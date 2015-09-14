@@ -1,0 +1,439 @@
+<?php $__env->startSection('content'); ?>
+<?php
+    #    Output easy-to-read numbers
+    #    by james at bandit.co.nz
+    function bd_nice_number($n) {
+        // is this a number?
+        if(!is_numeric($n)) return false;
+       
+        // now filter it;
+        if($n>1000000) return round(($n/1000000),1).'M';
+        else if($n>1000) return round(($n/1000),1).'K';
+       
+        return number_format($n);
+    }
+?>
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) { 
+    //DIRECT HIRE PRODUCTION | SALES Monthly
+    $('#directHiredatatable').hide();
+    $('#directHireAnnualdatatable').hide();
+    $('#tempGMPdatatable').hide();
+    $('#gmpAnnualdatatable').hide();
+    $('#directHire').highcharts({
+        data: {
+            table: 'directHiredatatable'
+        },
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: ''
+        },
+        yAxis: {
+           tickPositions: [0,5000,10000,20000,30000,40000,50000,60000,70000,80000,90000,100000],
+            allowDecimals: false,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            formatter: function () {
+                var a = parseFloat(this.point.y);
+                var numero='';
+                if(a>1000000){
+                    numero=Math.round((a/1000000))+'M';
+                }else{
+                    if(this.point.y>1000){
+                        numero=Math.round((a/1000))+'K';
+                    }
+                }
+                return '<b>' + this.series.name + '</b><br/>' +
+                    numero + ' ' + this.point.name.toLowerCase();
+            }
+        },
+        credits: {
+            enabled: false
+        }
+    });
+    
+    //DIRECT HIRE PRODUCTION | SALES Annually
+    $('#directHireAnnual').highcharts({
+        data: {
+            table: 'directHireAnnualdatatable'
+        },
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: ''
+        },
+        yAxis: {
+           tickPositions: [0,100000,150000,200000,250000,300000,350000,400000,450000,500000,600000,700000,800000,900000,1000000],
+            allowDecimals: false,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            formatter: function () {
+                var a = parseFloat(this.point.y);
+                var numero='';
+                if(a>1000000){
+                    numero=Math.round((a/1000000))+'M';
+                }else{
+                    if(this.point.y>1000){
+                        numero=Math.round((a/1000))+'K';
+                    }
+                }
+                return '<b>' + this.series.name + '</b><br/>' +
+                    numero + ' ' + this.point.name.toLowerCase();
+            }
+        },
+        credits: {
+            enabled: false
+        }
+    });
+    
+    //TEMP or CONTRACT GROSS MARGIN OF PROFIT (GMP) Monthly
+    $('#tempGMP').highcharts({
+        data: {
+            table: 'tempGMPdatatable'
+        },
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: ''
+        },
+        yAxis: {
+           tickPositions: [0,5000,10000,20000,30000,40000,50000,60000,70000,80000,90000,100000],
+            allowDecimals: false,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            formatter: function () {
+                var a = parseFloat(this.point.y);
+                var numero='';
+                if(a>1000000){
+                    numero=Math.round((a/1000000))+'M';
+                }else{
+                    if(this.point.y>1000){
+                        numero=Math.round((a/1000))+'K';
+                    }
+                }
+                return '<b>' + this.series.name + '</b><br/>' +
+                    numero + ' ' + this.point.name.toLowerCase();
+            }
+        },
+        credits: {
+            enabled: false
+        }
+    });
+    
+    //DIRECT HIRE PRODUCTION | SALES Annually
+    $('#gmpAnnual').highcharts({
+        data: {
+            table: 'gmpAnnualdatatable'
+        },
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: ''
+        },
+        yAxis: {
+           tickPositions: [0,100000,150000,200000,250000,300000,350000,400000,450000,500000,600000,700000,800000,900000,1000000],
+            allowDecimals: false,
+            title: {
+                text: ''
+            }
+        },
+        tooltip: {
+            formatter: function () {
+                var a = parseFloat(this.point.y);
+                var numero='';
+                if(a>1000000){
+                    numero=Math.round((a/1000000))+'M';
+                }else{
+                    if(this.point.y>1000){
+                        numero=Math.round((a/1000))+'K';
+                    }
+                }
+                return '<b>' + this.series.name + '</b><br/>' +
+                    numero + ' ' + this.point.name.toLowerCase();
+            }
+        },
+        credits: {
+            enabled: false
+        }
+    });
+});
+		</script>
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-8 col-md-7 col-sm-6">
+                <h2>Production | Sales Revenue <?php echo empty( $user->first_name ) ? '' : ' - <span style="color:blue;">' . $user->first_name . ' ' . $user -> last_name .'</span>'; ?>  </h2>
+            </div>
+        </div>
+    </div>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <h3>DIRECT HIRE PRODUCTION | SALES Monthly</h3>
+                                    <div id="directHire" style="min-width: 310px; height: 400px; margin: 10px; text-align: center;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <h3>DIRECT HIRE PRODUCTION | SALES Annually</h3>
+                                    <div id="directHireAnnual" style="min-width: 310px; height: 400px; margin: 10px; text-align: center;" ></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <h3>TEMP or CONTRACT GROSS MARGIN OF PROFIT (GMP) Monthly</h3>
+                                    <div id="tempGMP" style="min-width: 310px; height: 400px; margin: 10px; text-align: center;" ></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <h3>TEMP or CONTRACT GROSS MARGIN OF PROFIT (GMP) Annual</h3>
+                                    <div id="gmpAnnual" style="min-width: 310px; height: 400px; margin: 10px; text-align: center;" ></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+    
+
+<table id="directHiredatatable">
+	<thead>
+		<tr>
+			<th></th>
+			<th>GOAL</th>
+			<th>ACTUAL PERFORMANCE</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>Jan</th>
+			<td><?php echo e($directHireTarget->jan); ?></td>
+			<td><?php echo e(empty( $directHire['jan'] ) ? 0 : $directHire['jan']); ?></td>
+		</tr>
+		<tr>
+			<th>Feb</th>
+			<td><?php echo e($directHireTarget->feb); ?></td>
+			<td><?php echo e(empty( $directHire['feb'] ) ? 0 : $directHire['feb']); ?></td>
+		</tr>
+		<tr>
+			<th>Mar</th>
+			<td><?php echo e($directHireTarget->mar); ?></td>
+			<td><?php echo e(empty( $directHire['mar'] ) ? 0 : $directHire['mar']); ?></td>
+		</tr>
+		<tr>
+			<th>Apr</th>
+			<td><?php echo e($directHireTarget->apr); ?></td>
+			<td><?php echo e(empty( $directHire['apr'] ) ? 0 : $directHire['apr']); ?></td>
+		</tr>
+		<tr>
+			<th>May</th>
+			<td><?php echo e($directHireTarget->may); ?></td>
+			<td><?php echo e(empty( $directHire['may'] ) ? 0 : $directHire['may']); ?></td>
+		</tr>
+                <tr>
+			<th>Jun</th>
+			<td><?php echo e($directHireTarget->jun); ?></td>
+			<td><?php echo e(empty( $directHire['jun'] ) ? 0 : $directHire['jun']); ?></td>
+		</tr>
+                <tr>
+			<th>Jul</th>
+			<td><?php echo e($directHireTarget->jul); ?></td>
+			<td><?php echo e(empty( $directHire['jul'] ) ? 0 : $directHire['jul']); ?></td>
+		</tr>
+                <tr>
+			<th>Aug</th>
+			<td><?php echo e($directHireTarget->aug); ?></td>
+			<td><?php echo e(empty( $directHire['aug'] ) ? 0 : $directHire['aug']); ?></td>
+		</tr>
+                <tr>
+			<th>Sep</th>
+			<td><?php echo e($directHireTarget->sep); ?></td>
+			<td><?php echo e(empty( $directHire['sep'] ) ? 0 : $directHire['sep']); ?></td>
+		</tr>
+                <tr>
+			<th>Oct</th>
+			<td><?php echo e($directHireTarget->oct); ?></td>
+			<td><?php echo e(empty( $directHire['oct'] ) ? 0 : $directHire['oct']); ?></td>
+		</tr>
+                <tr>
+			<th>Nov</th>
+			<td><?php echo e($directHireTarget->nov); ?></td>
+			<td><?php echo e(empty( $directHire['nov'] ) ? 0 : $directHire['nov']); ?></td>
+		</tr>
+                <tr>
+			<th>Dic</th>
+			<td><?php echo e($directHireTarget->dec); ?></td>
+			<td><?php echo e(empty( $directHire['dec'] ) ? 0 : $directHire['dec']); ?></td>
+		</tr>
+                <tr>
+			<th>Annual</th>
+			<td><?php echo e($directHireTarget->annual); ?></td>
+			<td><?php echo e(empty( $directHire['annual'] ) ? 0 : $directHire['annual']); ?></td>
+		</tr>
+	</tbody>
+</table>
+                
+<table id="directHireAnnualdatatable">
+	<thead>
+		<tr>
+			<th></th>
+			<th>GOAL</th>
+			<th>ACTUAL PERFORMANCE</th>
+		</tr>
+	</thead>
+	<tbody>
+            <?php
+                    $thisYear = date( 'Y' );
+
+                    for( $i = $thisYear; $i < $thisYear+11; $i++ )
+                    {
+            ?>
+                <tr>
+                    <th><?php echo $i.'_'; ?></th>
+                    <td><?php echo ''.( empty($directHireAnnual[$i]) ? (  $thisYear == $i ? $directHireTarget->annual : 0  ) : $directHireTarget->annual ); ?></td>
+		    <td><?php echo ''.( empty($directHireAnnual[$i]) ? 0.0 : $directHireAnnual[$i] ); ?></td>
+                </tr>
+            <?php
+
+                    }
+            ?>
+		
+	</tbody>
+</table> 
+                
+<table id="tempGMPdatatable">
+	<thead>
+		<tr>
+			<th></th>
+			<th>GOAL</th>
+			<th>ACTUAL PERFORMANCE</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>Jan</th>
+			<td><?php echo e($directHireTarget->jan); ?></td>
+			<td><?php echo e(empty( $gmp['jan'] ) ? 0 : $gmp['jan']); ?></td>
+		</tr>
+		<tr>
+			<th>Feb</th>
+			<td><?php echo e($directHireTarget->feb); ?></td>
+			<td><?php echo e(empty( $gmp['feb'] ) ? 0 : $gmp['feb']); ?></td>
+		</tr>
+		<tr>
+			<th>Mar</th>
+			<td><?php echo e($directHireTarget->mar); ?></td>
+			<td><?php echo e(empty( $gmp['mar'] ) ? 0 : $gmp['mar']); ?></td>
+		</tr>
+		<tr>
+			<th>Apr</th>
+			<td><?php echo e($directHireTarget->apr); ?></td>
+			<td><?php echo e(empty( $gmp['apr'] ) ? 0 : $gmp['apr']); ?></td>
+		</tr>
+		<tr>
+			<th>May</th>
+			<td><?php echo e($directHireTarget->may); ?></td>
+			<td><?php echo e(empty( $gmp['may'] ) ? 0 : $gmp['may']); ?></td>
+		</tr>
+                <tr>
+			<th>Jun</th>
+			<td><?php echo e($directHireTarget->jun); ?></td>
+			<td><?php echo e(empty( $gmp['jun'] ) ? 0 : $gmp['jun']); ?></td>
+		</tr>
+                <tr>
+			<th>Jul</th>
+			<td><?php echo e($directHireTarget->jul); ?></td>
+			<td><?php echo e(empty( $gmp['jul'] ) ? 0 : $gmp['jul']); ?></td>
+		</tr>
+                <tr>
+			<th>Aug</th>
+			<td><?php echo e($directHireTarget->aug); ?></td>
+			<td><?php echo e(empty( $gmp['aug'] ) ? 0 : $gmp['aug']); ?></td>
+		</tr>
+                <tr>
+			<th>Sep</th>
+			<td><?php echo e($directHireTarget->sep); ?></td>
+			<td><?php echo e(empty( $gmp['sep'] ) ? 0 : $gmp['sep']); ?></td>
+		</tr>
+                <tr>
+			<th>Oct</th>
+			<td><?php echo e($directHireTarget->oct); ?></td>
+			<td><?php echo e(empty( $gmp['oct'] ) ? 0 : $gmp['oct']); ?></td>
+		</tr>
+                <tr>
+			<th>Nov</th>
+			<td><?php echo e($directHireTarget->nov); ?></td>
+			<td><?php echo e(empty( $gmp['nov'] ) ? 0 : $gmp['nov']); ?></td>
+		</tr>
+                <tr>
+			<th>Dic</th>
+			<td><?php echo e($directHireTarget->dec); ?></td>
+			<td><?php echo e(empty( $gmp['dec'] ) ? 0 : $gmp['dec']); ?></td>
+		</tr>
+                <tr>
+			<th>Annual</th>
+			<td><?php echo e($directHireTarget->annual); ?></td>
+			<td><?php echo e(empty( $gmp['annual'] ) ? 0 : $gmp['annual']); ?></td>
+		</tr>
+	</tbody>
+</table>
+                
+<table id="gmpAnnualdatatable">
+	<thead>
+		<tr>
+			<th></th>
+			<th>GOAL</th>
+			<th>ACTUAL PERFORMANCE</th>
+		</tr>
+	</thead>
+	<tbody>
+            <?php
+                    $thisYear = date( 'Y' );
+
+                    for( $i = $thisYear; $i < $thisYear+11; $i++ )
+                    {
+            ?>
+                <tr>
+                    <th><?php
+                    echo $i.'_'; ?></th>
+		    <td><?php echo ''.( empty($gmpAnnual[$i]) ? (  $thisYear == $i ? $directHireTarget->annual : 0  ) : $directHireTarget->annual ); ?></td>
+		    <td><?php echo ''.( empty($gmpAnnual[$i]) ? 0.0 : $gmpAnnual[$i] ); ?></td>
+                </tr>
+            <?php
+
+                    }
+            ?>
+		
+	</tbody>
+</table> 
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('footer'); ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

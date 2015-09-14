@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Metrics Solution</title>
+        <!-- Fonts -->
+        <!-- <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'> -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        
+        <link rel="stylesheet" href="fixes.css">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#godown').height($("#ss_fixed_nav").height());
+                window.onresize = function() {
+                    $('#godown').height($("#ss_fixed_nav").height());
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar-default navbar-fixed-top" id="ss_fixed_nav">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                    <span class="sr-only">Toggle Navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#">
+                                    <img class="hidden-xs hidden-sm img-responsive" src="images/modLogo.png" alt="logo description" />
+                                    <img class="hidden-xs visible-sm img-responsive" src="images/modLogo-half.png" alt="logo description" />
+                                    <img class="visible-xs img-responsive" src="images/modLogo-small.png" alt="logo description" />
+                                </a>
+                            </div>
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li class=""><a href="https://salesperformanceindicator.com">Manage Users</a></li>
+                                    <li class="active"><a href="https://salesperformanceindicator.com/goalSettings">Goal Setting</a></li>
+                                    <li class=""><a href="https://salesperformanceindicator.com/myStats">My Stats</a></li>
+                                    <li class=""><a href="https://salesperformanceindicator.com/prodSales">Production | Sales Revenue</a></li>
+                                    <li class=""><a href="https://salesperformanceindicator.com/myRatio">My Ratio</a></li>
+                                    <li class=""><a href="#">Order Licenses</a></li>
+                                    <li class=""><a href="#">Training</a></li>
+                                    <li class=""><a href="#">Manage Licenses</a></li>
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in as Test <span class="caret"></span></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="https://salesperformanceindicator.com/myprofile">MyProfile</a></li>
+                                            <li><a href="https://salesperformanceindicator.com/auth/logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div id="godown"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="page-header" id="banner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="gs-new-h2">Goal Setting</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading"><h3 class="gs-new-h3">Filter</h3></div>
+                        <div class="panel-body gs-new-search-body">
+                            <div class="col-md-12">
+                                <form class="form-horizontal" role="form" method="POST" action="https://salesperformanceindicator.com/goalSettings/search">
+                                    <input type="hidden" name="_token" value="9PrY6TCdQl5ZOq9LecZuXVio9fHgAWh0UgwC5dr2" />
+                                    <input type="hidden" id="request" name="request" value="" />
+                                    <fieldset>
+
+                                        <div class="input-group hidden-xs">
+                                            <input name="keyword" type="text" class="form-control gs-new-search" value="" placeholder="Please enter Email, First or Last Name of the User" />
+                                            <span class="input-group-btn">
+                                                <button type="submit" class="btn btn-primary gs-new-button-search" value="Search" onclick="setRequest('search')">Search</button>
+                                                <button type="submit" class="btn btn-success gs-new-button-export" value="Excel"  onclick="setRequest('excel')">Export to Excel</button>
+                                            </span>
+                                        </div>
+                                        <div class="input-group hidden-sm hidden-md hidden-lg">
+                                                <input name="keyword" type="text" class="form-control gs-new-search" value="" placeholder="Please enter Email, First or Last Name of the User" />
+                                                <span class="input-group-btn">
+                                                    <button type="submit" class="btn btn-primary gs-new-button-search" value="Search" onclick="setRequest('search')">Search</button>
+                                                    <button type="submit" class="btn btn-success gs-new-button-export" value="Excel"  onclick="setRequest('excel')">Export to Excel</button>
+                                                </span>
+
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">
+                            <h3 class="gs-new-h3">Daily Goals for each Month</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- Table -->
+                            <form class="form-horizontal" role="form" method="POST" action="https://salesperformanceindicator.com/goalSettings/updateAll" onsubmit="checkValues();" id="goalForm">
+                                <input type="hidden" name="_token" value="9PrY6TCdQl5ZOq9LecZuXVio9fHgAWh0UgwC5dr2">
+                                <div class="responsive">
+                                    <div class="outer-container">
+                                        <table class="gs-new-table pos-absolute">
+                                            <tr>
+                                                <th class="fixed-main-th-big">Name</th>
+                                                <th class="fixed-main-th-small">Annual</th>
+                                                <th class="vertical-table-separator top-bordered"></th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="table-hor-separator"></td>
+                                                <td class="empty-fix"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fixed-main-th-big"><a href="#" class="gs-new-user-link">John D.</a></td>
+                                                <td class="fixed-main-th-small"><span class="gs-new-data-bold"><b>5555555555</b></span></td>
+                                                <td class="vertical-table-separator"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="table-hor-separator"></td>
+                                                <td class="empty-fix"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fixed-main-th-big"><a href="#" class="gs-new-user-link">James S.</a></td>
+                                                <td class="fixed-main-th-small"><span class="gs-new-data-bold"><b>9999999999</b></span></td>
+                                                <td class="vertical-table-separator"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="table-hor-separator"></td>
+                                                <td class="empty-fix"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fixed-main-th-big"><a href="#" class="gs-new-user-link">Mary C.</a></td>
+                                                <td class="fixed-main-th-small"><span class="gs-new-data-bold"><b>5555555555</b></span></td>
+                                                <td class="vertical-table-separator"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="table-hor-separator"></td>
+                                                <td class="empty-fix"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fixed-main-th-big"><a href="#" class="gs-new-user-link">Arthur M.</a></td>
+                                                <td class="fixed-main-th-small"><span class="gs-new-data-bold"><b>7777777777</b></span></td>
+                                                <td class="vertical-table-separator"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="table-hor-separator"></td>
+                                                <td class="empty-fix"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fixed-main-th-big"><a href="#" class="gs-new-user-link">Matthew C.</a></td>
+                                                <td class="fixed-main-th-small"><span class="gs-new-data-bold"><b>6666666666</b></span></td>
+                                                <td class="vertical-table-separator bottom-bordered"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" class="gs-bottom-divider"></td>
+                                            </tr>
+                                        </table>
+                                        <div class="inner-container">
+                                            <table class="gs-new-table">
+                                                <tr class="gs-new-table-row-moving">
+                                                    <th>January</th>
+                                                    <th>Ferbruary</th>
+                                                    <th>March</th>
+                                                    <th>April</th>
+                                                    <th>May</th>
+                                                    <th>June</th>
+                                                    <th>July</th>
+                                                    <th>August</th>
+                                                    <th>September</th>
+                                                    <th>October</th>
+                                                    <th>November</th>
+                                                    <th>December</th>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="12" class="table-hor-separator-mov"></td>
+                                                </tr>
+                                                <tr class="gs-new-table-row-moving">
+                                                    <td class="fixed-td-small">
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="12" class="table-hor-separator-mov"></td>
+                                                </tr>
+                                                <tr class="gs-new-table-row-moving">
+                                                    <td class="fixed-td-small">
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="12" class="table-hor-separator-mov"></td>
+                                                </tr>
+                                                <tr class="gs-new-table-row-moving">
+                                                    <td class="fixed-td-small">
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="12" class="table-hor-separator-mov"></td>
+                                                </tr>
+                                                <tr class="gs-new-table-row-moving">
+                                                    <td class="fixed-td-small">
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="12" class="table-hor-separator-mov"></td>
+                                                </tr>
+                                                <tr class="gs-new-table-row-moving">
+                                                    <td class="fixed-td-small">
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" value="888888888" class="gs-new-input">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="col-md-2 col-md-offset-5"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center back-to-top">
+                        <a class="btn btn-default" href="#top">Back to top</a>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <ul class="list-unstyled">
+                            <li>
+                                <div class="footer-copyright">
+                                    <div class="container text-center">
+                                        Sales Performance Indicator | &copy; 2014-2015 Good as Gold Training, All rights reserved.<br />
+                                        <a class="grey-text text-lighten-4 right" href="mailto:support@staffingandrecruiting.com">support@staffingandrecruiting.com | 219 663 9609</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

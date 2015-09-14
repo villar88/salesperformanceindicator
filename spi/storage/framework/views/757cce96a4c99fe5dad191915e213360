@@ -1,0 +1,174 @@
+<?php $__env->startSection('content'); ?>
+    <style>
+        th{
+            text-align: center !important;
+        }
+
+    </style>
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-8 col-md-7 col-sm-6">
+                <h2>My Ratio </h2>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h3>Recruiting </h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 800px;"></th>
+                                    <th>Today's Ratio</th>
+                                    <th>Ongoing Ratio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Recruiting Presentation to Recruiting Hit</td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->recruitingPresentationToday); ?> / <?php echo e($recruiting->recruitingHitToday); ?></td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->recruitingPresentationOngoing); ?> / <?php echo e($recruiting->recruitingHitOngoing); ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Recruiting Hit to Candidate Interviews</td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->recruitingHitToday); ?> / <?php echo e($recruiting->candidateInterviewToday); ?></td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->recruitingHitOngoing); ?> / <?php echo e($recruiting->candidateInterviewOngoing); ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Recruiting Hit to Interview Reactivated Candidate</td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->recruitingHitToday); ?> / <?php echo e($recruiting->interviewReactivatedCandidateToday); ?></td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->recruitingHitOngoing); ?> / <?php echo e($recruiting->interviewReactivatedCandidateOngoing); ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Interviewed Candidate to Send Out</td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->candidateInterviewToday); ?> / <?php echo e($recruiting->sendOutInterviewToday); ?></td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->candidateInterviewOngoing); ?> / <?php echo e($recruiting->sendOutInterviewOngoing); ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Interview Reactivated Candidate to Send Out</td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->interviewReactivatedCandidateToday); ?> / <?php echo e($recruiting->sendOutRToday); ?></td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->interviewReactivatedCandidateOngoing); ?> / <?php echo e($recruiting->sendOutROngoing); ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Sent Out to Fill or Placement</td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->sendOutInterviewToday); ?> / <?php echo e($recruiting->fillOrPlacementToday); ?></td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->sendOutInterviewOngoing); ?> / <?php echo e($recruiting->fillOrPlacementOngoing); ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h3>Client Development - Inside  </h3>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th style="width: 800px;"></th>
+                                <th>Today's Ratio</th>
+                                <th>Ongoing Ratio</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Marketing Call to Job Order, Contract or Temp Assignment</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->marketingCallToday); ?> / <?php echo e($clientDev->jobOrderContractTempAssignmentMarketingToday); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->marketingCallOngoing); ?> / <?php echo e($clientDev->jobOrderContractTempAssignmentMarketingOngoing); ?></td>
+                            </tr>
+                            <tr>
+                                <td>MPC Presentation to Job Order, Contract or temp Assignment</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->mPCPresentationToday); ?> / <?php echo e($clientDev->jobOrderContractTempAssignmentMpcToday); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->mPCPresentationOngoing); ?> / <?php echo e($clientDev->jobOrderContractTempAssignmentMpcOngoing); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Job Order, Contract or Temp Assignment to Fill or Placement by Self</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->jobOrderContractTempAssignmentMarketingToday); ?> / <?php echo e($clientDev->fillBySelfToday); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->jobOrderContractTempAssignmentMarketingOngoing); ?> / <?php echo e($clientDev->fillBySelfOngoing); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Job Order, Contract or Temp Assignment to Fill or Placement by Others</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->jobOrderContractTempAssignmentMarketingToday); ?> / <?php echo e($clientDev->fillByOtherToday); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->jobOrderContractTempAssignmentMarketingOngoing); ?> / <?php echo e($clientDev->fillByOtherOngoing); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Submittal to Send Out</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->submittalToday); ?> / <?php echo e($clientDev->sendOutToday); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->submittalOngoing); ?> / <?php echo e($clientDev->sendOutOngoing); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Send Out to Fill or Placement by Self</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->sendOutToday); ?> / <?php echo e($clientDev->fillBySelfToday); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->sendOutOngoing); ?> / <?php echo e($clientDev->fillBySelfOngoing); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Sent Out to Fill or Placement by Others</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->sendOutToday); ?> / <?php echo e($clientDev->fillByOtherToday); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->sendOutOngoing); ?> / <?php echo e($clientDev->fillByOtherOngoing); ?></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h3>Client Development - Outside  </h3>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th style="width: 800px;"></th>
+                                <th>Today's Ratio</th>
+                                <th>Ongoing Ratio</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Complete Face-to-Face Appointment to Job Order, Contract or Temp Assignment</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->completeFaceToFaceAppointmentToday); ?> / <?php echo e($clientDevOut->jobOrderContractTempAssignmentToday); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->completeFaceToFaceAppointmentOngoing); ?> / <?php echo e($clientDevOut->jobOrderContractTempAssignmentOngoing); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Marketing Call or Appointment to Job Order, Contract or Temp Assignment</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->marketingCallToday); ?> / <?php echo e($clientDevOut->jobOrderContractTempAssignmentToday); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->marketingCallOngoing); ?> / <?php echo e($clientDevOut->jobOrderContractTempAssignmentOngoing); ?></td>
+                            </tr>
+                            <tr>
+                                <td>MPC Presentation to Job Order, Contract or Temp Assignment</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->mPCPresentationToday); ?> / <?php echo e($clientDevOut->mpcJOToday); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->mPCPresentationOngoing); ?> / <?php echo e($clientDevOut->mpcJOOngoing); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Job Order, Contract or Temp Assignment to fill or Placement by Self</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->jobOrderContractTempAssignmentToday); ?> / <?php echo e($clientDevOut->fillSelfToday); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->jobOrderContractTempAssignmentOngoing); ?> / <?php echo e($clientDevOut->fillSelfOngoing); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Job Order, Contract or Temp Assignment to Fill or Placement by Others</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->jobOrderContractTempAssignmentToday); ?> / <?php echo e($clientDevOut->fillOtherToday); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->jobOrderContractTempAssignmentOngoing); ?> / <?php echo e($clientDevOut->fillOtherOngoing); ?></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

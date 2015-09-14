@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Metrics Solution</title>
+		<!-- Fonts -->
+		<!-- <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'> -->
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		
+		<link rel="stylesheet" href="fixes.css">
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$('#godown').height($("#ss_fixed_nav").height());
+				window.onresize = function() {
+					$('#godown').height($("#ss_fixed_nav").height());
+				}
+			});
+		</script>
+    </head>
+    <body>
+    	<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<nav class="navbar-default navbar-fixed-top" id="ss_fixed_nav">
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+									<span class="sr-only">Toggle Navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+								<a class="navbar-brand" href="#">
+									<img class="hidden-xs hidden-sm img-responsive" src="images/modLogo.png" alt="logo description" />
+									<img class="hidden-xs visible-sm img-responsive" src="images/modLogo-half.png" alt="logo description" />
+									<img class="visible-xs img-responsive" src="images/modLogo-small.png" alt="logo description" />
+								</a>
+							</div>
+
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<ul class="nav navbar-nav navbar-right">
+                                    <li><a href="https://salesperformanceindicator.com/auth/login">Login</a></li>
+                                </ul>
+                            </div>
+						</div>
+					</nav>
+					<div id="godown"></div>
+				</div>
+			</div>
+		</div>
+		<!-- main body -->
+		<div class="container-fluid text-center">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<h1 class="marg-top-30">Welcome to our website!</h1>
+			</div>
+			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				<p class="description">Cultivate a data-driven culture by sharing the right performance indicators and business metrics with your team today.</p>
+			</div>
+			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="row">
+					<div class="hidden-xs col-sm-2 col-md-2 col-lg-2"></div>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+						<div class="embed-responsive embed-responsive-16by9">
+						    <iframe src="http://www.youtube.com/embed/W-Q7RMpINVo"></iframe>
+						</div>
+					</div>
+					<div class="hidden-xs col-sm-2 col-md-2 col-lg-2"></div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="hidden-xs col-sm-3 col-md-3 col-lg-3"></div>
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					<button type="button" class="btn btn-primary btn-lg btn-block text-cap marg-bot-30 marg-top-30">Download White Papers Here</button>
+				</div>
+				<div class="hidden-xs col-sm-3 col-md-3 col-lg-3"></div>
+			</div>
+		</div>
+    </div>
+    <div class="container-fluid">
+			<footer>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center back-to-top">
+						<a class="btn btn-default" href="#top">Back to top</a>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<ul class="list-unstyled">
+							<li>
+								<div class="footer-copyright">
+									<div class="container text-center">
+										Sales Performance Indicator | &copy; 2014-2015 Good as Gold Training, All rights reserved.<br />
+										<a class="grey-text text-lighten-4 right" href="mailto:support@staffingandrecruiting.com">support@staffingandrecruiting.com | 219 663 9609</a>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</footer>
+        </div>
+    </body>
+</html>

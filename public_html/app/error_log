@@ -1,0 +1,4 @@
+[04-May-2015 13:47:15 America/New_York] PHP Fatal error:  Class '\App\User' not found in /home/salesper/vendor/laravel/framework/src/Illuminate/Auth/EloquentUserProvider.php on line 122
+[03-Jun-2015 11:00:27 America/New_York] PHP Fatal error:  Call to undefined method Illuminate\Database\Eloquent\Collection::scopeGetTasks() in /home/salesper/app/Http/Controllers/MyStatsController.php on line 177
+[03-Jun-2015 11:00:48 America/New_York] PHP Fatal error:  Call to undefined method Illuminate\Database\Eloquent\Collection::scopeGetTasks() in /home/salesper/app/Http/Controllers/MyStatsController.php on line 177
+[03-Jun-2015 11:01:45 America/New_York] PHP Fatal error:  Call to undefined method Illuminate\Database\Eloquent\Collection::scopeGetTasks() in /home/salesper/app/Http/Controllers/MyStatsController.php on line 176

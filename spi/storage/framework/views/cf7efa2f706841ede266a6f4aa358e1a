@@ -1,0 +1,35 @@
+<?php $__env->startSection('content'); ?>
+
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-8 col-md-7 col-sm-6">
+                <h2>Modify User <?php echo e($user->last_name); ?>, <?php echo e($user->first_name); ?></h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+
+                <div class="panel panel-default">
+
+                    <div class="panel-body">
+
+                        <div class="col-md-10 col-md-offset-1">
+
+                            <?php echo $__env->make('_error', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                            <?php echo $__env->make('_message', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+                            <form class="form-horizontal" role="form" method="POST" action="<?php echo e(url('/myProfile/update')); ?>">
+                                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" />
+                                <?php echo $__env->make('myProfile._form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

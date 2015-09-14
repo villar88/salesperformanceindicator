@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Metrics Solution</title>
+        <!-- Fonts -->
+        <!-- <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'> -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        
+        <link rel="stylesheet" href="fixes.css">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#godown').height($("#ss_fixed_nav").height());
+                window.onresize = function() {
+                    $('#godown').height($("#ss_fixed_nav").height());
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar-default navbar-fixed-top" id="ss_fixed_nav">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                    <span class="sr-only">Toggle Navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#">
+                                    <img class="hidden-xs hidden-sm img-responsive" src="images/modLogo.png" alt="logo description" />
+                                    <img class="hidden-xs visible-sm img-responsive" src="images/modLogo-half.png" alt="logo description" />
+                                    <img class="visible-xs img-responsive" src="images/modLogo-small.png" alt="logo description" />
+                                </a>
+                            </div>
+
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li class=""><a href="http://salesperformanceindicator.com">Manage Users</a></li>
+                                    <li class="active"><a href="http://salesperformanceindicator.com/companies">Manage Companies</a></li>
+                                    <li class=""><a href="http://salesperformanceindicator.com/reports">Reports</a></li>
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in as System <span class="caret"></span></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="http://salesperformanceindicator.com/myprofile">MyProfile</a></li>
+                                            <li><a href="http://salesperformanceindicator.com/auth/logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div id="godown"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" id="main-content">
+            <div class="page-header" id="banner">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h2>Manage Companies</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading"><h3>Search</h3></div>
+                        <div class="panel-body">
+                            <div class="col-md-10 col-md-offset-1">
+                                <form class="form-horizontal" role="form" method="POST" action="https://salesperformanceindicator.com/companies/search">
+                                    <input type="hidden" name="_token" value="9PrY6TCdQl5ZOq9LecZuXVio9fHgAWh0UgwC5dr2" />
+                                    <input type="hidden" id="request" name="request" value="" />
+                                <fieldset>
+                                    <div class="input-group">
+                                        <input name="keyword" type="text" class="form-control" value=""/>
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-primary" value="Search" onclick="setRequest('search')">Search</button>
+                                            <button type="submit" class="btn btn-default" value="Show_All"  onclick="setRequest('showAll')">Show All</button>
+                                        </span>
+                                    </div>
+                                    <span>Please enter name of Company.</span>
+                                </fieldset>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">
+                            <h3>Companies</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <a href="https://salesperformanceindicator.com/companies/create" class="btn btn-primary pull-right">Create Company</a>
+                                </div>
+                            </div>
+
+                            <!-- Tables -->
+                            <table class="table table-small hidden-sm hidden-md hidden-lg">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <table class="table-small-bordered">
+                                                <tr>
+                                                    <td class="col-xs-5">Name</td>
+                                                    <td class="col-xs-7 text-right td-vcenter"><a href="https://salesperformanceindicator.com/companies/7">a</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Owner</td>
+                                                    <td class="col-xs-7 text-right td-vcenter"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Total Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">0 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Active Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">0 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Created</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-06-09</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Updated</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Status</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">INACTIVE</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="icons col-xs-5">Actions</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">
+                                                        <a href="https://salesperformanceindicator.com/licenses/list/7" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> |
+                                                        <a href="https://salesperformanceindicator.com/companies/7" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                        <a href="https://salesperformanceindicator.com/companies/activate/7" title="Activate"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                    <tr>
+                                        <td>
+                                            <table class="table-small-bordered">
+                                                <tr>
+                                                    <td class="col-xs-5">Name</td>
+                                                    <td class="col-xs-7 text-right td-vcenter"><a href="https://salesperformanceindicator.com/companies/5">Apple</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Owner</td>
+                                                    <td class="col-xs-7 text-right td-vcenter"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Total Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">0 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Active Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">0 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Created</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Updated</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Status</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="icons col-xs-5">Actions</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">
+                                                        <a href="https://salesperformanceindicator.com/licenses/list/5" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                                        <a href="https://salesperformanceindicator.com/companies/5" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                        <a href="https://salesperformanceindicator.com/companies/destroy/5" title="Desactivate" onclick="return  confirm('Are you sure you want to disable Apple?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                    <tr>
+                                        <td>
+                                            <table class="table-small-bordered">
+                                                <tr>
+                                                    <td class="col-xs-5">Name</td>
+                                                    <td class="col-xs-7 text-right td-vcenter"><a href="https://salesperformanceindicator.com/companies/16">CDIL</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Owner</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">demo  check</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Total Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">1 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Active Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">1 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Created</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-08-12</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Updated</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">-0001-11-30</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Status</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="icons col-xs-5">Actions</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">
+                                                        <a href="https://salesperformanceindicator.com/licenses/list/16" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                                        <a href="https://salesperformanceindicator.com/companies/16" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                        <a href="https://salesperformanceindicator.com/companies/destroy/16" title="Desactivate" onclick="return  confirm('Are you sure you want to disable CDIL?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                    <tr>
+                                        <td>
+                                            <table class="table-small-bordered">
+                                                <tr>
+                                                    <td class="col-xs-5">Name</td>
+                                                    <td class="col-xs-7 text-right td-vcenter"><a href="https://salesperformanceindicator.com/companies/18">CDIL DEMO</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Owner</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">Sikander mann</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Total Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">1 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Active Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">0 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Created</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-08-12</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Updated</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">-0001-11-30</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Status</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="icons col-xs-5">Actions</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">
+                                                        <a href="https://salesperformanceindicator.com/licenses/list/18" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                                        <a href="https://salesperformanceindicator.com/companies/18" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                        <a href="https://salesperformanceindicator.com/companies/destroy/18" title="Desactivate" onclick="return  confirm('Are you sure you want to disable CDIL DEMO?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                    <tr>
+                                        <td>
+                                            <table class="table-small-bordered">
+                                                <tr>
+                                                    <td class="col-xs-5">Name</td>
+                                                    <td class="col-xs-7 text-right td-vcenter"><a href="https://salesperformanceindicator.com/companies/2">Company Another</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Owner</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">Member13 Test</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Total Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">7 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Active Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">7 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Created</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Updated</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-08-05</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Status</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="icons col-xs-5">Actions</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">
+                                                        <a href="https://salesperformanceindicator.com/licenses/list/2" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                                        <a href="https://salesperformanceindicator.com/companies/2" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                        <a href="https://salesperformanceindicator.com/companies/destroy/2" title="Desactivate" onclick="return  confirm('Are you sure you want to disable Company Another?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                    <tr>
+                                        <td>
+                                            <table class="table-small-bordered">
+                                                <tr>
+                                                    <td class="col-xs-5">Name</td>
+                                                    <td class="col-xs-7 text-right td-vcenter"><a href="https://salesperformanceindicator.com/companies/1">Good as Gold Training</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Owner</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">Company Owner</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Total Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">37 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Active Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">37 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Created</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Updated</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Status</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="icons col-xs-5">Actions</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">
+                                                        <a href="https://salesperformanceindicator.com/licenses/list/1" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                                        <a href="https://salesperformanceindicator.com/companies/1" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                        <a href="https://salesperformanceindicator.com/companies/destroy/1" title="Desactivate" onclick="return  confirm('Are you sure you want to disable Good as Gold Training?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                    <tr>
+                                        <td>
+                                            <table class="table-small-bordered">
+                                                <tr>
+                                                    <td class="col-xs-5">Name</td>
+                                                    <td class="col-xs-7 text-right td-vcenter"><a href="https://salesperformanceindicator.com/companies/6">HR Search Inc</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Owner</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">Barbara Bruno</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Total Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">3 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Active Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">3 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Created</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-05</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Updated</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Status</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="icons col-xs-5">Actions</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">
+                                                        <a href="https://salesperformanceindicator.com/licenses/list/6" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> |
+                                                        <a href="https://salesperformanceindicator.com/companies/6" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                        <a href="https://salesperformanceindicator.com/companies/destroy/6" title="Desactivate" onclick="return  confirm('Are you sure you want to disable HR Search Inc?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                    <tr>
+                                        <td>
+                                            <table class="table-small-bordered">
+                                                <tr>
+                                                    <td class="col-xs-5">Name</td>
+                                                    <td class="col-xs-7 text-right td-vcenter"><a href="https://salesperformanceindicator.com/companies/9">Mattt</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Owner</td>
+                                                    <td class="col-xs-7 text-right td-vcenter"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Total Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">0 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Active Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">0 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Created</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-08-02</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Updated</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-08-02</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Status</td>
+                                                    <td class="col-xs-7 text-right td-vcenter"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="icons col-xs-5">Actions</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">
+                                                        <a href="https://salesperformanceindicator.com/licenses/list/9" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                                        <a href="https://salesperformanceindicator.com/companies/9" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                        <a href="https://salesperformanceindicator.com/companies/destroy/9" title="Desactivate" onclick="return  confirm('Are you sure you want to disable Mattt?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                    <tr>
+                                        <td>
+                                            <table class="table-small-bordered">
+                                                <tr>
+                                                    <td class="col-xs-5">Name</td>
+                                                    <td class="col-xs-7 text-right td-vcenter"><a href="https://salesperformanceindicator.com/companies/3">Microsoft</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Owner</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">Member20 Test</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Total Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">9 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Active Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">9 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Created</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Updated</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Status</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="icons col-xs-5">Actions</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">
+                                                        <a href="https://salesperformanceindicator.com/licenses/list/3" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                                        <a href="https://salesperformanceindicator.com/companies/3" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                        <a href="https://salesperformanceindicator.com/companies/destroy/3" title="Desactivate" onclick="return  confirm('Are you sure you want to disable Microsoft?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                    <tr>
+                                        <td>
+                                            <table class="table-small-bordered">
+                                                <tr>
+                                                    <td class="col-xs-5">Name</td>
+                                                    <td class="col-xs-7 text-right td-vcenter"><a href="https://salesperformanceindicator.com/companies/4">Oracle</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Owner</td>
+                                                    <td class="col-xs-7 text-right td-vcenter"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Total Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">0 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Active Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">0 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Created</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Updated</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Status</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="icons col-xs-5">Actions</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">
+                                                        <a href="https://salesperformanceindicator.com/licenses/list/4" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                                        <a href="https://salesperformanceindicator.com/companies/4" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                        <a href="https://salesperformanceindicator.com/companies/destroy/4" title="Desactivate" onclick="return  confirm('Are you sure you want to disable Oracle?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                    <tr>
+                                        <td>
+                                            <table class="table-small-bordered">
+                                                <tr>
+                                                    <td class="col-xs-5">Name</td>
+                                                    <td class="col-xs-7 text-right td-vcenter"><a href="https://salesperformanceindicator.com/companies/8">v</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Owner</td>
+                                                    <td class="col-xs-7 text-right td-vcenter"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Total Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">0 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Active Users</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">0 users</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Created</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-06-09</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Date Updated</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-12</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-5">Status</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">INACTIVE</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="icons col-xs-5">Actions</td>
+                                                    <td class="col-xs-7 text-right td-vcenter">
+                                                        <a href="https://salesperformanceindicator.com/licenses/list/8" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                                        <a href="https://salesperformanceindicator.com/companies/8" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                        <a href="https://salesperformanceindicator.com/companies/activate/8" title="Activate"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table hidden-xs">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Owner</th>
+                                        <th>Total Users</th>
+                                        <th>Active Users</th>
+                                        <th>Date Created</th>
+                                        <th>Date Updated</th>
+                                        <th>Status</th>
+                                        <th class="icons">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><a href="https://salesperformanceindicator.com/companies/7">a</a></td>
+                                        <td> </td>
+                                        <td>0 users</td>
+                                        <td>0 users</td>
+                                        <td>2015-06-09</td>
+                                        <td>2015-07-06</td>
+                                        <td>INACTIVE</td>
+                                        <td>
+                                            <a href="https://salesperformanceindicator.com/licenses/list/7" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                            <a href="https://salesperformanceindicator.com/companies/7" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                            <a href="https://salesperformanceindicator.com/companies/activate/7" title="Activate"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="https://salesperformanceindicator.com/companies/5">Apple</a></td>
+                                        <td> </td>
+                                        <td>0 users</td>
+                                        <td>0 users</td>
+                                        <td>2015-05-04</td>
+                                        <td>2015-05-04</td>
+                                        <td>ACTIVE</td>
+                                        <td>
+                                            <a href="https://salesperformanceindicator.com/licenses/list/5" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                            <a href="https://salesperformanceindicator.com/companies/5" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                            <a href="https://salesperformanceindicator.com/companies/destroy/5" title="Desactivate" onclick="return  confirm('Are you sure you want to disable Apple?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="https://salesperformanceindicator.com/companies/16">CDIL</a></td>
+                                        <td>demo  check</td>
+                                        <td>1 users</td>
+                                        <td>1 users</td>
+                                        <td>2015-08-12</td>
+                                        <td>-0001-11-30</td>
+                                        <td>ACTIVE</td>
+                                        <td>
+                                            <a href="https://salesperformanceindicator.com/licenses/list/16" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                            <a href="https://salesperformanceindicator.com/companies/16" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                            <a href="https://salesperformanceindicator.com/companies/destroy/16" title="Desactivate" onclick="return  confirm('Are you sure you want to disable CDIL?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="https://salesperformanceindicator.com/companies/18">CDIL DEMO</a></td>
+                                        <td>Sikander mann</td>
+                                        <td>1 users</td>
+                                        <td>0 users</td>
+                                        <td>2015-08-12</td>
+                                        <td>-0001-11-30</td>
+                                        <td>ACTIVE</td>
+                                        <td>
+                                            <a href="https://salesperformanceindicator.com/licenses/list/18" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                            <a href="https://salesperformanceindicator.com/companies/18" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                            <a href="https://salesperformanceindicator.com/companies/destroy/18" title="Desactivate" onclick="return  confirm('Are you sure you want to disable CDIL DEMO?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="https://salesperformanceindicator.com/companies/2">Company Another</a></td>
+                                        <td>Member13 Test</td>
+                                        <td>7 users</td>
+                                        <td>7 users</td>
+                                        <td>2015-05-04</td>
+                                        <td>2015-08-05</td>
+                                        <td>ACTIVE</td>
+                                        <td>
+                                            <a href="https://salesperformanceindicator.com/licenses/list/2" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                            <a href="https://salesperformanceindicator.com/companies/2" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                            <a href="https://salesperformanceindicator.com/companies/destroy/2" title="Desactivate" onclick="return  confirm('Are you sure you want to disable Company Another?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="https://salesperformanceindicator.com/companies/1">Good as Gold Training</a></td>
+                                        <td>Company Owner</td>
+                                        <td>37 users</td>
+                                        <td>37 users</td>
+                                        <td>2015-05-04</td>
+                                        <td>2015-05-04</td>
+                                        <td>ACTIVE</td>
+                                        <td>
+                                            <a href="https://salesperformanceindicator.com/licenses/list/1" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                            <a href="https://salesperformanceindicator.com/companies/1" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                            <a href="https://salesperformanceindicator.com/companies/destroy/1" title="Desactivate" onclick="return  confirm('Are you sure you want to disable Good as Gold Training?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="https://salesperformanceindicator.com/companies/6">HR Search Inc</a></td>
+                                        <td>Barbara Bruno</td>
+                                        <td>3 users</td>
+                                        <td>3 users</td>
+                                        <td>2015-05-05</td>
+                                        <td>2015-07-06</td>
+                                        <td>ACTIVE</td>
+                                        <td>
+                                            <a href="https://salesperformanceindicator.com/licenses/list/6" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                            <a href="https://salesperformanceindicator.com/companies/6" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                            <a href="https://salesperformanceindicator.com/companies/destroy/6" title="Desactivate" onclick="return  confirm('Are you sure you want to disable HR Search Inc?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="https://salesperformanceindicator.com/companies/9">Mattt</a></td>
+                                        <td> </td>
+                                        <td>0 users</td>
+                                        <td>0 users</td>
+                                        <td>2015-08-02</td>
+                                        <td>2015-08-02</td>
+                                        <td></td>
+                                        <td>
+                                            <a href="https://salesperformanceindicator.com/licenses/list/9" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                            <a href="https://salesperformanceindicator.com/companies/9" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                            <a href="https://salesperformanceindicator.com/companies/destroy/9" title="Desactivate" onclick="return  confirm('Are you sure you want to disable Mattt?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="https://salesperformanceindicator.com/companies/3">Microsoft</a></td>
+                                        <td>Member20 Test</td>
+                                        <td>9 users</td>
+                                        <td>9 users</td>
+                                        <td>2015-05-04</td>
+                                        <td>2015-05-04</td>
+                                        <td>ACTIVE</td>
+                                        <td>
+                                            <a href="https://salesperformanceindicator.com/licenses/list/3" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                            <a href="https://salesperformanceindicator.com/companies/3" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                            <a href="https://salesperformanceindicator.com/companies/destroy/3" title="Desactivate" onclick="return  confirm('Are you sure you want to disable Microsoft?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="https://salesperformanceindicator.com/companies/4">Oracle</a></td>
+                                        <td> </td>
+                                        <td>0 users</td>
+                                        <td>0 users</td>
+                                        <td>2015-05-04</td>
+                                        <td>2015-05-04</td>
+                                        <td>ACTIVE</td>
+                                        <td>
+                                            <a href="https://salesperformanceindicator.com/licenses/list/4" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                            <a href="https://salesperformanceindicator.com/companies/4" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                            <a href="https://salesperformanceindicator.com/companies/destroy/4" title="Desactivate" onclick="return  confirm('Are you sure you want to disable Oracle?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="https://salesperformanceindicator.com/companies/8">v</a></td>
+                                        <td> </td>
+                                        <td>0 users</td>
+                                        <td>0 users</td>
+                                        <td>2015-06-09</td>
+                                        <td>2015-07-12</td>
+                                        <td>INACTIVE</td>
+                                        <td>
+                                            <a href="https://salesperformanceindicator.com/licenses/list/8" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> | 
+                                            <a href="https://salesperformanceindicator.com/companies/8" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                            <a href="https://salesperformanceindicator.com/companies/activate/8" title="Activate"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <div class="col-md-11"><a href="https://salesperformanceindicator.com/companies/create" class="btn btn-primary">Create Company</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center back-to-top">
+                        <a class="btn btn-default" href="#top">Back to top</a>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <ul class="list-unstyled">
+                            <li>
+                                <div class="footer-copyright">
+                                    <div class="container text-center">
+                                        Sales Performance Indicator | &copy; 2014-2015 Good as Gold Training, All rights reserved.<br />
+                                        <a class="grey-text text-lighten-4 right" href="mailto:support@staffingandrecruiting.com">support@staffingandrecruiting.com | 219 663 9609</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

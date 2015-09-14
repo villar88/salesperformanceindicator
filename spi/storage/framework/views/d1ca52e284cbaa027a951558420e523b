@@ -1,0 +1,113 @@
+<?php $__env->startSection('content'); ?>
+
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-8 col-md-7 col-sm-6">
+                <h2>Modify Goals for <?php echo e($user->last_name); ?>, <?php echo e($user->first_name); ?></h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-10 col-md-offset-1">
+                        <?php echo $__env->make('_error', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                        <?php echo Form::model($goalSetting, ['route' => ['goalSettings.update', $goalSetting->id], 'method' => 'PATCH', 'class' => 'form-horizontal']); ?>
+
+
+                            <div class="form-group <?php echo e($errors->has('jan') ? 'has-error' : ''); ?>">
+                                <?php echo Form::label('jan', 'January*', ['class' => 'col-lg-2 control-label']); ?>
+
+                                <div class="col-lg-2"><?php echo Form::text('jan', null, ['class' => 'form-control']); ?></div>
+                            </div>
+                            <div class="form-group <?php echo e($errors->has('feb') ? 'has-error' : ''); ?>">
+                                <?php echo Form::label('feb', 'February*', ['class' => 'col-lg-2 control-label']); ?>
+
+                                <div class="col-lg-2"><?php echo Form::text('feb', null, ['class' => 'form-control']); ?></div>
+                            </div>
+                            <div class="form-group <?php echo e($errors->has('mar') ? 'has-error' : ''); ?>">
+                                <?php echo Form::label('mar', 'March*', ['class' => 'col-lg-2 control-label']); ?>
+
+                                <div class="col-lg-2"><?php echo Form::text('mar', null, ['class' => 'form-control']); ?></div>
+                            </div>
+                            <div class="form-group <?php echo e($errors->has('apr') ? 'has-error' : ''); ?>">
+                                <?php echo Form::label('apr', 'April*', ['class' => 'col-lg-2 control-label']); ?>
+
+                                <div class="col-lg-2"><?php echo Form::text('apr', null, ['class' => 'form-control']); ?></div>
+                            </div>
+                            <div class="form-group <?php echo e($errors->has('may') ? 'has-error' : ''); ?>">
+                                <?php echo Form::label('may', 'May*', ['class' => 'col-lg-2 control-label']); ?>
+
+                                <div class="col-lg-2"><?php echo Form::text('may', null, ['class' => 'form-control']); ?></div>
+                            </div>
+                            <div class="form-group <?php echo e($errors->has('jun') ? 'has-error' : ''); ?>">
+                                <?php echo Form::label('jun', 'June*', ['class' => 'col-lg-2 control-label']); ?>
+
+                                <div class="col-lg-2"><?php echo Form::text('jun', null, ['class' => 'form-control']); ?></div>
+                            </div>
+                            <div class="form-group <?php echo e($errors->has('jul') ? 'has-error' : ''); ?>">
+                                <?php echo Form::label('jul', 'July*', ['class' => 'col-lg-2 control-label']); ?>
+
+                                <div class="col-lg-2"><?php echo Form::text('jul', null, ['class' => 'form-control']); ?></div>
+                            </div>
+                            <div class="form-group <?php echo e($errors->has('aug') ? 'has-error' : ''); ?>">
+                                <?php echo Form::label('aug', 'August*', ['class' => 'col-lg-2 control-label']); ?>
+
+                                <div class="col-lg-2"><?php echo Form::text('aug', null, ['class' => 'form-control']); ?></div>
+                            </div>
+                            <div class="form-group <?php echo e($errors->has('sep') ? 'has-error' : ''); ?>">
+                                <?php echo Form::label('sep', 'September*', ['class' => 'col-lg-2 control-label']); ?>
+
+                                <div class="col-lg-2"><?php echo Form::text('sep', null, ['class' => 'form-control']); ?></div>
+                            </div>
+                        <div class="form-group <?php echo e($errors->has('oct') ? 'has-error' : ''); ?>">
+                            <?php echo Form::label('oct', 'October*', ['class' => 'col-lg-2 control-label']); ?>
+
+                            <div class="col-lg-2"><?php echo Form::text('oct', null, ['class' => 'form-control']); ?></div>
+                        </div>
+                        <div class="form-group <?php echo e($errors->has('nov') ? 'has-error' : ''); ?>">
+                            <?php echo Form::label('nov', 'November*', ['class' => 'col-lg-2 control-label']); ?>
+
+                            <div class="col-lg-2"><?php echo Form::text('nov', null, ['class' => 'form-control']); ?></div>
+                        </div>
+                        <div class="form-group <?php echo e($errors->has('dec') ? 'has-error' : ''); ?>">
+                            <?php echo Form::label('dec', 'December*', ['class' => 'col-lg-2 control-label']); ?>
+
+                            <div class="col-lg-2"><?php echo Form::text('dec', null, ['class' => 'form-control']); ?></div>
+                        </div>
+
+                        <div class="form-group <?php echo e($errors->has('direct_hire') ? 'has-error' : ''); ?>">
+                            <?php echo Form::label('direct_hire', 'Direct Hire*', ['class' => 'col-lg-2 control-label']); ?>
+
+                            <div class="col-lg-2"><?php echo Form::text('direct_hire', null, ['class' => 'form-control']); ?></div>
+                        </div>
+
+                        <div class="form-group <?php echo e($errors->has('gmp') ? 'has-error' : ''); ?>">
+                            <?php echo Form::label('dec', 'GMP*', ['class' => 'col-lg-2 control-label']); ?>
+
+                            <div class="col-lg-2"><?php echo Form::text('gmp', null, ['class' => 'form-control']); ?></div>
+                        </div>
+
+
+                        <?php echo Form::hidden('updated_by', Auth::user()->id); ?>
+
+
+                        <div class="form-group">
+                            <div class="col-lg-3 col-lg-offset-2">
+                                <a href="<?php echo e(url('/goalSettings')); ?>" class="btn btn-default pull-right">Cancel</a>
+                                <?php echo Form::submit('Update', ['class' => 'btn btn-primary']); ?>
+
+                            </div>
+                        </div>
+
+                        <?php echo Form::close(); ?>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

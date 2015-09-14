@@ -1,0 +1,49 @@
+<fieldset>
+
+    <div class="form-group <?php echo e($errors->has('name') ? 'has-error' : ''); ?>">
+        <?php echo Form::label('name', 'Company Name*', ['class' => 'col-lg-2 control-label']); ?>
+
+        <div class="col-lg-10"><?php echo Form::text('name', null, ['class' => 'form-control']); ?></div>
+    </div>
+
+
+    <?php if( !Request::is('companies/create' ) ): ?>
+        <div class="form-group">
+            <?php echo Form::label('created_by', 'Created By', ['class' => 'col-lg-2 control-label']); ?>
+
+            <div class="col-lg-10"><?php echo Form::label('created_by', $company->getAuditUser( $company->updated_by  ), ['class' => 'control-label']); ?></div>
+        </div>
+
+        <div class="form-group">
+            <?php echo Form::label('created_at', 'Created At', ['class' => 'col-lg-2 control-label']); ?>
+
+            <div class="col-lg-10"><label class="control-label"><?php echo e($company->created_at); ?></label></div>
+        </div>
+
+        <div class="form-group">
+            <?php echo Form::label('updated_by', 'Updated by', ['class' => 'col-lg-2 control-label']); ?>
+
+            <div class="col-lg-10"><?php echo Form::label('updated_by', $company->getAuditUser( $company->updated_by  ), ['class' => 'control-label']); ?></div>
+        </div>
+
+        <div class="form-group">
+            <?php echo Form::label('updated_at', 'Updated At', ['class' => 'col-lg-2 control-label']); ?>
+
+            <div class="col-lg-10"><label class="control-label"><?php echo e($company->created_at); ?></label></div>
+        </div>
+    <?php else: ?>
+        <?php echo Form::hidden('updated_by', Auth::user()->id); ?>
+
+    <?php endif; ?>
+    <?php echo Form::hidden('updated_by', Auth::user()->id); ?>
+
+
+    <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+            <a href="<?php echo e(url('/companies')); ?>" class="btn btn-default pull-right">Cancel</a>
+            <?php echo Form::submit('Update', ['class' => 'btn btn-primary']); ?>
+
+        </div>
+    </div>
+
+</fieldset>

@@ -1,0 +1,663 @@
+<?php
+#    Output easy-to-read numbers
+#    by james at bandit.co.nz
+
+function bd_nice_number($n) {
+    // is this a number?
+    if (!is_numeric($n))
+        return false;
+
+    // now filter it;
+    if ($n > 1000000)
+        return round(($n / 1000000), 1) . 'M';
+    else if ($n > 1000)
+        return round(($n / 1000), 1) . 'K';
+
+    return number_format($n);
+}
+?>
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        <h3>Users</h3>
+    </div>
+    <!--...<?php echo $__env->make('_message', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>-->
+        <?php if(Session::has('message') ): ?>
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <span><?php echo e(Session::get('message')); ?></span>
+        </div>
+        <?php endif; ?>
+    <div class="panel-body">
+
+
+        <?php if( \Illuminate\Support\Facades\Auth::user()->role_id == 4 || \Illuminate\Support\Facades\Auth::user()->role_id == 3 ): ?>
+        <a href="<?php echo e(url('/companyUsers/create')); ?>" class="btn btn-primary pull-right">Add User</a>
+        <?php endif; ?>
+        
+
+        <!-- Table -->
+        <table class="table table-condensed" style="border-collapse:collapse;">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($users as $user): ?>
+                <tr data-toggle="collapse" data-target="#demo<?php echo e($user->id); ?>" class="accordion-toggle">
+                    <td><?php echo e($user->first_name.' '.$user->last_name); ?></td>
+                    <td style="text-align: right;">
+                        <a href="#" title="View Details"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a> |
+                        <?php if( \Illuminate\Support\Facades\Auth::user()->role_id == 4): ?>
+                        <?php if( $user->status == 'INACTIVE' ): ?>
+                        <a href="<?php echo e(url('/companyUsers/activate/'.$user->id)); ?>" title="Active"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a> |
+                        <?php else: ?>
+                        <a href="<?php echo e(url('/companyUsers/destroy/'.$user->id)); ?>" onclick="return  confirm('Are you sure you want to disable <?php echo e($user->last_name); ?>, <?php echo e($user->first_name); ?>?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                        <?php endif; ?>
+                        <?php endif; ?>
+                        <a href="<?php echo e(url('/companyUsers/'.$user->id)); ?>" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                        <a href="<?php echo e(url('/users/reset/'.$user->id)); ?>" title="Reset" ><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span></a> |
+                        <a href="<?php echo e(url('/companyUsers/sendEmail/'.$user->id)); ?>" title="Send Username and Password" ><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="12" class="hiddenRow"><div class="accordian-body collapse" id="demo<?php echo e($user->id); ?>"> 
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 600px;"></th>
+                                        <th style="width: 100px;"></th>
+                                        <th style="width: 700px;"></th>
+                                    </tr>
+                                </thead>   
+                                <tbody>
+                                    <tr>
+                                        <th style="text-align: left;">
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-7 col-sm-6">
+                                        <h4><?php echo e($user->first_name.' '.$user->last_name); ?><b> Production | Sales Revenue</b> </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <div class="panel panel-default" style="width: 580px;">
+                                            <div class="panel-body">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <h4>DIRECT HIRE PRODUCTION | SALES Monthly</h4>
+                                                    <div id="directHire<?php echo e($user->id); ?>" style="min-width: 500px; height: 350px;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default" style="width: 580px;">
+                                            <div class="panel-body">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <h3>DIRECT HIRE PRODUCTION | SALES Annually</h3>
+                                                    <div id="directHireAnnual<?php echo e($user->id); ?>" style="min-width: 500px; height: 350px;" ></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="panel panel-default" style="width: 580px;">
+                                            <div class="panel-body">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <h3>TEMP or CONTRACT GROSS MARGIN OF PROFIT (GMP) Monthly</h3>
+                                                    <div id="tempGMP<?php echo e($user->id); ?>" style="min-width: 500px; height: 350px;" ></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="panel panel-default" style="width: 580px;">
+                                            <div class="panel-body">
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <h3>TEMP or CONTRACT GROSS MARGIN OF PROFIT (GMP) Annual</h3>
+                                                    <div id="gmpAnnual<?php echo e($user->id); ?>" style="min-width: 500px; height: 350px;" ></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </th>
+                                <th></th>
+                                <th style="text-align: right;">
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-7 col-sm-6">
+                                        <h4 style="text-align: left;"><?php echo e($user->first_name.' '.$user->last_name); ?> <b>Ratios</b> </h4>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="col-md-10 col-md-offset-1">
+                                            <h3 style="text-align: left;">Recruiting </h3>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 800px;"></th>
+                                                        <th>Today's Ratio</th>
+                                                        <th>Ongoing Ratio</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Recruiting Presentation to Recruiting Hit</td>
+                                                        <td style="text-align: center !important;"><?php echo e($recruiting[$user->cont]->recruit_1); ?> / <?php echo e($recruiting[$user->cont]->recruit_2); ?></td>
+                                                        <td style="text-align: center !important;"><?php echo e($recruiting[$user->cont]->recruit_3); ?> / <?php echo e($recruiting[$user->cont]->recruit_4); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Recruiting Hit to Candidate Interviews</td>
+                                                        <td style="text-align: center !important;"><?php echo e($recruiting[$user->cont]->recruit_5); ?> / <?php echo e($recruiting[$user->cont]->recruit_6); ?></td>
+                                                        <td style="text-align: center !important;"><?php echo e($recruiting[$user->cont]->recruit_7); ?> / <?php echo e($recruiting[$user->cont]->recruit_8); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Recruiting Hit to Interview Reactivated Candidate</td>
+                                                        <td style="text-align: center !important;"><?php echo e($recruiting[$user->cont]->recruit_9); ?> / <?php echo e($recruiting[$user->cont]->recruit_10); ?></td>
+                                                        <td style="text-align: center !important;"><?php echo e($recruiting[$user->cont]->recruit_11); ?> / <?php echo e($recruiting[$user->cont]->recruit_12); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Interviewed Candidate to Send Out</td>
+                                                        <td style="text-align: center !important;"><?php echo e($recruiting[$user->cont]->recruit_13); ?> / <?php echo e($recruiting[$user->cont]->recruit_14); ?></td>
+                                                        <td style="text-align: center !important;"><?php echo e($recruiting[$user->cont]->recruit_15); ?> / <?php echo e($recruiting[$user->cont]->recruit_16); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Interview Reactivated Candidate to Send Out</td>
+                                                        <td style="text-align: center !important;"><?php echo e($recruiting[$user->cont]->recruit_17); ?> / <?php echo e($recruiting[$user->cont]->recruit_18); ?></td>
+                                                        <td style="text-align: center !important;"><?php echo e($recruiting[$user->cont]->recruit_19); ?> / <?php echo e($recruiting[$user->cont]->recruit_20); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sent Out to Fill or Placement</td>
+                                                        <td style="text-align: center !important;"><?php echo e($recruiting[$user->cont]->recruit_21); ?> / <?php echo e($recruiting[$user->cont]->recruit_22); ?></td>
+                                                        <td style="text-align: center !important;"><?php echo e($recruiting[$user->cont]->recruit_23); ?> / <?php echo e($recruiting[$user->cont]->recruit_24); ?></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="col-md-10 col-md-offset-1">
+                                            <h3 style="text-align: left;">Client Development - Inside  </h3>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 800px;"></th>
+                                                        <th>Today's Ratio</th>
+                                                        <th>Ongoing Ratio</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Marketing Call to Job Order, Contract or Temp Assignment</td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDev[$user->cont]->clientDev_1); ?> / <?php echo e($clientDev[$user->cont]->clientDev_2); ?></td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDev[$user->cont]->clientDev_3); ?> / <?php echo e($clientDev[$user->cont]->clientDev_4); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>MPC Presentation to Job Order, Contract or Temp Assignment</td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDev[$user->cont]->clientDev_5); ?> / <?php echo e($clientDev[$user->cont]->clientDev_6); ?></td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDev[$user->cont]->clientDev_7); ?> / <?php echo e($clientDev[$user->cont]->clientDev_8); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Job Order, Contract or Temp Assignment to Fill or Placement by Self</td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDev[$user->cont]->clientDev_9); ?> / <?php echo e($clientDev[$user->cont]->clientDev_10); ?></td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDev[$user->cont]->clientDev_11); ?> / <?php echo e($clientDev[$user->cont]->clientDev_12); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Job Order, Contract or Temp Assignment to Fill or Placement by Others</td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDev[$user->cont]->clientDev_13); ?> / <?php echo e($clientDev[$user->cont]->clientDev_14); ?></td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDev[$user->cont]->clientDev_15); ?> / <?php echo e($clientDev[$user->cont]->clientDev_16); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Submittal to Send Out</td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDev[$user->cont]->clientDev_17); ?> / <?php echo e($clientDev[$user->cont]->clientDev_18); ?></td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDev[$user->cont]->clientDev_19); ?> / <?php echo e($clientDev[$user->cont]->clientDev_20); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Send Out to Fill or Placement by Self</td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDev[$user->cont]->clientDev_21); ?> / <?php echo e($clientDev[$user->cont]->clientDev_22); ?></td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDev[$user->cont]->clientDev_23); ?> / <?php echo e($clientDev[$user->cont]->clientDev_24); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sent Out to Fill or Placement by Others</td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDev[$user->cont]->clientDev_25); ?> / <?php echo e($clientDev[$user->cont]->clientDev_26); ?></td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDev[$user->cont]->clientDev_27); ?> / <?php echo e($clientDev[$user->cont]->clientDev_28); ?></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="col-md-10 col-md-offset-1">
+                                            <h3 style="text-align: left;">Client Development - Outside  </h3>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 800px;"></th>
+                                                        <th>Today's Ratio</th>
+                                                        <th>Ongoing Ratio</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Complete Face-to-Face Appointment to Job Order, Contract or Temp Assignment</td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDevOut[$user->cont]->clientDevOut_1); ?> / <?php echo e($clientDevOut[$user->cont]->clientDevOut_2); ?></td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDevOut[$user->cont]->clientDevOut_3); ?> / <?php echo e($clientDevOut[$user->cont]->clientDevOut_4); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Marketing Call to Job Order, Contract or Temp Assignment</td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDevOut[$user->cont]->clientDevOut_5); ?> / <?php echo e($clientDevOut[$user->cont]->clientDevOut_6); ?></td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDevOut[$user->cont]->clientDevOut_7); ?> / <?php echo e($clientDevOut[$user->cont]->clientDevOut_8); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>MPC Presentation to Job Order, Contract or Temp Assignment</td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDevOut[$user->cont]->clientDevOut_9); ?> / <?php echo e($clientDevOut[$user->cont]->clientDevOut_10); ?></td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDevOut[$user->cont]->clientDevOut_11); ?> / <?php echo e($clientDevOut[$user->cont]->clientDevOut_12); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Job Order, Contract or Temp Assignment to Fill or Placement by Self</td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDevOut[$user->cont]->clientDevOut_13); ?> / <?php echo e($clientDevOut[$user->cont]->clientDevOut_14); ?></td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDevOut[$user->cont]->clientDevOut_15); ?> / <?php echo e($clientDevOut[$user->cont]->clientDevOut_16); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Job Order, Contract or Temp Assignment to Fill or Placement by Others</td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDevOut[$user->cont]->clientDevOut_17); ?> / <?php echo e($clientDevOut[$user->cont]->clientDevOut_18); ?></td>
+                                                        <td style="text-align: center !important;"><?php echo e($clientDevOut[$user->cont]->clientDevOut_19); ?> / <?php echo e($clientDevOut[$user->cont]->clientDevOut_20); ?></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                </th>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div> </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <div class="col-md-2 col-md-offset-5"><?php echo $users->render(); ?></div>
+        <?php if( \Illuminate\Support\Facades\Auth::user()->role_id == 4 ): ?>
+        <div class="col-md-11 "><a href="<?php echo e(url('/companyUsers/create')); ?>" class="btn btn-primary">Add User</a></div>
+        <?php endif; ?>
+    </div>
+</div>
+<?php foreach ($users as $user) { ?>
+    <?php if( isset($directHireTarget[$user->cont]) ): ?>
+    <table id="directHiredatatable<?php echo e($user->id); ?>" style="display: none;">
+        <thead>
+            <tr>
+                <th></th>
+                <th>GOAL</th>
+                <th>ACTUAL PERFORMANCE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Jan</th>
+                <td><?php echo e($directHireTarget[$user->cont]->jan); ?></td>
+                <td><?php echo e(empty( $directHire[$user->cont]['jan'] ) ? 0 : $directHire[$user->cont]['jan']); ?></td>
+            </tr>
+            <tr>
+                <th>Feb</th>
+                <td><?php echo e($directHireTarget[$user->cont]->feb); ?></td>
+                <td><?php echo e(empty( $directHire[$user->cont]['feb'] ) ? 0 : $directHire[$user->cont]['feb']); ?></td>
+            </tr>
+            <tr>
+                <th>Mar</th>
+                <td><?php echo e($directHireTarget[$user->cont]->mar); ?></td>
+                <td><?php echo e(empty( $directHire[$user->cont]['mar'] ) ? 0 : $directHire[$user->cont]['mar']); ?></td>
+            </tr>
+            <tr>
+                <th>Apr</th>
+                <td><?php echo e($directHireTarget[$user->cont]->apr); ?></td>
+                <td><?php echo e(empty( $directHire[$user->cont]['apr'] ) ? 0 : $directHire[$user->cont]['apr']); ?></td>
+            </tr>
+            <tr>
+                <th>May</th>
+                <td><?php echo e($directHireTarget[$user->cont]->may); ?></td>
+                <td><?php echo e(empty( $directHire[$user->cont]['may'] ) ? 0 : $directHire[$user->cont]['may']); ?></td>
+            </tr>
+            <tr>
+                <th>Jun</th>
+                <td><?php echo e($directHireTarget[$user->cont]->jun); ?></td>
+                <td><?php echo e(empty( $directHire[$user->cont]['jun'] ) ? 0 : $directHire[$user->cont]['jun']); ?></td>
+            </tr>
+            <tr>
+                <th>Jul</th>
+                <td><?php echo e($directHireTarget[$user->cont]->jul); ?></td>
+                <td><?php echo e(empty( $directHire[$user->cont]['jul'] ) ? 0 : $directHire[$user->cont]['jul']); ?></td>
+            </tr>
+            <tr>
+                <th>Aug</th>
+                <td><?php echo e($directHireTarget[$user->cont]->aug); ?></td>
+                <td><?php echo e(empty( $directHire[$user->cont]['aug'] ) ? 0 : $directHire[$user->cont]['aug']); ?></td>
+            </tr>
+            <tr>
+                <th>Sep</th>
+                <td><?php echo e($directHireTarget[$user->cont]->sep); ?></td>
+                <td><?php echo e(empty( $directHire[$user->cont]['sep'] ) ? 0 : $directHire[$user->cont]['sep']); ?></td>
+            </tr>
+            <tr>
+                <th>Oct</th>
+                <td><?php echo e($directHireTarget[$user->cont]->oct); ?></td>
+                <td><?php echo e(empty( $directHire[$user->cont]['oct'] ) ? 0 : $directHire[$user->cont]['oct']); ?></td>
+            </tr>
+            <tr>
+                <th>Nov</th>
+                <td><?php echo e($directHireTarget[$user->cont]->nov); ?></td>
+                <td><?php echo e(empty( $directHire[$user->cont]['nov'] ) ? 0 : $directHire[$user->cont]['nov']); ?></td>
+            </tr>
+            <tr>
+                <th>Dic</th>
+                <td><?php echo e($directHireTarget[$user->cont]->dec); ?></td>
+                <td><?php echo e(empty( $directHire[$user->cont]['dec'] ) ? 0 : $directHire[$user->cont]['dec']); ?></td>
+            </tr>
+            <tr>
+                <th>Annual</th>
+                <td><?php echo e($directHireTarget[$user->cont]->annual); ?></td>
+                <td><?php echo e(empty( $directHire[$user->cont]['annual'] ) ? 0 : $directHire[$user->cont]['annual']); ?></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <table id="directHireAnnualdatatable<?php echo e($user->id); ?>" style="display: none;">
+        <thead>
+            <tr>
+                <th></th>
+                <th>GOAL</th>
+                <th>ACTUAL PERFORMANCE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $thisYear = date('Y');
+
+            for( $i = $thisYear; $i < $thisYear+11; $i++ ) {
+                ?>
+                <tr>
+                    <th><?php echo $i . '_'; ?></th>
+                    <td><?php echo '' . ( empty($directHireAnnual[$user->cont][$i]) ? ( $thisYear == $i ? $directHireTarget[0]->annual : 0 ) : $directHireTarget[$user->cont]->annual ); ?></td>
+                    <td><?php echo '' . ( empty($directHireAnnual[$user->cont][$i]) ? 0.0 : $directHireAnnual[$user->cont][$i] ); ?></td>
+                </tr>
+                <?php
+            }
+            ?>
+
+        </tbody>
+    </table> 
+
+<table id="tempGMPdatatable<?php echo e($user->id); ?>" style="display: none;">
+        <thead>
+            <tr>
+                <th></th>
+                <th>GOAL</th>
+                <th>ACTUAL PERFORMANCE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Jan</th>
+                <td><?php echo e($directHireTarget[$user->cont]->jan); ?></td>
+                <td><?php echo e(empty( $gmp[$user->cont]['jan'] ) ? 0 : $gmp[$user->cont]['jan']); ?></td>
+            </tr>
+            <tr>
+                <th>Feb</th>
+                <td><?php echo e($directHireTarget[$user->cont]->feb); ?></td>
+                <td><?php echo e(empty( $gmp[$user->cont]['feb'] ) ? 0 : $gmp[$user->cont]['feb']); ?></td>
+            </tr>
+            <tr>
+                <th>Mar</th>
+                <td><?php echo e($directHireTarget[$user->cont]->mar); ?></td>
+                <td><?php echo e(empty( $gmp[$user->cont]['mar'] ) ? 0 : $gmp[$user->cont]['mar']); ?></td>
+            </tr>
+            <tr>
+                <th>Apr</th>
+                <td><?php echo e($directHireTarget[$user->cont]->apr); ?></td>
+                <td><?php echo e(empty( $gmp[$user->cont]['apr'] ) ? 0 : $gmp[$user->cont]['apr']); ?></td>
+            </tr>
+            <tr>
+                <th>May</th>
+                <td><?php echo e($directHireTarget[$user->cont]->may); ?></td>
+                <td><?php echo e(empty( $gmp[$user->cont]['may'] ) ? 0 : $gmp[$user->cont]['may']); ?></td>
+            </tr>
+            <tr>
+                <th>Jun</th>
+                <td><?php echo e($directHireTarget[$user->cont]->jun); ?></td>
+                <td><?php echo e(empty( $gmp[$user->cont]['jun'] ) ? 0 : $gmp[$user->cont]['jun']); ?></td>
+            </tr>
+            <tr>
+                <th>Jul</th>
+                <td><?php echo e($directHireTarget[$user->cont]->jul); ?></td>
+                <td><?php echo e(empty( $gmp[$user->cont]['jul'] ) ? 0 : $gmp[$user->cont]['jul']); ?></td>
+            </tr>
+            <tr>
+                <th>Aug</th>
+                <td><?php echo e($directHireTarget[$user->cont]->aug); ?></td>
+                <td><?php echo e(empty( $gmp[$user->cont]['aug'] ) ? 0 : $gmp[$user->cont]['aug']); ?></td>
+            </tr>
+            <tr>
+                <th>Sep</th>
+                <td><?php echo e($directHireTarget[$user->cont]->sep); ?></td>
+                <td><?php echo e(empty( $gmp[$user->cont]['sep'] ) ? 0 : $gmp[$user->cont]['sep']); ?></td>
+            </tr>
+            <tr>
+                <th>Oct</th>
+                <td><?php echo e($directHireTarget[$user->cont]->oct); ?></td>
+                <td><?php echo e(empty( $gmp[$user->cont]['oct'] ) ? 0 : $gmp[$user->cont]['oct']); ?></td>
+            </tr>
+            <tr>
+                <th>Nov</th>
+                <td><?php echo e($directHireTarget[0]->nov); ?></td>
+                <td><?php echo e(empty( $gmp[$user->cont]['nov'] ) ? 0 : $gmp[$user->cont]['nov']); ?></td>
+            </tr>
+            <tr>
+                <th>Dic</th>
+                <td><?php echo e($directHireTarget[$user->cont]->dec); ?></td>
+                <td><?php echo e(empty( $gmp[$user->cont]['dec'] ) ? 0 : $gmp[$user->cont]['dec']); ?></td>
+            </tr>
+            <tr>
+                <th>Annual</th>
+                <td><?php echo e($directHireTarget[$user->cont]->annual); ?></td>
+                <td><?php echo e(empty( $gmp[$user->cont]['annual'] ) ? 0 : $gmp[$user->cont]['annual']); ?></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table id="gmpAnnualdatatable<?php echo e($user->id); ?>" style="display: none;">
+        <thead>
+            <tr>
+                <th></th>
+                <th>GOAL</th>
+                <th>ACTUAL PERFORMANCE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $thisYear = date('Y');
+
+            for( $i = $thisYear; $i < $thisYear+11; $i++ ) {
+                ?>
+                <tr>
+                    <th><?php echo $i . '_'; ?></th>
+                    <td><?php echo '' . ( empty($gmpAnnual[$user->cont][$i]) ? ( $thisYear == $i ? $directHireTarget[$user->cont]->annual : 0 ) : $directHireTarget[$user->cont]->annual ); ?></td>
+                    <td><?php echo '' . ( empty($gmpAnnual[$user->cont][$i]) ? 0.0 : $gmpAnnual[$user->cont][$i] ); ?></td>
+                </tr>
+                <?php
+            }
+            ?>
+
+        </tbody>
+    </table> 
+    <?php endif; ?>
+<?php } ?>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(event) { 
+        //DIRECT HIRE PRODUCTION | SALES Monthly
+<?php foreach ($users as $user) { ?>
+            var directHire='#directHire'+<?php echo $user->id; ?>;
+            var directHireAnnual='#directHireAnnual'+<?php echo $user->id; ?>;
+            var tempGMP='#tempGMP'+<?php echo $user->id; ?>;
+            var gmpAnnual='#gmpAnnual'+<?php echo $user->id; ?>;
+            $(directHire).highcharts({
+                data: {
+                    table: 'directHiredatatable'+<?php echo $user->id; ?>
+                },
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: ''
+                },
+                yAxis: {
+                    tickPositions: [0,5000,10000,20000,30000,40000,50000,60000,70000,80000,90000,100000],
+                    allowDecimals: false,
+                    title: {
+                        text: ''
+                    }
+                },
+                tooltip: {
+                    formatter: function () {
+                        var a = parseFloat(this.point.y);
+                        var numero='';
+                        if(a>1000000){
+                            numero=Math.round((a/1000000))+'M';
+                        }else{
+                            if(this.point.y>1000){
+                                numero=Math.round((a/1000))+'K';
+                            }
+                        }
+                        return '<b>' + this.series.name + '</b><br/>' +
+                            numero + ' ' + this.point.name.toLowerCase();
+                    }
+                },
+                credits: {
+                    enabled: false
+                }
+            });
+            
+            //DIRECT HIRE PRODUCTION | SALES Annually
+            $(directHireAnnual).highcharts({
+                data: {
+                    table: 'directHireAnnualdatatable'+<?php echo $user->id; ?>
+                },
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: ''
+                },
+                yAxis: {
+                    tickPositions: [0,100000,150000,200000,250000,300000,350000,400000,450000,500000,600000,700000,800000,900000,1000000],
+                    allowDecimals: false,
+                    title: {
+                        text: ''
+                    }
+                },
+                tooltip: {
+                    formatter: function () {
+                        var a = parseFloat(this.point.y);
+                        var numero='';
+                        if(a>1000000){
+                            numero=Math.round((a/1000000))+'M';
+                        }else{
+                            if(this.point.y>1000){
+                                numero=Math.round((a/1000))+'K';
+                            }
+                        }
+                        return '<b>' + this.series.name + '</b><br/>' +
+                            numero + ' ' + this.point.name.toLowerCase();
+                    }
+                },
+                credits: {
+                    enabled: false
+                }
+            });
+        
+            //TEMP or CONTRACT GROSS MARGIN OF PROFIT (GMP) Monthly
+            $(tempGMP).highcharts({
+                data: {
+                    table: 'tempGMPdatatable'+<?php echo $user->id; ?>
+                },
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: ''
+                },
+                yAxis: {
+                    tickPositions: [0,5000,10000,20000,30000,40000,50000,60000,70000,80000,90000,100000],
+                    allowDecimals: false,
+                    title: {
+                        text: ''
+                    }
+                },
+                tooltip: {
+                    formatter: function () {
+                        var a = parseFloat(this.point.y);
+                        var numero='';
+                        if(a>1000000){
+                            numero=Math.round((a/1000000))+'M';
+                        }else{
+                            if(this.point.y>1000){
+                                numero=Math.round((a/1000))+'K';
+                            }
+                        }
+                        return '<b>' + this.series.name + '</b><br/>' +
+                            numero + ' ' + this.point.name.toLowerCase();
+                    }
+                },
+                credits: {
+                    enabled: false
+                }
+            });
+        
+            //DIRECT HIRE PRODUCTION | SALES Annually
+            $(gmpAnnual).highcharts({
+                data: {
+                    table: 'gmpAnnualdatatable'+<?php echo $user->id; ?>
+                },
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: ''
+                },
+                yAxis: {
+                    tickPositions: [0,100000,150000,200000,250000,300000,350000,400000,450000,500000,600000,700000,800000,900000,1000000],
+                    allowDecimals: false,
+                    title: {
+                        text: ''
+                    }
+                },
+                tooltip: {
+                    formatter: function () {
+                        var a = parseFloat(this.point.y);
+                        var numero='';
+                        if(a>1000000){
+                            numero=Math.round((a/1000000))+'M';
+                        }else{
+                            if(this.point.y>1000){
+                                numero=Math.round((a/1000))+'K';
+                            }
+                        }
+                        return '<b>' + this.series.name + '</b><br/>' +
+                            numero + ' ' + this.point.name.toLowerCase();
+                    }
+                },
+                credits: {
+                    enabled: false
+                }
+            });
+<?php } ?>        
+    });
+</script>

@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Metrics Solution</title>
+        <!-- Fonts -->
+        <!-- <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'> -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        
+        <link rel="stylesheet" href="fixes.css">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#godown').height($("#ss_fixed_nav").height());
+                window.onresize = function() {
+                    $('#godown').height($("#ss_fixed_nav").height());
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<nav class="navbar-default navbar-fixed-top" id="ss_fixed_nav">
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+									<span class="sr-only">Toggle Navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+								<a class="navbar-brand" href="#">
+                                    <img class="hidden-xs hidden-sm img-responsive" src="images/modLogo.png" alt="logo description" />
+                                    <img class="hidden-xs visible-sm img-responsive" src="images/modLogo-half.png" alt="logo description" />
+                                    <img class="visible-xs img-responsive" src="images/modLogo-small.png" alt="logo description" />
+                                </a>
+							</div>
+
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<ul class="nav navbar-nav">
+                                    <li class=""><a href="http://salesperformanceindicator.com">Manage Users</a></li>
+									<li class=""><a href="http://salesperformanceindicator.com/companies">Manage Companies</a></li>
+									<li class="active"><a href="http://salesperformanceindicator.com/reports">Reports</a></li>
+								</ul>
+								<ul class="nav navbar-nav navbar-right">
+                                    <li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in as System <span class="caret"></span></a>
+										<ul class="dropdown-menu" role="menu">
+											<li><a href="http://salesperformanceindicator.com/myprofile">MyProfile</a></li>
+											<li><a href="http://salesperformanceindicator.com/auth/logout">Logout</a></li>
+										</ul>
+									</li>
+                                </ul>
+                            </div>
+						</div>
+					</nav>
+					<div id="godown"></div>
+				</div>
+			</div>
+		</div>
+
+        <div class="container-fluid">
+            <div class="page-header" id="banner">
+                <div class="row">
+					<div class="col-md-12">
+						<h2>Reports</h2>
+					</div>
+				</div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <ul class="nav nav-tabs">
+                        <li class="">
+                            <a href="#users" data-toggle="tab">User Reports</a>
+                        </li>
+                        <li class="">
+                            <a href="#other" data-toggle="tab">Other Reports</a>
+                        </li>
+                    </ul>
+                    <br/>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade active in" id="users">
+                            <div class="bs-component">
+                                <div class="panel panel-default">
+                                    <!-- Default panel contents -->
+                                    <div class="panel-heading"><h3>Filters</h3></div>
+                                    <div class="panel-body">
+                                        <div class="col-md-10 col-md-offset-1">
+                                            <form id="form_search" class="form-horizontal" role="form" method="POST" action="https://salesperformanceindicator.com/reports/search">
+                                    <input type="hidden" name="_token" value="3b9yqqQOUBLy04xTVKL3H51LNU0YfV82k4jvZgtT" />
+                                    <input type="hidden" id="request" name="request" value="" />
+                                    <fieldset>
+
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <div class="panel-body">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <h5>Users per organization</h5>
+                                                                    <input class="radio" checked="checked" name="user_filter" type="radio" value="1">
+                                                                    <select class="form-control" style="width: 300px" name="companies"><option value="default" selected="selected">All Companies</option><option value="7">a</option><option value="5">Apple</option><option value="16">CDIL</option><option value="18">CDIL DEMO</option><option value="2">Company Another</option><option value="1">Good as Gold Training</option><option value="6">HR Search Inc</option><option value="9">Mattt</option><option value="3">Microsoft</option><option value="4">Oracle</option><option value="8">v</option></select>
+                                                                    <hr>
+                                                                    <select class="form-control" style="width: 300px" name="status"><option value="ALL" selected="selected">ALL</option><option value="ACTIVE">ACTIVE</option><option value="INACTIVE">INACTIVE</option></select>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <h5>Users by Activation/Cancellation Date</h5>
+                                                                    <input class="radio" name="user_filter" type="radio" value="2">
+                                                                    <select class="form-control" style="width: 300px" name="status_date"><option value="ALL" selected="selected">ALL</option><option value="ACTIVATION">ACTIVATION</option><option value="CANCELLATION">CANCELLATION</option></select>
+                                                                    <hr>
+                                                                    <div class='input-group date' id='datetimepicker1' style="width: 280px;">
+                                                                        <input type='text' class="form-control" style="width: 260px;" name="from_date" id="from_date" placeholder="FROM DATE"  />
+                                                                        <span class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-calendar" ></span>
+                                                                        </span>
+                                                                    </div>
+
+                                                                    <div class='input-group date' id='datetimepicker2' style="width: 280px;">
+                                                                        <input type='text' class="form-control" style="width: 260px;" name="to_date" id="to_date" placeholder="TO DATE" />
+                                                                        <span class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-calendar" ></span>
+                                                                        </span>
+                                                                    </div>
+
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <script>
+                                                        function tal(event){
+                                                            $('#datetimepicker1').datetimepicker({
+                                                                format: 'YYYY-MM-DD'
+                                                            });
+
+                                                            $('#datetimepicker2').datetimepicker({
+                                                                format: 'YYYY-MM-DD'
+                                                            });
+                                                            $('#from_date').keypress(function (event) {
+                                                                event.preventDefault();
+                                                            });
+                                                            $('#to_date').keypress(function (event) {
+                                                                event.preventDefault();
+                                                            });
+                                                            function validateDates()
+                                                            {
+                                                                var from_date = $.trim($('#from_date').val());
+                                                                var to_date = $.trim($('#to_date').val());
+                                                                if (from_date === '') {
+                                                                    alert('FROM DATE is empty.');
+                                                                    return false;
+                                                                }
+
+                                                                if (to_date === '') {
+                                                                    alert('TO DATE is empty.');
+                                                                    return false;
+                                                                }
+                                                                return true;
+                                                            }
+                                                            $('#form_search').submit(function () {
+                                                                if ($('input:radio[name=user_filter]:checked').val() == 2) {
+                                                                    if ($('select[name=status_date]').val() == "ACTIVATION") {
+                                                                        return validateDates();
+                                                                    }
+                                                                    if ($('select[name=status_date]').val() == "CANCELLATION") {
+                                                                        return validateDates();
+                                                                    }
+                                                                    if ($('select[name=status_date]').val() == "ALL") {
+                                                                        return true;
+                                                                    }
+                                                                }
+
+                                                            });
+                                                        }
+                                                        if (document.addEventListener) {
+                                                            document.addEventListener("DOMContentLoaded", tal);
+
+                                                        } else if (document.attachEvent) {
+                                                            document.attachEvent('DOMContentLoaded', tal);
+                                                        }
+                                                    </script>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary" value="Search" onclick="setRequest('search')">Search</button>
+                                                <button type="submit" class="btn btn-default" value="Show_All"  onclick="setRequest('showAll')">Show All</button>
+                                            </span>
+                                        </div>
+
+                                    </fieldset>
+                                </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <!-- Default panel contents -->
+                                    <div class="panel-heading">
+                                        <h3>Users</h3>
+                                    </div>
+                                    <div class="panel-body">
+
+                                        <!-- Table -->
+                                        <form name="prueba" id="prueba" class="form-horizontal" role="form" method="POST" action="http://salesperformanceindicator.com/reports/search">
+                                            <input type="hidden" name="_token" value="SJUaCUT2wxZik7bJjqHEvvo9dbUpGjQT8dvKSyNO" />
+                                            <input type="hidden" id="request" name="request" value="" />
+                                            
+                                            <table class="table table-small hidden-sm hidden-md hidden-lg">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="table-small-bordered">
+                                                                <tr>
+                                                                    <td class="col-xs-5">First Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">System</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Last Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Admin</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Email</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">system@system.com</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">User Group</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">SuperAdmin</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Company Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Status</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Created</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Updated</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-08-21</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Actived</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Cancelled</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-06-28</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="table-small-bordered">
+                                                                <tr>
+                                                                    <td class="col-xs-5">First Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Company</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Last Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Owner</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Email</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">adm@adm.com</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">User Group</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Owner</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Company Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Status</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Created</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Updated</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-08-21</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Actived</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Cancelled</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-06-21</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="table-small-bordered">
+                                                                <tr>
+                                                                    <td class="col-xs-5">First Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Office</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Last Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Manager</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Email</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">manager@manager.com</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">User Group</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Manager</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Company Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Status</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Created</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Updated</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-08-21</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Actived</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Cancelled</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-06-21</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="table-small-bordered">
+                                                                <tr>
+                                                                    <td class="col-xs-5">First Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Last Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Test</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Email</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">rec2@rec2.com</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">User Group</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Company Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Status</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">RESET</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Created</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Updated</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Actived</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Cancelled</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-06-09</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="table-small-bordered">
+                                                                <tr>
+                                                                    <td class="col-xs-5">First Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member1</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Last Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Test</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Email</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">rec2@rec3.com</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">User Group</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Company Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">HR Search Inc</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Status</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Created</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Updated</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-08</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Actived</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Cancelled</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-06-27</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="table-small-bordered">
+                                                                <tr>
+                                                                    <td class="col-xs-5">First Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Last Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Testx</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Email</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">superadmin@ahorasi.com</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">User Group</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Company Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Status</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Created</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Updated</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-08-11</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Actived</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-12</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Cancelled</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-12</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="table-small-bordered">
+                                                                <tr>
+                                                                    <td class="col-xs-5">First Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Last Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Test</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Email</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">rec2@rec5.com</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">User Group</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Company Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Status</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Created</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Updated</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Actived</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Cancelled</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="table-small-bordered">
+                                                                <tr>
+                                                                    <td class="col-xs-5">First Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member4</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Last Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Test</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Email</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">rec2@rec6.com</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">User Group</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Company Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Status</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Created</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Updated</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-27</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Actived</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-27</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Cancelled</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-27</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="table-small-bordered">
+                                                                <tr>
+                                                                    <td class="col-xs-5">First Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member5</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Last Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Testa</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Email</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">rec2@rec7.com</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">User Group</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Company Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Status</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Created</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Updated</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-12</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Actived</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Cancelled</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="table-small-bordered">
+                                                                <tr>
+                                                                    <td class="col-xs-5">First Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member6</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Last Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Test otra pag</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Email</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">rec2@rec8.com</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">User Group</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Company Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Status</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Created</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Updated</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-19</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Actived</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Cancelled</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="table-small-bordered">
+                                                                <tr>
+                                                                    <td class="col-xs-5">First Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member7</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Last Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Test</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Email</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">rec2@rec9.com</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">User Group</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Company Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Status</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Created</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Updated</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-12</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Actived</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-12</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Cancelled</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-12</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="table-small-bordered">
+                                                                <tr>
+                                                                    <td class="col-xs-5">First Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member8</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Last Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Test</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Email</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">rec2@rec10.com</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">User Group</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Company Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Status</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Created</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Updated</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Actived</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Cancelled</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="table-small-bordered">
+                                                                <tr>
+                                                                    <td class="col-xs-5">First Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member9</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Last Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Test</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Email</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">rec2@rec11.com</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">User Group</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Company Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Company Another</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Status</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Created</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Updated</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-08-11</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Actived</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Cancelled</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="table-small-bordered">
+                                                                <tr>
+                                                                    <td class="col-xs-5">First Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member10</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Last Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Test</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Email</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">rec2@rec12.com</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">User Group</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">SuperAdmin</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Company Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Company Another</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Status</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Created</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Updated</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Actived</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Cancelled</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td class="td-separator">&nbsp;</td></tr>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="table-small-bordered">
+                                                                <tr>
+                                                                    <td class="col-xs-5">First Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member11</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Last Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Test</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Email</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">rec2@rec13.com</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">User Group</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Company Name</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">Company Another</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Status</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Created</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Updated</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Actived</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-xs-5">Date Cancelled</td>
+                                                                    <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>                    
+                                                </tbody>
+                                            </table>
+
+                                            <table class="table hidden-xs">
+                                                <thead>
+                                                    <tr>
+                                                        <th>First Name</th>
+                                                        <th>Last Name</th>
+                                                        <th>Email</th>
+                                                        <th>User Group</th>
+                                                        <th>Company Name</th>
+                                                        <th>Status</th>
+                                                        <th>Date Created</th>
+                                                        <th>Date Updated</th>
+                                                        <th>Date Actived</th>
+                                                        <th>Date Cancelled</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>System</td>
+                                                        <td>Admin</td>
+                                                        <td>system@system.com</td>
+                                                        <td>SuperAdmin</td>
+                                                        <td>Good as Gold Training</td>
+                                                        <td>ACTIVE</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-08-21</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-06-28</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Company</td>
+                                                        <td>Owner</td>
+                                                        <td>adm@adm.com</td>
+                                                        <td>Owner</td>
+                                                        <td>Good as Gold Training</td>
+                                                        <td>ACTIVE</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-08-21</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-06-21</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Office</td>
+                                                        <td>Manager</td>
+                                                        <td>manager@manager.com</td>
+                                                        <td>Manager</td>
+                                                        <td>Good as Gold Training</td>
+                                                        <td>ACTIVE</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-08-21</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-06-21</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Member</td>
+                                                        <td>Test</td>
+                                                        <td>rec2@rec2.com</td>
+                                                        <td>Member</td>
+                                                        <td>Good as Gold Training</td>
+                                                        <td>RESET</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-07-06</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-06-09</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Member1</td>
+                                                        <td>Test</td>
+                                                        <td>rec2@rec3.com</td>
+                                                        <td>Member</td>
+                                                        <td>HR Search Inc</td>
+                                                        <td>ACTIVE</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-07-08</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-06-27</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Member2</td>
+                                                        <td>Testx</td>
+                                                        <td>superadmin@ahorasi.com</td>
+                                                        <td>Member</td>
+                                                        <td>Good as Gold Training</td>
+                                                        <td>ACTIVE</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-08-11</td>
+                                                        <td>2015-07-12</td>
+                                                        <td>2015-07-12</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Member3</td>
+                                                        <td>Test</td>
+                                                        <td>rec2@rec5.com</td>
+                                                        <td>Member</td>
+                                                        <td>Good as Gold Training</td>
+                                                        <td>ACTIVE</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-07-06</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-05-04</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Member4</td>
+                                                        <td>Test</td>
+                                                        <td>rec2@rec6.com</td>
+                                                        <td>Member</td>
+                                                        <td>Good as Gold Training</td>
+                                                        <td>ACTIVE</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-07-27</td>
+                                                        <td>2015-07-27</td>
+                                                        <td>2015-07-27</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Member5</td>
+                                                        <td>Testa</td>
+                                                        <td>rec2@rec7.com</td>
+                                                        <td>Member</td>
+                                                        <td>Good as Gold Training</td>
+                                                        <td>ACTIVE</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-07-12</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-05-04</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Member6</td>
+                                                        <td>Test otra pag</td>
+                                                        <td>rec2@rec8.com</td>
+                                                        <td>Member</td>
+                                                        <td>Good as Gold Training</td>
+                                                        <td>ACTIVE</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-07-19</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-05-04</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Member7</td>
+                                                        <td>Test</td>
+                                                        <td>rec2@rec9.com</td>
+                                                        <td>Member</td>
+                                                        <td>Good as Gold Training</td>
+                                                        <td>ACTIVE</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-07-12</td>
+                                                        <td>2015-07-12</td>
+                                                        <td>2015-07-12</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Member8</td>
+                                                        <td>Test</td>
+                                                        <td>rec2@rec10.com</td>
+                                                        <td>Member</td>
+                                                        <td>Good as Gold Training</td>
+                                                        <td>ACTIVE</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-07-06</td>
+                                                        <td>2015-07-06</td>
+                                                        <td>2015-07-06</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Member9</td>
+                                                        <td>Test</td>
+                                                        <td>rec2@rec11.com</td>
+                                                        <td>Member</td>
+                                                        <td>Company Another</td>
+                                                        <td>ACTIVE</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-08-11</td>
+                                                        <td>2015-07-06</td>
+                                                        <td>2015-07-06</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Member10</td>
+                                                        <td>Test</td>
+                                                        <td>rec2@rec12.com</td>
+                                                        <td>SuperAdmin</td>
+                                                        <td>Company Another</td>
+                                                        <td>ACTIVE</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-07-06</td>
+                                                        <td>2015-07-06</td>
+                                                        <td>2015-07-06</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Member11</td>
+                                                        <td>Test</td>
+                                                        <td>rec2@rec13.com</td>
+                                                        <td>Member</td>
+                                                        <td>Company Another</td>
+                                                        <td>ACTIVE</td>
+                                                        <td>2015-05-04</td>
+                                                        <td>2015-07-06</td>
+                                                        <td>2015-07-06</td>
+                                                        <td>2015-07-06</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </form>
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-8 text-center">
+                                                <ul class="pagination">
+                                                    <li class="disabled"><span>&laquo;</span></li>
+                                                    <li class="active"><span>1</span></li>
+                                                    <li><a href="http://salesperformanceindicator.com/reports/?page=2">2</a></li>
+                                                    <li><a href="http://salesperformanceindicator.com/reports/?page=3">3</a></li>
+                                                    <li><a href="http://salesperformanceindicator.com/reports/?page=4">4</a></li>
+                                                    <li><a href="http://salesperformanceindicator.com/reports/?page=5">5</a></li>
+                                                    <li><a href="http://salesperformanceindicator.com/reports/?page=2" rel="next">&raquo;</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-2"></div>
+                                        </div>
+                                        <div class="col-md-11 "><button type="submit" class="btn btn-primary" value="Search">Exportar</button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="other">
+                            <div class="row ">
+                                <div class="col-lg-4">
+                                    <div class="bs-component">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body other-panel-style">
+                                                <div class="col-lg-3">
+                                                    <h1>Another Thing</h1>
+                                                    <a href="http://salesperformanceindicator.com/reports/findByStatus" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="bs-component">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body other-panel-style">
+                                                <div class="col-lg-3">
+                                                    <h1>Another Thing</h1>
+                                                    <a href="http://salesperformanceindicator.com/reports/findByStatus" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12 text-center back-to-top">
+                        <a class="btn btn-default" href="#top">Back to top</a>
+                    </div>
+                    <div class="col-lg-12">
+                        <ul class="list-unstyled">
+                            <li>
+                                <div class="footer-copyright">
+                                    <div class="container text-center">
+                                        Sales Performance Indicator | &copy; 2014-2015 Good as Gold Training, All rights reserved.<br />
+                                        <a class="grey-text text-lighten-4 right" href="mailto:support@staffingandrecruiting.com">support@staffingandrecruiting.com | 219 663 9609</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+        <script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/src/js/bootstrap-datetimepicker.js"></script>
+        <link rel="stylesheet" href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css">
+    </body>
+</html>

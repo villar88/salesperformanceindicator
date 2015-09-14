@@ -1,0 +1,24 @@
+[10-Aug-2015 15:21:46 America/New_York] PHP Fatal error:  Call to undefined function view() in /home/salesper/public_html/order/order.php on line 50
+[11-Aug-2015 14:21:05 America/New_York] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/salesper/public_html/order/order.php on line 9
+[11-Aug-2015 14:24:01 America/New_York] PHP Parse error:  syntax error, unexpected ')' in /home/salesper/public_html/order/order.php on line 5
+[11-Aug-2015 14:24:07 America/New_York] PHP Parse error:  syntax error, unexpected ')' in /home/salesper/public_html/order/order.php on line 5
+[11-Aug-2015 14:24:09 America/New_York] PHP Parse error:  syntax error, unexpected ')' in /home/salesper/public_html/order/order.php on line 5
+[11-Aug-2015 14:24:11 America/New_York] PHP Parse error:  syntax error, unexpected ')' in /home/salesper/public_html/order/order.php on line 5
+[11-Aug-2015 15:31:32 America/New_York] PHP Parse error:  syntax error, unexpected ',' in /home/salesper/public_html/order/order.php on line 104
+[11-Aug-2015 16:36:18 America/New_York] PHP Fatal error:  Call to undefined function password_hash() in /home/salesper/public_html/order/order.php on line 233
+[11-Aug-2015 16:36:23 America/New_York] PHP Fatal error:  Call to undefined function password_hash() in /home/salesper/public_html/order/order.php on line 233
+[11-Aug-2015 16:36:47 America/New_York] PHP Fatal error:  Call to undefined function bcrypt() in /home/salesper/public_html/order/order.php on line 229
+[11-Aug-2015 16:42:22 America/New_York] PHP Fatal error:  Call to undefined function bcrypt() in /home/salesper/public_html/order/order.php on line 229
+[11-Aug-2015 16:42:34 America/New_York] PHP Warning:  crypt() expects parameter 2 to be string, array given in /home/salesper/public_html/order/order.php on line 229
+[12-Aug-2015 14:18:51 America/New_York] PHP Parse error:  syntax error, unexpected '}' in /home/salesper/public_html/order/order.php on line 189
+[12-Aug-2015 14:19:05 America/New_York] PHP Parse error:  syntax error, unexpected '}' in /home/salesper/public_html/order/order.php on line 189
+[12-Aug-2015 14:19:14 America/New_York] PHP Parse error:  syntax error, unexpected '}' in /home/salesper/public_html/order/order.php on line 189
+[12-Aug-2015 14:19:22 America/New_York] PHP Parse error:  syntax error, unexpected '}' in /home/salesper/public_html/order/order.php on line 189
+[12-Aug-2015 14:19:26 America/New_York] PHP Parse error:  syntax error, unexpected '}' in /home/salesper/public_html/order/order.php on line 189
+[12-Aug-2015 14:19:30 America/New_York] PHP Parse error:  syntax error, unexpected '}' in /home/salesper/public_html/order/order.php on line 189
+[12-Aug-2015 14:19:53 America/New_York] PHP Parse error:  syntax error, unexpected '}' in /home/salesper/public_html/order/order.php on line 189
+[12-Aug-2015 14:20:04 America/New_York] PHP Parse error:  syntax error, unexpected '}' in /home/salesper/public_html/order/order.php on line 189
+[12-Aug-2015 14:20:53 America/New_York] PHP Parse error:  syntax error, unexpected '}' in /home/salesper/public_html/order/order.php on line 189
+[12-Aug-2015 14:20:58 America/New_York] PHP Parse error:  syntax error, unexpected '}' in /home/salesper/public_html/order/order.php on line 189
+[12-Aug-2015 14:21:12 America/New_York] PHP Parse error:  syntax error, unexpected '}' in /home/salesper/public_html/order/order.php on line 189
+[12-Aug-2015 14:21:14 America/New_York] PHP Parse error:  syntax error, unexpected '}' in /home/salesper/public_html/order/order.php on line 189

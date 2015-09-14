@@ -1,0 +1,179 @@
+<?php $__env->startSection('content'); ?>
+    <style>
+        th{
+            text-align: center !important;
+        }
+
+    </style>
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-8 col-md-7 col-sm-6">
+                <h2>My Ratio </h2>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h3>Recruiting </h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 800px;"></th>
+                                    <th>Today's Ratio</th>
+                                    <th>Ongoing Ratio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Recruiting Presentation to Recruiting Hit</td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->recruit_1); ?> / <?php echo e($recruiting->recruit_2); ?></td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->recruit_3); ?> / <?php echo e($recruiting->recruit_4); ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Recruiting Hit to Candidate Interviews</td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->recruit_5); ?> / <?php echo e($recruiting->recruit_6); ?></td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->recruit_7); ?> / <?php echo e($recruiting->recruit_8); ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Recruiting Hit to Interview Reactivated Candidate</td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->recruit_9); ?> / <?php echo e($recruiting->recruit_10); ?></td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->recruit_11); ?> / <?php echo e($recruiting->recruit_12); ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Interviewed Candidate to Send Out</td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->recruit_13); ?> / <?php echo e($recruiting->recruit_14); ?></td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->recruit_15); ?> / <?php echo e($recruiting->recruit_16); ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Interview Reactivated Candidate to Send Out</td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->recruit_17); ?> / <?php echo e($recruiting->recruit_18); ?></td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->recruit_19); ?> / <?php echo e($recruiting->recruit_20); ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Sent Out to Fill or Placement</td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->recruit_21); ?> / <?php echo e($recruiting->recruit_22); ?></td>
+                                    <td style="text-align: center !important;"><?php echo e($recruiting->recruit_23); ?> / <?php echo e($recruiting->recruit_24); ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h3>Client Development - Inside  </h3>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th style="width: 800px;"></th>
+                                <th>Today's Ratio</th>
+                                <th>Ongoing Ratio</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Marketing Call to Job Order, Contract or Temp Assignment</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->clientDev_1); ?> / <?php echo e($clientDev->clientDev_2); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->clientDev_3); ?> / <?php echo e($clientDev->clientDev_4); ?></td>
+                            </tr>
+                            <tr>
+                                <td>MPC Presentation to Job Order, Contract or Temp Assignment</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->clientDev_5); ?> / <?php echo e($clientDev->clientDev_6); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->clientDev_7); ?> / <?php echo e($clientDev->clientDev_8); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Job Order, Contract or Temp Assignment to Fill or Placement by Self</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->clientDev_9); ?> / <?php echo e($clientDev->clientDev_10); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->clientDev_11); ?> / <?php echo e($clientDev->clientDev_12); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Job Order, Contract or Temp Assignment to Fill or Placement by Others</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->clientDev_13); ?> / <?php echo e($clientDev->clientDev_14); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->clientDev_15); ?> / <?php echo e($clientDev->clientDev_16); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Submittal to Send Out</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->clientDev_17); ?> / <?php echo e($clientDev->clientDev_18); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->clientDev_19); ?> / <?php echo e($clientDev->clientDev_20); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Send Out to Fill or Placement by Self</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->clientDev_21); ?> / <?php echo e($clientDev->clientDev_22); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->clientDev_23); ?> / <?php echo e($clientDev->clientDev_24); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Sent Out to Fill or Placement by Others</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->clientDev_25); ?> / <?php echo e($clientDev->clientDev_26); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDev->clientDev_27); ?> / <?php echo e($clientDev->clientDev_28); ?></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h3>Client Development - Outside  </h3>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th style="width: 800px;"></th>
+                                <th>Today's Ratio</th>
+                                <th>Ongoing Ratio</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Complete Face-to-Face Appointment to Job Order, Contract or Temp Assignment</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->clientDevOut_1); ?> / <?php echo e($clientDevOut->clientDevOut_2); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->clientDevOut_3); ?> / <?php echo e($clientDevOut->clientDevOut_4); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Marketing Call to Job Order, Contract or Temp Assignment</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->clientDevOut_5); ?> / <?php echo e($clientDevOut->clientDevOut_6); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->clientDevOut_7); ?> / <?php echo e($clientDevOut->clientDevOut_8); ?></td>
+                            </tr>
+                            <tr>
+                                <td>MPC Presentation to Job Order, Contract or Temp Assignment</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->clientDevOut_9); ?> / <?php echo e($clientDevOut->clientDevOut_10); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->clientDevOut_11); ?> / <?php echo e($clientDevOut->clientDevOut_12); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Job Order, Contract or Temp Assignment to Fill or Placement by Self</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->clientDevOut_13); ?> / <?php echo e($clientDevOut->clientDevOut_14); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->clientDevOut_15); ?> / <?php echo e($clientDevOut->clientDevOut_16); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Job Order, Contract or Temp Assignment to Fill or Placement by Others</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->clientDevOut_17); ?> / <?php echo e($clientDevOut->clientDevOut_18); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->clientDevOut_19); ?> / <?php echo e($clientDevOut->clientDevOut_20); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Sent Out to Fill or Placement by Others</td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->clientDevOut_21); ?> / <?php echo e($clientDevOut->clientDevOut_22); ?></td>
+                                <td style="text-align: center !important;"><?php echo e($clientDevOut->clientDevOut_23); ?> / <?php echo e($clientDevOut->clientDevOut_24); ?></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

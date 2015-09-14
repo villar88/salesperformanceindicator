@@ -1,0 +1,39 @@
+head	1.2;
+access;
+symbols;
+locks
+	salesper:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2015.03.23.11.50.31;	author salesper;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2015.03.23.11.50.30;	author salesper;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@"Modified by /usr/local/cpanel/cpanel "
+@
+text
+@no-reply:x:530:528::/home/salesper/mail/salesperformanceindicator.com/no-reply:/home/salesper
+@
+
+
+1.1
+log
+@"Modified by /usr/local/cpanel/cpanel "
+@
+text
+@d1 1
+@

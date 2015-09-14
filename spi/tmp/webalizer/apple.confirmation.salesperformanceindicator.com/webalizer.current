@@ -1,0 +1,205 @@
+# Webalizer V2.23-05 Incremental Data - 09/15/2014 12:34:49
+2014 9 15 12 34 49
+55 47 8 12 6 5 1176304 13 7 0
+7 4 39 1 15
+12 12 304019 1 1 1
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+43 35 872285 7 12 6
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+39 33 870889 8
+4 2 1396 4
+0 0 0 0
+0 0 0 0
+0 0 0 0
+12 12 304019 1
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0
+0
+0
+47
+0
+0
+0
+0
+0
+1
+0
+0
+3
+0
+0
+0
+0
+0
+0
+0
+0
+4
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+# -urls- 
+/Confirm/js/jquery.validationEngine.js
+0 4 400593680 290468 0 0
+/Confirm/js/jquery-1.8.2.min.js
+0 4 0 373744 0 0
+/Confirm/js/languages/jquery.validationEngine-en.js
+0 4 0 31420 0 0
+/Confirm/
+0 5 0 208085 4 1
+/Confirm/img/app-icons.png
+0 5 0 136375 0 0
+/Confirm/img/sc.png
+0 4 0 19972 0 0
+/Confirm/img/crd.png
+0 4 0 37256 0 0
+/Confirm/css/validationEngine.jquery.css
+0 4 0 13336 0 0
+/
+0 3 400595488 1419 1 0
+/Confirm/img/favicon.ico
+0 2 400595696 15564 0 0
+/Confirm/css/style.css
+0 4 0 17596 0 0
+/Confirm/img/dite-logo.png
+0 5 0 29760 0 0
+# End Of Table - urls
+# -sites- (monthly)
+google-proxy-66-249-83-35.google.com
+0 9 9 229175 0 0
+-
+31.13.97.117
+0 1 0 441 1 1410779988
+-
+197.9.18.114
+0 11 11 278574 1 1410779989
+/Confirm/
+31.13.97.115
+0 1 0 0 0 0
+-
+197.1.75.234
+0 12 12 304019 1 1409587580
+/Confirm/
+197.1.150.42
+0 19 14 280861 2 1410784489
+/
+google-proxy-64-233-172-35.google.com
+0 1 1 41617 1 1410780087
+/Confirm/
+31.13.97.112
+0 1 1 41617 1 1410779983
+/Confirm/
+# End Of Table - sites (monthly)
+# -sites- (daily)
+google-proxy-66-249-83-35.google.com
+0 9 9 229175 0 0
+-
+31.13.97.117
+0 1 0 441 1 1410779988
+-
+197.9.18.114
+0 11 11 278574 1 1410779989
+/Confirm/
+31.13.97.115
+0 1 0 0 0 0
+-
+197.1.150.42
+0 19 14 280861 2 1410784489
+/
+google-proxy-64-233-172-35.google.com
+0 1 1 41617 1 1410780087
+/Confirm/
+31.13.97.112
+0 1 1 41617 1 1410779983
+/Confirm/
+# End Of Table - sites (daily)
+# -referrers- 
+http://www.apple.confirmation.salesperformanceindicator.com/Confirm/
+0 34
+http://www.google.com/url
+0 1
+http://www.apple.confirmation.salesperformanceindicator.com/Confirm/css/style.css
+0 4
+http://l.facebook.com/lsr.php
+0 1
+http://www.apple.confirmation.salesperformanceindicator.com/
+0 1
+- (Direct Request)
+0 14
+# End Of Table - referrers
+# -agents- 
+Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36
+0 19
+Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36
+0 12
+Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36
+0 10
+facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)
+0 3
+Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.103 Safari/537.36
+0 11
+# End Of Table - agents
+# -search strings- 
+# End Of Table - search strings
+# -usernames- 
+# End Of Table - usernames

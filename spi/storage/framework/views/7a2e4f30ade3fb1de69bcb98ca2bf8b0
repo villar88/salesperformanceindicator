@@ -1,0 +1,58 @@
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        <h3>Users</h3>
+    </div>
+    <div class="panel-body">
+
+        <?php if( \Illuminate\Support\Facades\Auth::user()->role_id == 4 || \Illuminate\Support\Facades\Auth::user()->role_id == 3 ): ?>
+            <a href="<?php echo e(url('/companyUsers/create')); ?>" class="btn btn-primary pull-right">Add User</a>
+        <?php endif; ?>
+
+            <!--...<?php echo $__env->make('_message', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>-->
+            <?php if(Session::has('message') ): ?>
+                <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <span><?php echo e(Session::get('message')); ?></span>
+                </div>
+            <?php endif; ?>
+
+        <!-- Table -->
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($users as $user): ?>
+                <tr>
+                    <td><a href="<?php echo e(url('/companyUsers/'.$user->id)); ?>"><?php echo e($user->first_name.' '.$user->last_name); ?></a></td>
+                    <td><?php echo e($user->getEmailDisp()); ?></td>
+                    <td><?php echo e($user->status); ?></td>
+                    <td>
+                        <?php if( \Illuminate\Support\Facades\Auth::user()->role_id == 4): ?>
+                            <?php if( $user->status == 'INACTIVE' ): ?>
+                                <a href="<?php echo e(url('/companyUsers/activate/'.$user->id)); ?>" title="Active"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a> |
+                            <?php else: ?>
+                                <a href="<?php echo e(url('/companyUsers/destroy/'.$user->id)); ?>" onclick="return  confirm('Are you sure you want to disable <?php echo e($user->last_name); ?>, <?php echo e($user->first_name); ?>?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        <a href="<?php echo e(url('/companyUsers/'.$user->id)); ?>" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                        <a href="<?php echo e(url('/companyUsers/statistics/'.$user->id)); ?>" title="Statistics"><span class="glyphicon glyphicon-stats"  aria-hidden="true"></span></a>|
+                        <a href="<?php echo e(url('/users/reset/'.$user->id)); ?>" title="Reset" ><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span></a>
+                        <a href="<?php echo e(url('/companyUsers/sendEmail/'.$user->id)); ?>" title="Send Username and Password" ><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+        <div class="col-md-2 col-md-offset-5"><?php echo $users->render(); ?></div>
+            <?php if( \Illuminate\Support\Facades\Auth::user()->role_id == 4 ): ?>
+                <div class="col-md-11 "><a href="<?php echo e(url('/companyUsers/create')); ?>" class="btn btn-primary">Add User</a></div>
+            <?php endif; ?>
+    </div>
+</div>

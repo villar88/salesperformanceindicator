@@ -1,0 +1,86 @@
+<?php $__env->startSection('content'); ?>
+<div class="page-header" id="banner">
+    <div class="row">
+        <div class="col-lg-8 col-md-7 col-sm-6">
+            <h2>Manage Licenses</h2>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        <h2>Licenses for  <?php echo e($company->name); ?></h2>
+    </div>
+    <?php if(Session::has('message') ): ?>
+    <div class="alert alert-dismissible alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <span><?php echo e(Session::get('message')); ?></span>
+    </div>
+    <?php endif; ?>
+    <div class="panel-body">
+        <?php if( Auth::user()->role->id == 1): ?>
+        <a href="<?php echo e(url('/licenses/create/'.$company->id)); ?>" class="btn btn-primary pull-right">Add License</a>
+        <?php endif; ?>
+
+        <!-- Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>User License</th>
+                    <th>Created By</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Life</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($licenses as $license): ?>
+                <tr>
+                    <?php if( $license->user_id == 0 ): ?>
+                        <td>Unassigned</td>
+                    <?php else: ?>
+                        <td><a href="<?php echo e(url('/users/'.$license->user_id)); ?>"><?php echo e($license->user->first_name.' '.$license->user->last_name); ?></a></td>
+                    <?php endif; ?>
+                    <td><?php echo e($company->getAuditUser( $license->created_by )); ?></td>
+                    <td><?php echo e(date('Y-m-d',strtotime($license->start_date))); ?></td>
+                    <td><?php echo e(date('Y-m-d',strtotime($license->end_date))); ?></td>
+                        <?php if( $license->life ==0 ): ?>
+                            <td>Lifetime</td>
+                        <?php else: ?>
+                            <?php if( $license->life <7 ): ?>
+                                <td><?php echo e($license->life.' Months'); ?></td>
+                            <?php else: ?>
+                                <?php if( $license->life ==7 ): ?>
+                                    <td><?php echo e('One Year'); ?></td>
+                                <?php endif; ?>
+                                <?php if( $license->life ==8 ): ?>
+                                    <td><?php echo e('Two Years'); ?></td>
+                                <?php endif; ?>
+                                <?php if( $license->life ==9 ): ?>
+                                    <td><?php echo e('Five Years'); ?></td>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    <td><?php echo e($license->status); ?></td>
+                    <td>
+                        <?php if( $license->status == 'INACTIVE' ): ?>
+                        <a href="<?php echo e(url('/licenses/activate/'.$license->id)); ?>" title="Activate"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a>
+                        <?php else: ?>
+                        <a href="<?php echo e(url('/licenses/destroy/'.$license->id)); ?>" title="Desactivate" onclick="return  confirm('Are you sure you want to disable the License?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+
+            </tbody>
+
+        </table>
+        <div class="col-md-2 col-md-offset-5"><?php echo $licenses->render(); ?></div>
+    </div>
+
+</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

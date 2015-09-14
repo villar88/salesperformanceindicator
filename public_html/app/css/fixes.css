@@ -1,0 +1,315 @@
+body {
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333333;
+    background-color: #ffffff;
+			  
+    overflow-y: scroll;
+    -ms-overflow-style: scrollbar;
+    min-height: 100%;
+}
+.page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    margin-top: 0 !important;
+    border-bottom: 1px solid #eeeeee;
+}
+nav[class^="navbar-default"] {
+    background-color:#2fa4e7;
+}
+ul[class^="nav navbar-nav"]>li>a {
+    color:#fff !important;
+}
+ul[class^="nav navbar-nav"]>li>a:hover {
+    background-color: #178acc !important;
+}
+ul[class^="nav navbar-nav"]>li.active>a {
+    background-color: #178acc !important;
+}
+			
+ul[class^="nav navbar-nav"]>li>a:active, ul[class^="nav navbar-nav"]>li>a:focus {
+    background-color: #178acc !important;
+}
+ul[class="dropdown-menu"]>li>a:hover {
+    background-color: #2fa4e7 !important;
+    color: #fff !important;
+}
+table tr:nth-child(odd) td {
+    background-color: #d9edf7;
+}
+table.table-small {
+    margin-top: 15px;
+
+}
+
+table.table-small > tbody > tr > td:first-child {
+    font-weight: bold !important;
+}
+select[class^="form-control select-small"] {
+    font-size:12px;
+    line-height: 1;
+    height:100%;
+    padding: 0;
+}
+table.table-small tr td {
+    padding: 0 !important;
+}
+table.table-small-bordered {
+    border: solid 2px #CCC;
+    width: 100%;
+}
+table.table-small-bordered tr {
+    border-bottom: dashed 1px grey;
+    border-top: dashed 1px grey;
+    
+}
+table.table-small-bordered tr td {
+    padding: 5px 5px !important;
+}
+table.table-small-bordered tr:nth-child(odd) td {
+    background-color: #FDF3DA;
+}
+table.table-small-bordered tr:nth-child(even) td {
+    background-color: #E6FCEF;
+}
+.td-separator {
+    height: 15px;
+}
+h1, h2, h3, h4 {
+    color: #457eac !important;
+}
+.table {
+    font-size: 12px;
+}
+thead > tr > th.icons {
+    min-width: 80px;
+}
+thead > tr > th > select[class^="form-control"] {
+    font-size:12px;
+    line-height: 1;
+    height:100%;
+    padding: 0;
+}
+label[class~="control-label"] {
+    font-weight: bold;
+}
+.select-reports {
+    width: 300px !important;
+}
+div[class^="input-group date"] {
+    width: 280px !important;
+}
+.datepicker-input {
+    width: 260px !important;
+}
+.other-panel-style {
+    height: 800px;
+}
+.xs-graphs-column-settings {
+    padding: 0 !important;
+    max-width: 350px !important;
+}
+.graphs-column-settings {
+    padding: 0 !important;
+    display: inline-block;
+}
+.text-center {
+    text-align: center !important;
+}
+.text-right {
+    text-align: right !important;
+}
+.text-left {
+    text-align: left !important;
+}
+.text-middle {
+    vertical-align: middle !important;
+}
+.fix-width20 {
+    width: 20%;
+}
+.pad0 {
+    padding: 0 !important;
+}
+.mar0 {
+    margin: 0;
+}
+.back-to-top {
+    margin-bottom: 15px;
+}
+.vcenter {
+    display: inline-block !important;
+    vertical-align: middle !important;
+    float: none !important;
+}
+.label-vcenter {
+    display: block !important;
+    vertical-align: middle !important;
+    float: none !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+.td-vcenter {
+    vertical-align: middle !important;
+}
+.marg-top-30 {
+	margin-top: 30px;
+}
+.marg-bot-30 {
+    margin-bottom: 30px;
+}
+.marg-top-15 {
+	margin-top: 15px;
+}
+.marg-bot-15 {
+    margin-bottom: 15px !important;
+}
+.video-link {
+	width: 85%;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+.description {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    color: #a0a0a0;
+}
+.text-cap {
+    text-transform: uppercase;
+}
+.login-height{
+    min-height: 90px !important;
+}
+table[class^="table hidden"] input[type="text"] {
+    font-size: 12px !important;
+    width: 70px !important;
+}
+.userCol
+{
+    min-width: 50px;
+    font-size: 12px !important;
+}
+img.img-responsive { display: inline-block; max-width: 100%;}
+.marg-right-15 {
+    margin-right: 15px;
+}
+span[class^="input-group-btn"] button {
+    display: inline-block;
+}
+button[class^="btn btn-primary btn-lg btn-block text-cap"] {
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+@media all and (max-width:767px) {
+    .label-vcenter {
+        text-align: left !important;
+    }
+    input[class^="form-control"] {
+        width: 100% !important;
+        border-radius: 3px !important;
+    }
+    div[class^="input-group hidden-sm hidden-md hidden-lg"] {
+        display: block !important;
+    }
+    span[class^="input-group-btn"] button {
+        display: block;
+        
+        border-radius: 3px !important;
+        margin: 0 auto !important;
+        margin-top: 10px !important;
+    }
+    span[class^="input-group-btn"] {
+        display: inline-block;
+        text-align: center !important;
+        width: 100% !important;
+    }
+}
+
+.credit-cards-icons {
+   height: 35px;
+   float: right;
+   margin-bottom: 0;
+   margin-top: 20px;
+   padding: 0;
+}
+.credit-cards-icons a {
+    display: inline-block;
+    width: 50px;
+    height: 35px;
+    overflow: auto;
+    margin-right: 5px;
+    float: right;
+    text-decoration: none !important;
+}
+.credit-cards-icons a:first-child {
+    margin-right: 15px !important;
+}
+
+.icon-visa {
+    background: url(https://salesperformanceindicator.com/app/images/payment-systems-sprite.png) top left -25px no-repeat;
+}
+.icon-paypal {
+    background: url(https://salesperformanceindicator.com/app/images/payment-systems-sprite.png) top -50px left -25px no-repeat;
+}
+.icon-master-card {
+    background: url(https://salesperformanceindicator.com/app/images/payment-systems-sprite.png) top -100px left -25px no-repeat;
+}
+.icon-discover {
+    background: url(https://salesperformanceindicator.com/app/images/payment-systems-sprite.png) top -150px left -25px no-repeat;
+}
+.icon-american-express {
+    background: url(https://salesperformanceindicator.com/app/images/payment-systems-sprite.png) top -200px left -25px no-repeat;
+}
+.icon-ssl {
+    background: url(https://salesperformanceindicator.com/app/images/payment-systems-sprite.png) top -248px left no-repeat;
+}
+.icon-godaddy {
+    background: url(https://salesperformanceindicator.com/app/images/payment-systems-sprite.png) top -335px left no-repeat;
+}
+.icon-big {
+    width: 100px !important;
+    height: 66px !important;
+    display: inline-block;
+    text-decoration: none !important;
+   }
+.icon-big100 {
+    width: 100px !important;
+    height: 85px !important;
+    display: inline-block;
+    text-decoration: none !important;
+
+}
+.form-settings {
+    overflow: auto;
+    padding: 0;
+    margin-bottom: 30px;
+    padding: 0;
+}
+.rounded-form-container {
+    border: solid 1px #dddddd;
+    background-color: #eeeeee;
+    border-radius: 5px;
+    padding: 0;
+}
+.rounded-form {
+    float: right;
+}
+.rounded-form:first-child {
+    float: left;
+}
+@media all and (max-width:992px) {
+    
+    .label-vcenter {
+        text-align: left !important;
+    }
+    .credit-cards-icons { float: left; }
+    .icons-container { float: left; }
+}
+@media all and (max-width:768px) {
+    
+    .credit-cards-icons { float: left; padding-left: 15px; }
+    .icons-container { float: left; }
+}

@@ -1,0 +1,54 @@
+<?php $__env->startSection('content'); ?>
+
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-8 col-md-7 col-sm-6">
+                <h2>Manage Users</h2>
+            </div>
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+
+                <script type="text/javascript">
+
+                    function setRequest(arg)
+                    {
+                        $("#request").val(arg);
+                    }
+
+
+                </script>
+
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading"><h3>Search</h3></div>
+                    <div class="panel-body">
+                        <div class="col-md-10 col-md-offset-1">
+                            <form class="form-horizontal" role="form" method="POST" action="<?php echo e(url('/companyUsers/search')); ?>">
+                                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" />
+                                <input type="hidden" id="request" name="request" value="" />
+                            <fieldset>
+
+                                <div class="input-group">
+                                    <input name="keyword" type="text" class="form-control" value="<?php echo e($keyword); ?>"/>
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-primary" value="Search" onclick="setRequest('search')">Search</button>
+                                        <button type="submit" class="btn btn-default" value="Show_All"  onclick="setRequest('showAll')">Show All</button>
+                                    </span>
+                                </div>
+                                <span>Please enter Email, First or Last Name of the User.</span>
+
+                            </fieldset>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+                <?php echo $__env->make('companyUser/_companyuserlist', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>;
+            </div>
+        </div>
+
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

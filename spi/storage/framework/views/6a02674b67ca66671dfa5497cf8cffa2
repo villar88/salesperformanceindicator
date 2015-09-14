@@ -1,0 +1,69 @@
+<fieldset>
+
+    <div class="form-group <?php echo e($errors->has('email') ? 'has-error' : ''); ?>">
+        <?php echo Form::label('email', 'Email*', ['class' => 'col-lg-3 control-label']); ?>
+
+        <div class="col-lg-9"><label class="control-label"><?php echo e($user->email); ?></label></div>
+    </div>
+
+    <div class="form-group <?php echo e($errors->has('new_password') ? 'has-error' : ''); ?>">
+        <?php echo Form::label('new_password', 'New Password', ['class' => 'col-lg-3 control-label']); ?>
+
+        <div class="col-lg-9"><?php echo Form::password('new_password', ['class' => 'form-control', 'placeholder' => 'Leave blank or unchanged if you don\'t want to modify the password']); ?></div>
+    </div>
+
+    <div class="form-group <?php echo e($errors->has('confirm_password') ? 'has-error' : ''); ?>">
+        <?php echo Form::label('confirm_password', 'Confirm Password', ['class' => 'col-lg-3 control-label']); ?>
+
+        <div class="col-lg-9"><?php echo Form::password('confirm_password', ['class' => 'form-control']); ?></div>
+    </div>
+
+    <div class="form-group <?php echo e($errors->has('first_name') ? 'has-error' : ''); ?>">
+        <?php echo Form::label('first_name', 'First Name*', ['class' => 'col-lg-3 control-label']); ?>
+
+        <div class="col-lg-9"><?php echo Form::text('first_name', $user->first_name, ['class' => 'form-control']); ?></div>
+    </div>
+
+    <div class="form-group <?php echo e($errors->has('last_name') ? 'has-error' : ''); ?>">
+        <?php echo Form::label('last_name', 'Last Name*', ['class' => 'col-lg-3 control-label']); ?>
+
+        <div class="col-lg-9"><?php echo Form::text('last_name', $user->last_name, ['class' => 'form-control']); ?></div>
+    </div>
+
+
+    <div class="form-group <?php echo e($errors->has('contact_number') ? 'has-error' : ''); ?>">
+        <?php echo Form::label('contact_number', 'Contact Number', ['class' => 'col-lg-3 control-label']); ?>
+
+        <div class="col-lg-9"><?php echo Form::text('contact_number', $user->contact_number, ['class' => 'form-control']); ?></div>
+    </div>
+
+    <div class="form-group <?php echo e($errors->has('address1') ? 'has-error' : ''); ?>">
+        <?php echo Form::label('address1', 'Address 1', ['class' => 'col-lg-3 control-label']); ?>
+
+        <div class="col-lg-9"><?php echo Form::text('address1', $user->address1, ['class' => 'form-control']); ?></div>
+    </div>
+
+    <div class="form-group <?php echo e($errors->has('address2') ? 'has-error' : ''); ?>">
+        <?php echo Form::label('address2', 'Address 2', ['class' => 'col-lg-3 control-label']); ?>
+
+        <div class="col-lg-9"><?php echo Form::text('address2', $user->address2, ['class' => 'form-control']); ?></div>
+    </div>
+
+    <div class="form-group <?php echo e($errors->has('company_id') ? 'has-error' : ''); ?>">
+        <?php echo Form::label('company_id', 'Company', ['class' => 'col-lg-3 control-label']); ?>
+
+        <div class="col-lg-9"><label class="control-label"><?php echo e($user->company->name); ?></label></div>
+    </div>
+
+    <?php echo Form::hidden('updated_by', Auth::user()->id); ?>
+
+
+    <div class="form-group">
+        <div class="col-lg-9 col-lg-offset-3">
+            <a href="<?php echo e(url('/')); ?>" class="btn btn-default pull-right">Cancel</a>
+            <?php echo Form::submit('Submit', ['class' => 'btn btn-primary']); ?>
+
+        </div>
+    </div>
+
+</fieldset>

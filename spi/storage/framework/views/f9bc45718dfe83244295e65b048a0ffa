@@ -1,0 +1,66 @@
+<?php $__env->startSection('content'); ?>
+
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-8 col-md-7 col-sm-6">
+                <h2>Update License</h2>
+            </div>
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-body">
+
+                        <div class="col-md-10 col-md-offset-1">
+
+                            <?php echo $__env->make('_error', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                            <?php echo Form::open(['route' => ['licenses.update'], 'class' => 'form-horizontal']); ?>
+
+                            <fieldset>    
+                            <div class="form-group <?php echo e($errors->has('life') ? 'has-error' : ''); ?>">
+                                <?php echo Form::label('life', 'Life of License*', ['class' => 'col-lg-2 control-label']); ?>
+
+                                <div class="col-lg-10"><?php echo Form::select('life', array('0' => 'Lifetime','1' =>'1 Month','2' =>'2 Months','3' =>'3 Months','4' =>'4 Months','5' =>'5 Months','6' =>'6 Months','7' =>'One Year','8' =>'Two Years','9' =>'Five Years'),$license->life,['class' => 'form-control']);; ?></div>
+                                </div>
+                                <div class="form-group">
+                                    <?php echo Form::label('created_by', 'Created By', ['class' => 'col-lg-2 control-label']); ?>
+
+                                    <div class="col-lg-10"><?php echo Form::label('created_by', $company->getAuditUser( $license->created_by  ), ['class' => 'control-label']); ?></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <?php echo Form::label('created_at', 'Created At', ['class' => 'col-lg-2 control-label']); ?>
+
+                                    <div class="col-lg-10"><label class="control-label"><?php echo e($license->created_at); ?></label></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <?php echo Form::label('updated_at', 'Updated At', ['class' => 'col-lg-2 control-label']); ?>
+
+                                    <div class="col-lg-10"><label class="control-label"><?php echo e($license->updated_at); ?></label></div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-10 col-lg-offset-2">
+                                        <a href="<?php echo e(url('/licenses/list/'.$company->id)); ?>" class="btn btn-default pull-right">Cancel</a>
+                                            <?php echo Form::submit('Update', ['class' => 'btn btn-primary']); ?>
+
+                                    </div>
+                                </div>
+                                </fieldset>
+                            <?php echo Form::close(); ?>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

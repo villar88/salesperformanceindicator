@@ -1,0 +1,1 @@
+[28-Mar-2015 04:08:01 America/New_York] PHP Fatal error:  Call to undefined function get() in /home/salesper/public_html/app/Http/routes.php on line 17

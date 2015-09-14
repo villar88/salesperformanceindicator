@@ -1,0 +1,125 @@
+<?php $__env->startSection('content'); ?>
+
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-7">
+                <h3>You have scored <?php echo e(empty( $today_total->total ) ? '0' : number_format($today_total->total)); ?> points so far today ( <?php echo e(empty($today_total->total) ? '0' : $today_total->date); ?> ). <br>Your minimum daily goal is <?php echo e($today_target); ?>.</h3>
+            </div>
+			<div class="col-lg-5"><br><img src="<?php echo e(asset('/images/stop.png')); ?>"> <a href="http://youtube.com/" target="_blank">View this instructional video before entering your stats for the first time
+</a></div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-10 col-md-offset-1">
+
+            <?php if( !empty($message) ): ?>
+                <div class="alert alert-dismissible <?php echo e($isErr ? 'alert-danger' : 'alert-success'); ?>">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <?php echo $message; ?>
+
+                </div>
+            <?php endif; ?>
+
+            <ul class="nav nav-tabs">
+                <?php foreach( $task_types as $task_type ): ?>
+                    <li class="<?php echo e(( $activeTab == $task_type->id ) ? 'active' : ''); ?>">
+                        <a href="#<?php echo e($task_type->id); ?>" data-toggle="tab"><?php echo e($task_type->name); ?> </a>
+                    </li>
+                <?php endforeach; ?>
+                    <li class="<?php echo e(( $activeTab == 'sales' ) ? 'active' : ''); ?>">
+                        <a href="#sales" data-toggle="tab">Sales</a>
+                    </li>
+            </ul>
+            <br/>
+            <div id="myTabContent" class="tab-content">
+
+                <?php foreach( $task_types as $task_type ): ?>
+                    <div class="tab-pane fade <?php echo e(( $activeTab == $task_type->id ) ? 'active in' : ''); ?>" id="<?php echo e($task_type->id); ?>">
+                        <div class="row ">
+                            <?php foreach( $task_type->getTasks() as $task ): ?>
+                                <div class="col-lg-4">
+                                    <div class="bs-component">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body"  style="height: 250px;">
+                                                <div class="col-lg-3 text-center">
+                                                    <img src="<?php echo e(asset('/images/'.$task->icon)); ?>">
+                                                </div>
+                                                <div class="col-lg-8 col-lg-offset-1">
+                                                    <h4><?php echo e($task->name); ?> <nobr>(<?php echo e($task->getTodayPoints()); ?>)</nobr></h4>
+                                                    <span href="#" class="btn btn-primary btn-xs"><?php echo e($task->value); ?> Points</span>
+                                                    <p><small><?php echo e($task->description); ?></small></p>
+                                                    <form class="form-horizontal" role="form" method="post" action="<?php echo e(url('/myStats/add')); ?>" onsubmit="return ajaxSubmit(this);">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-10 col-lg-offset-2">
+                                                                <div class="input-group">
+                                                                    <?php echo Form::text('point', null, ['class' => 'form-control']); ?>
+
+                                                                        <span class="input-group-btn">
+                                                                            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" />
+                                                                            <?php echo Form::submit('Submit', ['class' => 'btn btn-success']); ?>
+
+                                                                            <?php echo Form::hidden('task_id', $task->id); ?>
+
+                                                                            <?php echo Form::hidden('task_type_id', $task_type->id); ?>
+
+                                                                        </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+
+                    <div class="tab-pane fade <?php echo e(( $activeTab == 'sales' ) ? 'active in' : ''); ?>" id="sales">
+                        <div class="row ">
+                            <?php foreach( $saleTypes as $saleType ): ?>
+                                <div class="col-lg-4">
+                                    <div class="bs-component">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body"  style="height: 250px;">
+                                                <div class="col-lg-3">
+                                                    <img src="<?php echo e(asset('/images/'.$saleType->icon )); ?>">
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <h4><?php echo e($saleType->name); ?> <?php echo $saleType->getTodaySales( ); ?> </h4>
+                                                    <p><small><?php echo e($saleType->description); ?></small></p>
+                                                    <form class="form-horizontal" role="form" method="post" action="<?php echo e(url('/myStats/addSales')); ?>">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-10 col-lg-offset-2">
+                                                                <div class="input-group">
+                                                                    <?php echo Form::text('sales', null, ['class' => 'form-control']); ?>
+
+                                                            <span class="input-group-btn">
+                                                                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" />
+                                                                <?php echo Form::submit('Submit', ['class' => 'btn btn-success']); ?>
+
+                                                                <?php echo Form::hidden('saleType_id', $saleType->id); ?>
+
+                                                            </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

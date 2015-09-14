@@ -1,0 +1,15 @@
+FCC: imap://no-reply%40salesperformanceindicator.com@server.rackpsace.com/Sent
+X-Identity-Key: id2
+X-Account-Key: account11
+Message-ID: <55100928.1050006@salesperformanceindicator.com>
+Date: Mon, 23 Mar 2015 20:38:00 +0800
+From: NoRep <no-reply@salesperformanceindicator.com>
+X-Mozilla-Draft-Info: internal/draft; vcard=0; receipt=0; DSN=0; uuencode=0; attachmentreminder=0
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; rv:31.0) Gecko/20100101 Thunderbird/31.5.0
+MIME-Version: 1.0
+To: Steve <steve@brewsoftcorp.com>
+Subject: Test Account
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+This is a test

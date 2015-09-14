@@ -1,0 +1,109 @@
+<?php $__env->startSection('content'); ?>
+
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-8 col-md-7 col-sm-6">
+                <h2>Manage Companies</h2>
+            </div>
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+
+                <script type="text/javascript">
+
+                    function setRequest(arg)
+                    {
+                        $("#request").val(arg);
+                    }
+
+
+                </script>
+
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading"><h3>Search</h3></div>
+                    <div class="panel-body">
+                        <div class="col-md-10 col-md-offset-1">
+                            <form class="form-horizontal" role="form" method="POST" action="<?php echo e(url('/companies/search')); ?>">
+                                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" />
+                                <input type="hidden" id="request" name="request" value="" />
+                            <fieldset>
+
+                                <div class="input-group">
+                                    <input name="keyword" type="text" class="form-control" value="<?php echo e($keyword); ?>"/>
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-primary" value="Search" onclick="setRequest('search')">Search</button>
+                                        <button type="submit" class="btn btn-default" value="Show_All"  onclick="setRequest('showAll')">Show All</button>
+                                    </span>
+                                </div>
+                                <span>Please enter name of Company.</span>
+
+                            </fieldset>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">
+                        <h3>Companies</h3>
+                    </div>
+                    <div class="panel-body">
+                        <a href="<?php echo e(url('/companies/create')); ?>" class="btn btn-primary pull-right">Create Company</a>
+                        <?php echo $__env->make('_message', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+                        <!-- Table -->
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Owner</th>
+                                <th>Total Users</th>
+                                <th>Active Users</th>
+                                <th>Date Created</th>
+                                <th>Date Updated</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($companies as $company): ?>
+                                <tr>
+                                    <td><a href="<?php echo e(url('/companies/'.$company->id)); ?>"><?php echo e($company->name); ?></a></td>
+                                    <td><?php echo $company->getAllSortedOwners( $company->id ); ?></td>
+                                    <td><?php echo $company->getUsersCount( $company->id ); ?></td>
+                                    <td><?php echo $company->getActiveUsersCount( $company->id ); ?></td>
+                                    <td><?php echo e($company->status); ?></td>
+                                    <td><?php echo e($company->created_at->format('Y-m-d')); ?></td>
+                                    <td><?php echo e($company->updated_at->format('Y-m-d')); ?></td>
+                                    <td>
+                                        <a href="<?php echo e(url('/companies/'.$company->id)); ?>" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                        <?php if( $company->status == 'INACTIVE' ): ?>
+                                            <a href="<?php echo e(url('/companies/activate/'.$company->id)); ?>"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a>
+                                        <?php else: ?>
+                                            <a href="<?php echo e(url('/companies/destroy/'.$company->id)); ?>" onclick="return  confirm('Are you sure you want to disable <?php echo e($company->name); ?>?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+
+                            </tbody>
+
+                        </table>
+                        <div class="col-md-2 col-md-offset-5"><?php echo $companies->render(); ?></div>
+                        <div class="col-md-11 "><a href="<?php echo e(url('/companies/create')); ?>" class="btn btn-primary">Create Company</a></div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,28 @@
+<?php $__env->startSection('content'); ?>
+
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-8 col-md-7 col-sm-6">
+                <h2>Manage Company - <?php echo e($company->name); ?></h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-10 col-md-offset-1">
+                        <?php echo $__env->make('_error', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                        <?php echo Form::model($company, ['route' => ['companies.update', $company->id], 'method' => 'PATCH', 'class' => 'form-horizontal']); ?>
+
+                        <?php echo $__env->make('company._form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                        <?php echo Form::close(); ?>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php echo $__env->make('companyUser/_companyuserlist', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>;
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

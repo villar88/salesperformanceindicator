@@ -1,0 +1,1 @@
+[28-Mar-2015 04:07:34 America/New_York] PHP Fatal error:  Interface 'Illuminate\Contracts\Auth\Registrar' not found in /home/salesper/public_html/app/Services/Registrar.php on line 7

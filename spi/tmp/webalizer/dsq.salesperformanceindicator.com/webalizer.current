@@ -1,0 +1,212 @@
+# Webalizer V2.23-05 Incremental Data - 09/15/2014 11:56:24
+2014 9 15 11 56 24
+140 94 7 24 6 4 811649 34 7 0
+3 107 107 1 15
+31 25 98784 2 7 2
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+2 2 4668 2 2 2
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+107 67 708197 3 25 3
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+107 67 708197 25
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+33 27 103452 9
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0
+0
+0
+94
+0
+0
+0
+0
+0
+0
+0
+0
+30
+0
+9
+0
+0
+0
+0
+0
+0
+7
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+# -urls- 
+/auth/images/copyright.png
+0 4 465179552 6516 0 0
+/auth/images/ef7e75b6da5d06db762e.png
+0 3 465197360 1736 0 0
+/auth/images/login.png
+0 4 0 6596 0 0
+/auth/images/pw.png
+0 4 0 2644 0 0
+/auth/identification.php
+0 10 465187328 96592 0 0
+/auth/css/loading.css
+0 2 465186976 1170 0 0
+/auth/images/dob.png
+0 2 465197712 1352 0 0
+/auth/images/email.png
+0 4 0 2692 0 0
+/auth/processing.php
+0 2 465186864 2148 0 0
+/auth/images/website_logo.gif
+0 5 0 9416 0 0
+/auth/images/c95c9a42995ebe0fe080f74a29a1c5af6.png
+0 6 0 17610 0 0
+/auth/images/cinformation.png
+0 3 465196896 3690 0 0
+/auth/images/adr2.png
+0 2 465197248 1570 0 0
+/auth/images/fname.png
+0 3 465197024 994 0 0
+/auth/images/cty.png
+0 2 465187456 1492 0 0
+/auth/css/gfrehegr.css
+0 5 0 7128 0 0
+/auth/images/fon.png
+0 2 465197488 1392 0 0
+/auth/images/try.png
+0 3 465197824 462980 0 0
+/auth/images/texto.png
+0 4 0 34416 0 0
+/auth/images/adr.png
+0 3 465197136 1472 0 0
+/auth/images/ajax.gif
+0 2 465187216 17574 0 0
+/auth/images/global.js
+0 6 0 81300 0 0
+/auth/
+0 20 0 46820 3 0
+/auth/images/pc.png
+0 2 465197600 1182 0 0
+# End Of Table - urls
+# -sites- (monthly)
+197.9.18.114
+0 47 32 343426 1 1410781180
+/auth/
+out-ar114.tfbnw.net
+0 1 1 2334 1 1410193909
+/auth/
+197.17.201.179
+0 17 14 53504 1 1409589670
+/auth/
+out-ar113.tfbnw.net
+0 1 1 2334 1 1410193909
+/auth/
+31.13.97.113
+0 2 1 2334 1 1410780378
+/auth/
+197.1.75.234
+0 14 11 45280 1 1409587714
+/auth/
+197.1.150.42
+0 58 34 362437 1 1410781491
+/auth/
+# End Of Table - sites (monthly)
+# -sites- (daily)
+197.9.18.114
+0 47 32 343426 1 1410781180
+/auth/
+31.13.97.113
+0 2 1 2334 1 1410780378
+/auth/
+197.1.150.42
+0 58 34 362437 1 1410781491
+/auth/
+# End Of Table - sites (daily)
+# -referrers- 
+http://www.dsq.salesperformanceindicator.com/auth/index.php
+0 18
+http://l.facebook.com/lsr.php
+0 9
+- (Direct Request)
+0 23
+http://www.dsq.salesperformanceindicator.com/auth/
+0 44
+http://www.dsq.salesperformanceindicator.com/auth/processing.php
+0 6
+http://www.dsq.salesperformanceindicator.com/auth/identification.php
+0 40
+# End Of Table - referrers
+# -agents- 
+Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36
+0 58
+Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36
+0 31
+facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)
+0 4
+Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.103 Safari/537.36
+0 47
+# End Of Table - agents
+# -search strings- 
+# End Of Table - search strings
+# -usernames- 
+# End Of Table - usernames

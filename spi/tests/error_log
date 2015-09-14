@@ -1,0 +1,2 @@
+[28-Mar-2015 04:07:00 America/New_York] PHP Fatal error:  Class 'TestCase' not found in /home/salesper/public_html/tests/ExampleTest.php on line 3
+[28-Mar-2015 04:11:23 America/New_York] PHP Fatal error:  Class 'Illuminate\Foundation\Testing\TestCase' not found in /home/salesper/public_html/tests/TestCase.php on line 3

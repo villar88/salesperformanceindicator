@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Metrics Solution</title>
+        <!-- Fonts -->
+        <!-- <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'> -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        
+        <link rel="stylesheet" href="fixes.css">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#godown').height($("#ss_fixed_nav").height());
+                window.onresize = function() {
+                    $('#godown').height($("#ss_fixed_nav").height());
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar-default navbar-fixed-top" id="ss_fixed_nav">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                    <span class="sr-only">Toggle Navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#">
+                                    <img class="hidden-xs hidden-sm img-responsive" src="images/modLogo.png" alt="logo description" />
+                                    <img class="hidden-xs visible-sm img-responsive" src="images/modLogo-half.png" alt="logo description" />
+                                    <img class="visible-xs img-responsive" src="images/modLogo-small.png" alt="logo description" />
+                                </a>
+                            </div>
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li class=""><a href="https://salesperformanceindicator.com">Manage Users</a></li>
+                                    <li class="active"><a href="https://salesperformanceindicator.com/goalSettings">Goal Setting</a></li>
+                                    <li class=""><a href="https://salesperformanceindicator.com/myStats">My Stats</a></li>
+                                    <li class=""><a href="https://salesperformanceindicator.com/prodSales">Production | Sales Revenue</a></li>
+                                    <li class=""><a href="https://salesperformanceindicator.com/myRatio">My Ratio</a></li>
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in as Office <span class="caret"></span></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="https://salesperformanceindicator.com/myprofile">MyProfile</a></li>
+                                            <li><a href="https://salesperformanceindicator.com/auth/logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div id="godown"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="page-header" id="banner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Goal Setting</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading"><h3>Filter</h3></div>
+                        <div class="panel-body">
+                            <div class="col-md-10 col-md-offset-1">
+                                <form class="form-horizontal" role="form" method="POST" action="https://salesperformanceindicator.com/goalSettings/search">
+                                    <input type="hidden" name="_token" value="9PrY6TCdQl5ZOq9LecZuXVio9fHgAWh0UgwC5dr2" />
+                                    <input type="hidden" id="request" name="request" value="" />
+                                    <fieldset>
+
+                                        <div class="input-group">
+                                            <input name="keyword" type="text" class="form-control" value=""/>
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-primary" value="Search" onclick="setRequest('search')">Search</button>
+                                            <button type="submit" class="btn btn-default" value="Show_All"  onclick="setRequest('showAll')">Show All</button>
+                                            <button type="submit" class="btn btn-success" value="Excel"  onclick="setRequest('excel')">Export to Excel</button>
+                                        </span>
+                                        </div>
+                                        <span>Please enter Email, First or Last Name of the User.</span>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">
+                            <h3>Daily Goals for each Month</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- Table -->
+                            <form class="form-horizontal" role="form" method="POST" action="https://salesperformanceindicator.com/goalSettings/updateAll" onsubmit="checkValues();" id="goalForm">
+                                <input type="hidden" name="_token" value="9PrY6TCdQl5ZOq9LecZuXVio9fHgAWh0UgwC5dr2">
+                                <div class="responsive">
+                                    
+                                    <table class="table table-small hidden-sm hidden-md hidden-lg">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <table class="table-small-bordered">
+                                                        <tr>
+                                                            <td class="col-xs-6 ">User</td>
+                                                            <td class="col-xs-5 text-right td-vcenter">
+                                                                <a href="https://salesperformanceindicator.com/goalSettings/edit/53">algo algo</a>
+                                                            </td>
+                                                            <td class="col-xs-1 text-right td-vcenter">
+                                                                <input type="checkbox" id="_id54"  name="_id[54]" value="54"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jan/Feb</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jan', '54','10,000.00' )" type="text" name="jan[54]" id="jan54" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'feb', '54','10,000.00' )" type="text" name="feb[54]" id="feb54" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Mar/Apr</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'mar', '54','10,000.00' )" type="text" name="mar[54]" id="mar54" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'apr', '54','10,000.00' )" type="text" name="apr[54]" id="apr54" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">May/Jun</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'may', '54','10,000.00' )" type="text" name="may[54]" id="may54" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'jun', '54','10,000.00' )" type="text" name="jun[54]" id="jun54" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jul/Aug</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jul', '54','10,000.00' )" type="text" name="jul[54]" id="jul54" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'aug', '54','10,000.00' )" type="text" name="aug[54]" id="aug54" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Sept/Oct</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'sep', '54','10,000.00' )" type="text" name="sep[54]" id="sep54" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'oct', '54','10,000.00' )" type="text" name="oct[54]" id="oct54" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Nov/Dec</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'nov', '54','10,000.00' )" type="text" name="nov[54]" id="nov54" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'dec', '54','10,000.00' )" type="text" name="dec[54]" id="dec54" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Annual</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input type="text" name="annual[54]" id="annual54" value="120,000.00" disabled="disabled"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr><td class="td-separator">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="table-small-bordered">
+                                                        <tr>
+                                                            <td class="col-xs-6 ">User</td>
+                                                            <td class="col-xs-5 text-right td-vcenter">
+                                                                <a href="https://salesperformanceindicator.com/goalSettings/edit/40">hola bien</a>
+                                                            </td>
+                                                            <td class="col-xs-1 text-right td-vcenter">
+                                                                <input type="checkbox" id="_id41"  name="_id[41]"  value="41"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jan/Feb</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jan', '41','7,000.00' )" type="text" name="jan[41]" id="jan41" value="7,000.00"/>
+                                                                <input onblur="cleanup( 'feb', '41','5,000.00' )" type="text" name="feb[41]" id="feb41" value="5,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Mar/Apr</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'mar', '41','5,000.00' )" type="text" name="mar[41]" id="mar41" value="5,000.00"/>
+                                                                <input onblur="cleanup( 'apr', '41','5,000.00' )" type="text" name="apr[41]" id="apr41" value="5,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">May/Jun</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'may', '41','5,000.00' )" type="text" name="may[41]" id="may41" value="5,000.00"/>
+                                                                <input onblur="cleanup( 'jun', '41','5,000.00' )" type="text" name="jun[41]" id="jun41" value="5,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jul/Aug</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jul', '41','5,000.00' )" type="text" name="jul[41]" id="jul41" value="5,000.00"/>
+                                                                <input onblur="cleanup( 'aug', '41','5,000.00' )" type="text" name="aug[41]" id="aug41" value="5,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Sept/Oct</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'sep', '41','5,000.00' )" type="text" name="sep[41]" id="sep41" value="5,000.00"/>
+                                                                <input onblur="cleanup( 'oct', '41','5,000.00' )" type="text" name="oct[41]" id="oct41" value="5,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Nov/Dec</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'nov', '41','5,000.00' )" type="text" name="nov[41]" id="nov41" value="5,000.00"/>
+                                                                <input onblur="cleanup( 'dec', '41','5,000.00' )" type="text" name="dec[41]" id="dec41" value="5,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Annual</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input type="text" name="annual[41]" id="annual41" value="62,000.00" disabled="disabled"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr><td class="td-separator">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="table-small-bordered">
+                                                        <tr>
+                                                            <td class="col-xs-6 ">User</td>
+                                                            <td class="col-xs-5 text-right td-vcenter">
+                                                                <a href="https://salesperformanceindicator.com/goalSettings/edit/42">jose rojas</a>
+                                                            </td>
+                                                            <td class="col-xs-1 text-right td-vcenter">
+                                                                <input type="checkbox" id="_id43"  name="_id[43]"  value="43"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jan/Feb</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jan', '43','10,000.00' )" type="text" name="jan[43]" id="jan43" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'feb', '43','10,000.00' )" type="text" name="feb[43]" id="feb43" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Mar/Apr</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'mar', '43','10,000.00' )" type="text" name="mar[43]" id="mar43" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'apr', '43','10,000.00' )" type="text" name="apr[43]" id="apr43" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">May/Jun</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'may', '43','10,000.00' )" type="text" name="may[43]" id="may43" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'jun', '43','10,000.00' )" type="text" name="jun[43]" id="jun43" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jul/Aug</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jul', '43','10,000.00' )" type="text" name="jul[43]" id="jul43" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'aug', '43','10,000.00' )" type="text" name="aug[43]" id="aug43" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Sept/Oct</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'sep', '43','10,000.00' )" type="text" name="sep[43]" id="sep43" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'oct', '43','10,000.00' )" type="text" name="oct[43]" id="oct43" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Nov/Dec</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'nov', '43','10,000.00' )" type="text" name="nov[43]" id="nov43" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'dec', '43','10,000.00' )" type="text" name="dec[43]" id="dec43" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Annual</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input type="text" name="annual[43]" id="annual43" value="120,000.00" disabled="disabled"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr><td class="td-separator">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="table-small-bordered">
+                                                        <tr>
+                                                            <td class="col-xs-6 ">User</td>
+                                                            <td class="col-xs-5 text-right td-vcenter">
+                                                                <a href="https://salesperformanceindicator.com/goalSettings/edit/43">josr rojas villar</a>
+                                                            </td>
+                                                            <td class="col-xs-1 text-right td-vcenter">
+                                                                <input type="checkbox" id="_id44"  name="_id[44]"  value="44"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jan/Feb</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jan', '44','10,000.00' )" type="text" name="jan[44]" id="jan44" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'feb', '44','10,000.00' )" type="text" name="feb[44]" id="feb44" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Mar/Apr</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'mar', '44','10,000.00' )" type="text" name="mar[44]" id="mar44" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'apr', '44','10,000.00' )" type="text" name="apr[44]" id="apr44" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">May/Jun</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'may', '44','10,000.00' )" type="text" name="may[44]" id="may44" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'jun', '44','10,000.00' )" type="text" name="jun[44]" id="jun44" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jul/Aug</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jul', '44','10,000.00' )" type="text" name="jul[44]" id="jul44" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'aug', '44','10,000.00' )" type="text" name="aug[44]" id="aug44" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Sept/Oct</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'sep', '44','10,000.00' )" type="text" name="sep[44]" id="sep44" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'oct', '44','10,000.00' )" type="text" name="oct[44]" id="oct44" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Nov/Dec</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'nov', '44','10,000.00' )" type="text" name="nov[44]" id="nov44" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'dec', '44','10,000.00' )" type="text" name="dec[44]" id="dec44" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Annual</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input type="text" name="annual[44]" id="annual44" value="120,000.00" disabled="disabled"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr><td class="td-separator">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="table-small-bordered">
+                                                        <tr>
+                                                            <td class="col-xs-6 ">User</td>
+                                                            <td class="col-xs-5 text-right td-vcenter">
+                                                                <a href="https://salesperformanceindicator.com/goalSettings/edit/32">Member Testt</a>
+                                                            </td>
+                                                            <td class="col-xs-1 text-right td-vcenter">
+                                                                <input type="checkbox" id="_id32"  name="_id[32]"  value="32"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jan/Feb</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jan', '32','10,000.00' )" type="text" name="jan[32]" id="jan32" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'feb', '32','10,000.00' )" type="text" name="feb[32]" id="feb32" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Mar/Apr</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'mar', '32','10,000.00' )" type="text" name="mar[32]" id="mar32" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'apr', '32','10,000.00' )" type="text" name="apr[32]" id="apr32" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">May/Jun</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'may', '32','10,000.00' )" type="text" name="may[32]" id="may32" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'jun', '32','10,000.00' )" type="text" name="jun[32]" id="jun32" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jul/Aug</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jul', '32','10,000.00' )" type="text" name="jul[32]" id="jul32" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'aug', '32','10,000.00' )" type="text" name="aug[32]" id="aug32" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Sept/Oct</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'sep', '32','10,000.00' )" type="text" name="sep[32]" id="sep32" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'oct', '32','10,000.00' )" type="text" name="oct[32]" id="oct32" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Nov/Dec</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'nov', '32','10,000.00' )" type="text" name="nov[32]" id="nov32" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'dec', '32','10,000.00' )" type="text" name="dec[32]" id="dec32" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Annual</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input type="text" name="annual[32]" id="annual32" value="120,000.00" disabled="disabled"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr><td class="td-separator">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="table-small-bordered">
+                                                        <tr>
+                                                            <td class="col-xs-6 ">User</td>
+                                                            <td class="col-xs-5 text-right td-vcenter">
+                                                                <a href="https://salesperformanceindicator.com/goalSettings/edit/33">Member Test</a>
+                                                            </td>
+                                                            <td class="col-xs-1 text-right td-vcenter">
+                                                                <input type="checkbox" id="_id33"  name="_id[33]"  value="33"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jan/Feb</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jan', '33','10,000.00' )" type="text" name="jan[33]" id="jan33" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'feb', '33','10,000.00' )" type="text" name="feb[33]" id="feb33" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Mar/Apr</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'mar', '33','10,000.00' )" type="text" name="mar[33]" id="mar33" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'apr', '33','10,000.00' )" type="text" name="apr[33]" id="apr33" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">May/Jun</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'may', '33','10,000.00' )" type="text" name="may[33]" id="may33" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'jun', '33','10,000.00' )" type="text" name="jun[33]" id="jun33" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jul/Aug</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jul', '33','10,000.00' )" type="text" name="jul[33]" id="jul33" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'aug', '33','10,000.00' )" type="text" name="aug[33]" id="aug33" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Sept/Oct</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'sep', '33','10,000.00' )" type="text" name="sep[33]" id="sep33" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'oct', '33','10,000.00' )" type="text" name="oct[33]" id="oct33" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Nov/Dec</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'nov', '33','10,000.00' )" type="text" name="nov[33]" id="nov33" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'dec', '33','10,000.00' )" type="text" name="dec[33]" id="dec33" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Annual</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input type="text" name="annual[33]" id="annual33" value="120,000.00" disabled="disabled"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr><td class="td-separator">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="table-small-bordered">
+                                                        <tr>
+                                                            <td class="col-xs-6 ">User</td>
+                                                            <td class="col-xs-5 text-right td-vcenter">
+                                                                <a href="https://salesperformanceindicator.com/goalSettings/edit/34">Member Test</a>
+                                                            </td>
+                                                            <td class="col-xs-1 text-right td-vcenter">
+                                                                <input type="checkbox" id="_id34"  name="_id[34]"  value="34"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jan/Feb</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jan', '34','10,000.00' )" type="text" name="jan[34]" id="jan34" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'feb', '34','10,000.00' )" type="text" name="feb[34]" id="feb34" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Mar/Apr</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'mar', '34','10,000.00' )" type="text" name="mar[34]" id="mar34" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'apr', '34','10,000.00' )" type="text" name="apr[34]" id="apr34" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">May/Jun</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'may', '34','10,000.00' )" type="text" name="may[34]" id="may34" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'jun', '34','10,000.00' )" type="text" name="jun[34]" id="jun34" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jul/Aug</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jul', '34','10,000.00' )" type="text" name="jul[34]" id="jul34" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'aug', '34','10,000.00' )" type="text" name="aug[34]" id="aug34" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Sept/Oct</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'sep', '34','10,000.00' )" type="text" name="sep[34]" id="sep34" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'oct', '34','10,000.00' )" type="text" name="oct[34]" id="oct34" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Nov/Dec</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'nov', '34','10,000.00' )" type="text" name="nov[34]" id="nov34" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'dec', '34','10,000.00' )" type="text" name="dec[34]" id="dec34" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Annual</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input type="text" name="annual[34]" id="annual34" value="120,000.00" disabled="disabled"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr><td class="td-separator">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="table-small-bordered">
+                                                        <tr>
+                                                            <td class="col-xs-6 ">User</td>
+                                                            <td class="col-xs-5 text-right td-vcenter">
+                                                                <a href="https://salesperformanceindicator.com/goalSettings/edit/6">Member2 Testx</a>
+                                                            </td>
+                                                            <td class="col-xs-1 text-right td-vcenter">
+                                                                <input type="checkbox" id="_id6"  name="_id[6]"  value="6"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jan/Feb</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jan', '6','10,000.00' )" type="text" name="jan[6]" id="jan6" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'feb', '6','10,000.00' )" type="text" name="feb[6]" id="feb6" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Mar/Apr</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'mar', '6','10,000.00' )" type="text" name="mar[6]" id="mar6" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'apr', '6','10,000.00' )" type="text" name="apr[6]" id="apr6" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">May/Jun</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'may', '6','10,000.00' )" type="text" name="may[6]" id="may6" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'jun', '6','10,000.00' )" type="text" name="jun[6]" id="jun6" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jul/Aug</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jul', '6','10,000.00' )" type="text" name="jul[6]" id="jul6" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'aug', '6','10,000.00' )" type="text" name="aug[6]" id="aug6" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Sept/Oct</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'sep', '6','10,000.00' )" type="text" name="sep[6]" id="sep6" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'oct', '6','10,000.00' )" type="text" name="oct[6]" id="oct6" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Nov/Dec</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'nov', '6','10,000.00' )" type="text" name="nov[6]" id="nov6" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'dec', '6','10,000.00' )" type="text" name="dec[6]" id="dec6" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Annual</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input type="text" name="annual[6]" id="annual6" value="120,000.00" disabled="disabled"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr><td class="td-separator">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="table-small-bordered">
+                                                        <tr>
+                                                            <td class="col-xs-6 ">User</td>
+                                                            <td class="col-xs-5 text-right td-vcenter">
+                                                                <a href="https://salesperformanceindicator.com/goalSettings/edit/29">Member25 Test</a>
+                                                            </td>
+                                                            <td class="col-xs-1 text-right td-vcenter">
+                                                                <input type="checkbox" id="_id29"  name="_id[29]"  value="29"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jan/Feb</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jan', '29','10,000.00' )" type="text" name="jan[29]" id="jan29" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'feb', '29','10,000.00' )" type="text" name="feb[29]" id="feb29" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Mar/Apr</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'mar', '29','10,000.00' )" type="text" name="mar[29]" id="mar29" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'apr', '29','10,000.00' )" type="text" name="apr[29]" id="apr29" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">May/Jun</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'may', '29','10,000.00' )" type="text" name="may[29]" id="may29" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'jun', '29','10,000.00' )" type="text" name="jun[29]" id="jun29" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jul/Aug</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jul', '29','10,000.00' )" type="text" name="jul[29]" id="jul29" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'aug', '29','10,000.00' )" type="text" name="aug[29]" id="aug29" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Sept/Oct</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'sep', '29','10,000.00' )" type="text" name="sep[29]" id="sep29" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'oct', '29','10,000.00' )" type="text" name="oct[29]" id="oct29" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Nov/Dec</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'nov', '29','10,000.00' )" type="text" name="nov[29]" id="nov29" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'dec', '29','10,000.00' )" type="text" name="dec[29]" id="dec29" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Annual</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input type="text" name="annual[29]" id="annual29" value="120,000.00" disabled="disabled"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr><td class="td-separator">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="table-small-bordered">
+                                                        <tr>
+                                                            <td class="col-xs-6 ">User</td>
+                                                            <td class="col-xs-5 text-right td-vcenter">
+                                                                <a href="https://salesperformanceindicator.com/goalSettings/edit/30">Member26 Test</a>
+                                                            </td>
+                                                            <td class="col-xs-1 text-right td-vcenter">
+                                                                <input type="checkbox" id="_id30"  name="_id[30]"  value="30"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jan/Feb</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jan', '30','10,000.00' )" type="text" name="jan[30]" id="jan30" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'feb', '30','10,000.00' )" type="text" name="feb[30]" id="feb30" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Mar/Apr</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'mar', '30','10,000.00' )" type="text" name="mar[30]" id="mar30" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'apr', '30','10,000.00' )" type="text" name="apr[30]" id="apr30" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">May/Jun</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'may', '30','10,000.00' )" type="text" name="may[30]" id="may30" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'jun', '30','10,000.00' )" type="text" name="jun[30]" id="jun30" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jul/Aug</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jul', '30','10,000.00' )" type="text" name="jul[30]" id="jul30" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'aug', '30','10,000.00' )" type="text" name="aug[30]" id="aug30" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Sept/Oct</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'sep', '30','10,000.00' )" type="text" name="sep[30]" id="sep30" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'oct', '30','10,000.00' )" type="text" name="oct[30]" id="oct30" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Nov/Dec</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'nov', '30','10,000.00' )" type="text" name="nov[30]" id="nov30" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'dec', '30','10,000.00' )" type="text" name="dec[30]" id="dec30" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Annual</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input type="text" name="annual[30]" id="annual30" value="120,000.00" disabled="disabled"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr><td class="td-separator">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="table-small-bordered">
+                                                        <tr>
+                                                            <td class="col-xs-6 ">User</td>
+                                                            <td class="col-xs-5 text-right td-vcenter">
+                                                                <a href="https://salesperformanceindicator.com/goalSettings/edit/7">Member3 Test</a>
+                                                            </td>
+                                                            <td class="col-xs-1 text-right td-vcenter">
+                                                                <input type="checkbox" id="_id7"  name="_id[7]"  value="7"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jan/Feb</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jan', '7','10,000.00' )" type="text" name="jan[7]" id="jan7" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'feb', '7','10,000.00' )" type="text" name="feb[7]" id="feb7" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Mar/Apr</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'mar', '7','10,000.00' )" type="text" name="mar[7]" id="mar7" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'apr', '7','10,000.00' )" type="text" name="apr[7]" id="apr7" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">May/Jun</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'may', '7','10,000.00' )" type="text" name="may[7]" id="may7" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'jun', '7','10,000.00' )" type="text" name="jun[7]" id="jun7" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jul/Aug</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jul', '7','10,000.00' )" type="text" name="jul[7]" id="jul7" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'aug', '7','10,000.00' )" type="text" name="aug[7]" id="aug7" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Sept/Oct</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'sep', '7','10,000.00' )" type="text" name="sep[7]" id="sep7" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'oct', '7','10,000.00' )" type="text" name="oct[7]" id="oct7" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Nov/Dec</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'nov', '7','10,000.00' )" type="text" name="nov[7]" id="nov7" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'dec', '7','10,000.00' )" type="text" name="dec[7]" id="dec7" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Annual</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input type="text" name="annual[7]" id="annual7" value="120,000.00" disabled="disabled"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr><td class="td-separator">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="table-small-bordered">
+                                                        <tr>
+                                                            <td class="col-xs-6 ">User</td>
+                                                            <td class="col-xs-5 text-right td-vcenter">
+                                                                <a href="https://salesperformanceindicator.com/goalSettings/edit/8">Member4 Test</a>
+                                                            </td>
+                                                            <td class="col-xs-1 text-right td-vcenter">
+                                                                <input type="checkbox" id="_id8"  name="_id[8]"  value="8"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jan/Feb</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jan', '8','10,000.00' )" type="text" name="jan[8]" id="jan8" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'feb', '8','10,000.00' )" type="text" name="feb[8]" id="feb8" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Mar/Apr</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'mar', '8','10,000.00' )" type="text" name="mar[8]" id="mar8" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'apr', '8','10,000.00' )" type="text" name="apr[8]" id="apr8" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">May/Jun</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'may', '8','10,000.00' )" type="text" name="may[8]" id="may8" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'jun', '8','10,000.00' )" type="text" name="jun[8]" id="jun8" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jul/Aug</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jul', '8','10,000.00' )" type="text" name="jul[8]" id="jul8" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'aug', '8','10,000.00' )" type="text" name="aug[8]" id="aug8" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Sept/Oct</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'sep', '8','10,000.00' )" type="text" name="sep[8]" id="sep8" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'oct', '8','10,000.00' )" type="text" name="oct[8]" id="oct8" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Nov/Dec</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'nov', '8','10,000.00' )" type="text" name="nov[8]" id="nov8" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'dec', '8','10,000.00' )" type="text" name="dec[8]" id="dec8" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Annual</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input type="text" name="annual[8]" id="annual8" value="120,000.00" disabled="disabled"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr><td class="td-separator">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="table-small-bordered">
+                                                        <tr>
+                                                            <td class="col-xs-6 ">User</td>
+                                                            <td class="col-xs-5 text-right td-vcenter">
+                                                                <a href="https://salesperformanceindicator.com/goalSettings/edit/10">Member6 Test otra pag</a>
+                                                            </td>
+                                                            <td class="col-xs-1 text-right td-vcenter">
+                                                                <input type="checkbox" id="_id10"  name="_id[10]"  value="10"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jan/Feb</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jan', '10','10,000.00' )" type="text" name="jan[10]" id="jan10" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'feb', '10','10,000.00' )" type="text" name="feb[10]" id="feb10" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Mar/Apr</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'mar', '10','10,000.00' )" type="text" name="mar[10]" id="mar10" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'apr', '10','10,000.00' )" type="text" name="apr[10]" id="apr10" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">May/Jun</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'may', '10','10,000.00' )" type="text" name="may[10]" id="may10" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'jun', '10','10,000.00' )" type="text" name="jun[10]" id="jun10" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jul/Aug</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jul', '10','10,000.00' )" type="text" name="jul[10]" id="jul10" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'aug', '10','10,000.00' )" type="text" name="aug[10]" id="aug10" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Sept/Oct</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'sep', '10','10,000.00' )" type="text" name="sep[10]" id="sep10" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'oct', '10','10,000.00' )" type="text" name="oct[10]" id="oct10" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Nov/Dec</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'nov', '10','10,000.00' )" type="text" name="nov[10]" id="nov10" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'dec', '10','10,000.00' )" type="text" name="dec[10]" id="dec10" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Annual</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input type="text" name="annual[10]" id="annual10" value="120,000.00" disabled="disabled"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr><td class="td-separator">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="table-small-bordered">
+                                                        <tr>
+                                                            <td class="col-xs-6 ">User</td>
+                                                            <td class="col-xs-5 text-right td-vcenter">
+                                                                <a href="https://salesperformanceindicator.com/goalSettings/edit/11">Member7 Test</a>
+                                                            </td>
+                                                            <td class="col-xs-1 text-right td-vcenter">
+                                                                <input type="checkbox" id="_id11"  name="_id[11]"  value="11"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jan/Feb</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jan', '11','10,000.00' )" type="text" name="jan[11]" id="jan11" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'feb', '11','10,000.00' )" type="text" name="feb[11]" id="feb11" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Mar/Apr</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'mar', '11','10,000.00' )" type="text" name="mar[11]" id="mar11" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'apr', '11','10,000.00' )" type="text" name="apr[11]" id="apr11" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">May/Jun</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'may', '11','5,000.00' )" type="text" name="may[11]" id="may11" value="5,000.00"/>
+                                                                <input onblur="cleanup( 'jun', '11','10,000.00' )" type="text" name="jun[11]" id="jun11" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jul/Aug</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jul', '11','10,000.00' )" type="text" name="jul[11]" id="jul11" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'aug', '11','10,000.00' )" type="text" name="aug[11]" id="aug11" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Sept/Oct</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'sep', '11','10,000.00' )" type="text" name="sep[11]" id="sep11" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'oct', '11','10,000.00' )" type="text" name="oct[11]" id="oct11" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Nov/Dec</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'nov', '11','10,000.00' )" type="text" name="nov[11]" id="nov11" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'dec', '11','10,000.00' )" type="text" name="dec[11]" id="dec11" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Annual</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input type="text" name="annual[11]" id="annual11" value="115,000.00" disabled="disabled"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr><td class="td-separator">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="table-small-bordered">
+                                                        <tr>
+                                                            <td class="col-xs-6 ">User</td>
+                                                            <td class="col-xs-5 text-right td-vcenter">
+                                                                <a href="https://salesperformanceindicator.com/goalSettings/edit/12">Member8 Test</a>
+                                                            </td>
+                                                            <td class="col-xs-1 text-right td-vcenter">
+                                                                <input type="checkbox" id="_id12"  name="_id[12]"  value="12"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jan/Feb</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jan', '12','10,000.00' )" type="text" name="jan[12]" id="jan12" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'feb', '12','10,000.00' )" type="text" name="feb[12]" id="feb12" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Mar/Apr</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'mar', '12','10,000.00' )" type="text" name="mar[12]" id="mar12" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'apr', '12','10,000.00' )" type="text" name="apr[12]" id="apr12" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">May/Jun</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'may', '12','10,000.00' )" type="text" name="may[12]" id="may12" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'jun', '12','10,000.00' )" type="text" name="jun[12]" id="jun12" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jul/Aug</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jul', '12','10,000.00' )" type="text" name="jul[12]" id="jul12" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'aug', '12','10,000.00' )" type="text" name="aug[12]" id="aug12" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Sept/Oct</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'sep', '12','10,000.00' )" type="text" name="sep[12]" id="sep12" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'oct', '12','10,000.00' )" type="text" name="oct[12]" id="oct12" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Nov/Dec</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'nov', '12','10,000.00' )" type="text" name="nov[12]" id="nov12" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'dec', '12','10,000.00' )" type="text" name="dec[12]" id="dec12" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Annual</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input type="text" name="annual[12]" id="annual12" value="120,000.00" disabled="disabled"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr><td class="td-separator">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="table-small-bordered">
+                                                        <tr>
+                                                            <td class="col-xs-6 ">User</td>
+                                                            <td class="col-xs-5 text-right td-vcenter">
+                                                                <a href="https://salesperformanceindicator.com/goalSettings/edit/39">Nancy Philips</a>
+                                                            </td>
+                                                            <td class="col-xs-1 text-right td-vcenter">
+                                                                <input type="checkbox" id="_id40"  name="_id[40]"  value="40"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jan/Feb</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jan', '40','10,000.00' )" type="text" name="jan[40]" id="jan40" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'feb', '40','10,000.00' )" type="text" name="feb[40]" id="feb40" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Mar/Apr</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'mar', '40','10,000.00' )" type="text" name="mar[40]" id="mar40" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'apr', '40','10,000.00' )" type="text" name="apr[40]" id="apr40" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">May/Jun</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'may', '40','10,000.00' )" type="text" name="may[40]" id="may40" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'jun', '40','10,000.00' )" type="text" name="jun[40]" id="jun40" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jul/Aug</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jul', '40','10,000.00' )" type="text" name="jul[40]" id="jul40" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'aug', '40','10,000.00' )" type="text" name="aug[40]" id="aug40" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Sept/Oct</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'sep', '40','10,000.00' )" type="text" name="sep[40]" id="sep40" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'oct', '40','10,000.00' )" type="text" name="oct[40]" id="oct40" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Nov/Dec</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'nov', '40','10,000.00' )" type="text" name="nov[40]" id="nov40" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'dec', '40','10,000.00' )" type="text" name="dec[40]" id="dec40" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Annual</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input type="text" name="annual[40]" id="annual40" value="120,000.00" disabled="disabled"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr><td class="td-separator">&nbsp;</td></tr>
+                                            <tr>
+                                                <td>
+                                                    <table class="table-small-bordered">
+                                                        <tr>
+                                                            <td class="col-xs-6 ">User</td>
+                                                            <td class="col-xs-5 text-right td-vcenter">
+                                                                <a href="https://salesperformanceindicator.com/goalSettings/edit/35">Steve Torrefranca</a>
+                                                            </td>
+                                                            <td class="col-xs-1 text-right td-vcenter">
+                                                                <input type="checkbox" id="_id35"  name="_id[35]"  value="35"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jan/Feb</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jan', '35','10,000.00' )" type="text" name="jan[35]" id="jan35" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'feb', '35','10,000.00' )" type="text" name="feb[35]" id="feb35" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Mar/Apr</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'mar', '35','10,000.00' )" type="text" name="mar[35]" id="mar35" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'apr', '35','10,000.00' )" type="text" name="apr[35]" id="apr35" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">May/Jun</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'may', '35','10,000.00' )" type="text" name="may[35]" id="may35" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'jun', '35','10,000.00' )" type="text" name="jun[35]" id="jun35" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Jul/Aug</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'jul', '35','10,000.00' )" type="text" name="jul[35]" id="jul35" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'aug', '35','10,000.00' )" type="text" name="aug[35]" id="aug35" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Sept/Oct</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'sep', '35','10,000.00' )" type="text" name="sep[35]" id="sep35" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'oct', '35','10,000.00' )" type="text" name="oct[35]" id="oct35" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Nov/Dec</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input onblur="cleanup( 'nov', '35','10,000.00' )" type="text" name="nov[35]" id="nov35" value="10,000.00"/>
+                                                                <input onblur="cleanup( 'dec', '35','10,000.00' )" type="text" name="dec[35]" id="dec35" value="10,000.00"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-xs-6 ">Annual</td>
+                                                            <td class="col-xs-6 text-right td-vcenter" colspan="2">
+                                                                <input type="text" name="annual[35]" id="annual35" value="120,000.00" disabled="disabled"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>                              
+                                        </tbody>
+                                    </table>
+
+                                    <table class="table hidden-xs">
+                                        <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th class="userCol">User</th>
+                                            <th>Jan/Feb</th>
+                                            <th>Mar/Apr</th>
+                                            <th>May/Jun</th>
+                                            <th>Jul/Aug</th>
+                                            <th>Sept/Oct</th>
+                                            <th>Nov/Dec</th>
+                                            <th>Annual</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="checkbox" id="_id54"  name="_id[54]"  value="54"/></td>
+                                                <!--...--><td><a href="https://salesperformanceindicator.com/goalSettings/edit/53">algo algo</a></td>
+                                                <td><input onblur="cleanup( 'jan', '54','10,000.00' )" type="text" name="jan[54]" id="jan54" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'feb', '54','10,000.00' )" type="text" name="feb[54]" id="feb54" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'mar', '54','10,000.00' )" type="text" name="mar[54]" id="mar54" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'apr', '54','10,000.00' )" type="text" name="apr[54]" id="apr54" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'may', '54','10,000.00' )" type="text" name="may[54]" id="may54" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'jun', '54','10,000.00' )" type="text" name="jun[54]" id="jun54" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'jul', '54','10,000.00' )" type="text" name="jul[54]" id="jul54" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'aug', '54','10,000.00' )" type="text" name="aug[54]" id="aug54" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'sep', '54','10,000.00' )" type="text" name="sep[54]" id="sep54" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'oct', '54','10,000.00' )" type="text" name="oct[54]" id="oct54" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'nov', '54','10,000.00' )" type="text" name="nov[54]" id="nov54" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'dec', '54','10,000.00' )" type="text" name="dec[54]" id="dec54" value="10,000.00"/></td>
+                                                <td><input type="text" name="annual[54]" id="annual54" value="120,000.00" disabled="disabled"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="_id41"  name="_id[41]"  value="41"/></td>
+                                                <!--...--><td><a href="https://salesperformanceindicator.com/goalSettings/edit/40">hola bien</a></td>
+                                                <td><input onblur="cleanup( 'jan', '41','7,000.00' )" type="text" name="jan[41]" id="jan41" value="7,000.00"/>
+                                                    <input onblur="cleanup( 'feb', '41','5,000.00' )" type="text" name="feb[41]" id="feb41" value="5,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'mar', '41','5,000.00' )" type="text" name="mar[41]" id="mar41" value="5,000.00"/>
+                                                    <input onblur="cleanup( 'apr', '41','5,000.00' )" type="text" name="apr[41]" id="apr41" value="5,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'may', '41','5,000.00' )" type="text" name="may[41]" id="may41" value="5,000.00"/>
+                                                    <input onblur="cleanup( 'jun', '41','5,000.00' )" type="text" name="jun[41]" id="jun41" value="5,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'jul', '41','5,000.00' )" type="text" name="jul[41]" id="jul41" value="5,000.00"/>
+                                                    <input onblur="cleanup( 'aug', '41','5,000.00' )" type="text" name="aug[41]" id="aug41" value="5,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'sep', '41','5,000.00' )" type="text" name="sep[41]" id="sep41" value="5,000.00"/>
+                                                    <input onblur="cleanup( 'oct', '41','5,000.00' )" type="text" name="oct[41]" id="oct41" value="5,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'nov', '41','5,000.00' )" type="text" name="nov[41]" id="nov41" value="5,000.00"/>
+                                                    <input onblur="cleanup( 'dec', '41','5,000.00' )" type="text" name="dec[41]" id="dec41" value="5,000.00"/></td>
+                                                <td><input type="text" name="annual[41]" id="annual41" value="62,000.00" disabled="disabled"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="_id43"  name="_id[43]"  value="43"/></td>
+                                                <!--...--><td><a href="https://salesperformanceindicator.com/goalSettings/edit/42">jose rojas</a></td>
+                                                <td><input onblur="cleanup( 'jan', '43','10,000.00' )" type="text" name="jan[43]" id="jan43" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'feb', '43','10,000.00' )" type="text" name="feb[43]" id="feb43" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'mar', '43','10,000.00' )" type="text" name="mar[43]" id="mar43" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'apr', '43','10,000.00' )" type="text" name="apr[43]" id="apr43" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'may', '43','10,000.00' )" type="text" name="may[43]" id="may43" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'jun', '43','10,000.00' )" type="text" name="jun[43]" id="jun43" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'jul', '43','10,000.00' )" type="text" name="jul[43]" id="jul43" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'aug', '43','10,000.00' )" type="text" name="aug[43]" id="aug43" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'sep', '43','10,000.00' )" type="text" name="sep[43]" id="sep43" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'oct', '43','10,000.00' )" type="text" name="oct[43]" id="oct43" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'nov', '43','10,000.00' )" type="text" name="nov[43]" id="nov43" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'dec', '43','10,000.00' )" type="text" name="dec[43]" id="dec43" value="10,000.00"/></td>
+                                                <td><input type="text" name="annual[43]" id="annual43" value="120,000.00" disabled="disabled"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="_id44"  name="_id[44]"  value="44"/></td>
+                                                <!--...--><td><a href="https://salesperformanceindicator.com/goalSettings/edit/43">josr rojas villar</a></td>
+                                                <td><input onblur="cleanup( 'jan', '44','10,000.00' )" type="text" name="jan[44]" id="jan44" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'feb', '44','10,000.00' )" type="text" name="feb[44]" id="feb44" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'mar', '44','10,000.00' )" type="text" name="mar[44]" id="mar44" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'apr', '44','10,000.00' )" type="text" name="apr[44]" id="apr44" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'may', '44','10,000.00' )" type="text" name="may[44]" id="may44" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'jun', '44','10,000.00' )" type="text" name="jun[44]" id="jun44" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'jul', '44','10,000.00' )" type="text" name="jul[44]" id="jul44" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'aug', '44','10,000.00' )" type="text" name="aug[44]" id="aug44" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'sep', '44','10,000.00' )" type="text" name="sep[44]" id="sep44" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'oct', '44','10,000.00' )" type="text" name="oct[44]" id="oct44" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'nov', '44','10,000.00' )" type="text" name="nov[44]" id="nov44" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'dec', '44','10,000.00' )" type="text" name="dec[44]" id="dec44" value="10,000.00"/></td>
+                                                <td><input type="text" name="annual[44]" id="annual44" value="120,000.00" disabled="disabled"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="_id32"  name="_id[32]"  value="32"/></td>
+                                                <!--...--><td><a href="https://salesperformanceindicator.com/goalSettings/edit/32">Member Testt</a></td>
+                                                <td><input onblur="cleanup( 'jan', '32','10,000.00' )" type="text" name="jan[32]" id="jan32" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'feb', '32','10,000.00' )" type="text" name="feb[32]" id="feb32" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'mar', '32','10,000.00' )" type="text" name="mar[32]" id="mar32" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'apr', '32','10,000.00' )" type="text" name="apr[32]" id="apr32" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'may', '32','10,000.00' )" type="text" name="may[32]" id="may32" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'jun', '32','10,000.00' )" type="text" name="jun[32]" id="jun32" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'jul', '32','10,000.00' )" type="text" name="jul[32]" id="jul32" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'aug', '32','10,000.00' )" type="text" name="aug[32]" id="aug32" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'sep', '32','10,000.00' )" type="text" name="sep[32]" id="sep32" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'oct', '32','10,000.00' )" type="text" name="oct[32]" id="oct32" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'nov', '32','10,000.00' )" type="text" name="nov[32]" id="nov32" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'dec', '32','10,000.00' )" type="text" name="dec[32]" id="dec32" value="10,000.00"/></td>
+                                                <td><input type="text" name="annual[32]" id="annual32" value="120,000.00" disabled="disabled"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="_id33"  name="_id[33]"  value="33"/></td>
+                                                <!--...--><td><a href="https://salesperformanceindicator.com/goalSettings/edit/33">Member Test</a></td>
+                                                <td><input onblur="cleanup( 'jan', '33','10,000.00' )" type="text" name="jan[33]" id="jan33" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'feb', '33','10,000.00' )" type="text" name="feb[33]" id="feb33" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'mar', '33','10,000.00' )" type="text" name="mar[33]" id="mar33" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'apr', '33','10,000.00' )" type="text" name="apr[33]" id="apr33" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'may', '33','10,000.00' )" type="text" name="may[33]" id="may33" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'jun', '33','10,000.00' )" type="text" name="jun[33]" id="jun33" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'jul', '33','10,000.00' )" type="text" name="jul[33]" id="jul33" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'aug', '33','10,000.00' )" type="text" name="aug[33]" id="aug33" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'sep', '33','10,000.00' )" type="text" name="sep[33]" id="sep33" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'oct', '33','10,000.00' )" type="text" name="oct[33]" id="oct33" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'nov', '33','10,000.00' )" type="text" name="nov[33]" id="nov33" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'dec', '33','10,000.00' )" type="text" name="dec[33]" id="dec33" value="10,000.00"/></td>
+                                                <td><input type="text" name="annual[33]" id="annual33" value="120,000.00" disabled="disabled"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="_id34"  name="_id[34]"  value="34"/></td>
+                                                <!--...--><td><a href="https://salesperformanceindicator.com/goalSettings/edit/34">Member Test</a></td>
+                                                <td><input onblur="cleanup( 'jan', '34','10,000.00' )" type="text" name="jan[34]" id="jan34" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'feb', '34','10,000.00' )" type="text" name="feb[34]" id="feb34" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'mar', '34','10,000.00' )" type="text" name="mar[34]" id="mar34" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'apr', '34','10,000.00' )" type="text" name="apr[34]" id="apr34" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'may', '34','10,000.00' )" type="text" name="may[34]" id="may34" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'jun', '34','10,000.00' )" type="text" name="jun[34]" id="jun34" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'jul', '34','10,000.00' )" type="text" name="jul[34]" id="jul34" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'aug', '34','10,000.00' )" type="text" name="aug[34]" id="aug34" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'sep', '34','10,000.00' )" type="text" name="sep[34]" id="sep34" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'oct', '34','10,000.00' )" type="text" name="oct[34]" id="oct34" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'nov', '34','10,000.00' )" type="text" name="nov[34]" id="nov34" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'dec', '34','10,000.00' )" type="text" name="dec[34]" id="dec34" value="10,000.00"/></td>
+                                                <td><input type="text" name="annual[34]" id="annual34" value="120,000.00" disabled="disabled"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="_id6"  name="_id[6]"  value="6"/></td>
+                                                <!--...--><td><a href="https://salesperformanceindicator.com/goalSettings/edit/6">Member2 Testx</a></td>
+                                                <td><input onblur="cleanup( 'jan', '6','10,000.00' )" type="text" name="jan[6]" id="jan6" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'feb', '6','10,000.00' )" type="text" name="feb[6]" id="feb6" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'mar', '6','10,000.00' )" type="text" name="mar[6]" id="mar6" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'apr', '6','10,000.00' )" type="text" name="apr[6]" id="apr6" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'may', '6','10,000.00' )" type="text" name="may[6]" id="may6" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'jun', '6','10,000.00' )" type="text" name="jun[6]" id="jun6" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'jul', '6','10,000.00' )" type="text" name="jul[6]" id="jul6" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'aug', '6','10,000.00' )" type="text" name="aug[6]" id="aug6" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'sep', '6','10,000.00' )" type="text" name="sep[6]" id="sep6" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'oct', '6','10,000.00' )" type="text" name="oct[6]" id="oct6" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'nov', '6','10,000.00' )" type="text" name="nov[6]" id="nov6" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'dec', '6','10,000.00' )" type="text" name="dec[6]" id="dec6" value="10,000.00"/></td>
+                                                <td><input type="text" name="annual[6]" id="annual6" value="120,000.00" disabled="disabled"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="_id29"  name="_id[29]"  value="29"/></td>
+                                                <!--...--><td><a href="https://salesperformanceindicator.com/goalSettings/edit/29">Member25 Test</a></td>
+                                                <td><input onblur="cleanup( 'jan', '29','10,000.00' )" type="text" name="jan[29]" id="jan29" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'feb', '29','10,000.00' )" type="text" name="feb[29]" id="feb29" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'mar', '29','10,000.00' )" type="text" name="mar[29]" id="mar29" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'apr', '29','10,000.00' )" type="text" name="apr[29]" id="apr29" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'may', '29','10,000.00' )" type="text" name="may[29]" id="may29" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'jun', '29','10,000.00' )" type="text" name="jun[29]" id="jun29" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'jul', '29','10,000.00' )" type="text" name="jul[29]" id="jul29" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'aug', '29','10,000.00' )" type="text" name="aug[29]" id="aug29" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'sep', '29','10,000.00' )" type="text" name="sep[29]" id="sep29" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'oct', '29','10,000.00' )" type="text" name="oct[29]" id="oct29" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'nov', '29','10,000.00' )" type="text" name="nov[29]" id="nov29" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'dec', '29','10,000.00' )" type="text" name="dec[29]" id="dec29" value="10,000.00"/></td>
+                                                <td><input type="text" name="annual[29]" id="annual29" value="120,000.00" disabled="disabled"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="_id30"  name="_id[30]"  value="30"/></td>
+                                                <!--...--><td><a href="https://salesperformanceindicator.com/goalSettings/edit/30">Member26 Test</a></td>
+                                                <td><input onblur="cleanup( 'jan', '30','10,000.00' )" type="text" name="jan[30]" id="jan30" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'feb', '30','10,000.00' )" type="text" name="feb[30]" id="feb30" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'mar', '30','10,000.00' )" type="text" name="mar[30]" id="mar30" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'apr', '30','10,000.00' )" type="text" name="apr[30]" id="apr30" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'may', '30','10,000.00' )" type="text" name="may[30]" id="may30" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'jun', '30','10,000.00' )" type="text" name="jun[30]" id="jun30" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'jul', '30','10,000.00' )" type="text" name="jul[30]" id="jul30" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'aug', '30','10,000.00' )" type="text" name="aug[30]" id="aug30" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'sep', '30','10,000.00' )" type="text" name="sep[30]" id="sep30" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'oct', '30','10,000.00' )" type="text" name="oct[30]" id="oct30" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'nov', '30','10,000.00' )" type="text" name="nov[30]" id="nov30" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'dec', '30','10,000.00' )" type="text" name="dec[30]" id="dec30" value="10,000.00"/></td>
+                                                <td><input type="text" name="annual[30]" id="annual30" value="120,000.00" disabled="disabled"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="_id7"  name="_id[7]"  value="7"/></td>
+                                                <!--...--><td><a href="https://salesperformanceindicator.com/goalSettings/edit/7">Member3 Test</a></td>
+                                                <td><input onblur="cleanup( 'jan', '7','10,000.00' )" type="text" name="jan[7]" id="jan7" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'feb', '7','10,000.00' )" type="text" name="feb[7]" id="feb7" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'mar', '7','10,000.00' )" type="text" name="mar[7]" id="mar7" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'apr', '7','10,000.00' )" type="text" name="apr[7]" id="apr7" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'may', '7','10,000.00' )" type="text" name="may[7]" id="may7" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'jun', '7','10,000.00' )" type="text" name="jun[7]" id="jun7" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'jul', '7','10,000.00' )" type="text" name="jul[7]" id="jul7" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'aug', '7','10,000.00' )" type="text" name="aug[7]" id="aug7" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'sep', '7','10,000.00' )" type="text" name="sep[7]" id="sep7" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'oct', '7','10,000.00' )" type="text" name="oct[7]" id="oct7" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'nov', '7','10,000.00' )" type="text" name="nov[7]" id="nov7" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'dec', '7','10,000.00' )" type="text" name="dec[7]" id="dec7" value="10,000.00"/></td>
+                                                <td><input type="text" name="annual[7]" id="annual7" value="120,000.00" disabled="disabled"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="_id8"  name="_id[8]"  value="8"/></td>
+                                                <!--...--><td><a href="https://salesperformanceindicator.com/goalSettings/edit/8">Member4 Test</a></td>
+                                                <td><input onblur="cleanup( 'jan', '8','10,000.00' )" type="text" name="jan[8]" id="jan8" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'feb', '8','10,000.00' )" type="text" name="feb[8]" id="feb8" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'mar', '8','10,000.00' )" type="text" name="mar[8]" id="mar8" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'apr', '8','10,000.00' )" type="text" name="apr[8]" id="apr8" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'may', '8','10,000.00' )" type="text" name="may[8]" id="may8" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'jun', '8','10,000.00' )" type="text" name="jun[8]" id="jun8" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'jul', '8','10,000.00' )" type="text" name="jul[8]" id="jul8" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'aug', '8','10,000.00' )" type="text" name="aug[8]" id="aug8" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'sep', '8','10,000.00' )" type="text" name="sep[8]" id="sep8" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'oct', '8','10,000.00' )" type="text" name="oct[8]" id="oct8" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'nov', '8','10,000.00' )" type="text" name="nov[8]" id="nov8" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'dec', '8','10,000.00' )" type="text" name="dec[8]" id="dec8" value="10,000.00"/></td>
+                                                <td><input type="text" name="annual[8]" id="annual8" value="120,000.00" disabled="disabled"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="_id10"  name="_id[10]"  value="10"/></td>
+                                                <!--...--><td><a href="https://salesperformanceindicator.com/goalSettings/edit/10">Member6 Test otra pag</a></td>
+                                                <td><input onblur="cleanup( 'jan', '10','10,000.00' )" type="text" name="jan[10]" id="jan10" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'feb', '10','10,000.00' )" type="text" name="feb[10]" id="feb10" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'mar', '10','10,000.00' )" type="text" name="mar[10]" id="mar10" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'apr', '10','10,000.00' )" type="text" name="apr[10]" id="apr10" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'may', '10','10,000.00' )" type="text" name="may[10]" id="may10" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'jun', '10','10,000.00' )" type="text" name="jun[10]" id="jun10" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'jul', '10','10,000.00' )" type="text" name="jul[10]" id="jul10" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'aug', '10','10,000.00' )" type="text" name="aug[10]" id="aug10" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'sep', '10','10,000.00' )" type="text" name="sep[10]" id="sep10" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'oct', '10','10,000.00' )" type="text" name="oct[10]" id="oct10" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'nov', '10','10,000.00' )" type="text" name="nov[10]" id="nov10" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'dec', '10','10,000.00' )" type="text" name="dec[10]" id="dec10" value="10,000.00"/></td>
+                                                <td><input type="text" name="annual[10]" id="annual10" value="120,000.00" disabled="disabled"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="_id11"  name="_id[11]"  value="11"/></td>
+                                                <!--...--><td><a href="https://salesperformanceindicator.com/goalSettings/edit/11">Member7 Test</a></td>
+                                                <td><input onblur="cleanup( 'jan', '11','10,000.00' )" type="text" name="jan[11]" id="jan11" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'feb', '11','10,000.00' )" type="text" name="feb[11]" id="feb11" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'mar', '11','10,000.00' )" type="text" name="mar[11]" id="mar11" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'apr', '11','10,000.00' )" type="text" name="apr[11]" id="apr11" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'may', '11','5,000.00' )" type="text" name="may[11]" id="may11" value="5,000.00"/>
+                                                    <input onblur="cleanup( 'jun', '11','10,000.00' )" type="text" name="jun[11]" id="jun11" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'jul', '11','10,000.00' )" type="text" name="jul[11]" id="jul11" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'aug', '11','10,000.00' )" type="text" name="aug[11]" id="aug11" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'sep', '11','10,000.00' )" type="text" name="sep[11]" id="sep11" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'oct', '11','10,000.00' )" type="text" name="oct[11]" id="oct11" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'nov', '11','10,000.00' )" type="text" name="nov[11]" id="nov11" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'dec', '11','10,000.00' )" type="text" name="dec[11]" id="dec11" value="10,000.00"/></td>
+                                                <td><input type="text" name="annual[11]" id="annual11" value="115,000.00" disabled="disabled"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="_id12"  name="_id[12]"  value="12"/></td>
+                                                <!--...--><td><a href="https://salesperformanceindicator.com/goalSettings/edit/12">Member8 Test</a></td>
+                                                <td><input onblur="cleanup( 'jan', '12','10,000.00' )" type="text" name="jan[12]" id="jan12" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'feb', '12','10,000.00' )" type="text" name="feb[12]" id="feb12" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'mar', '12','10,000.00' )" type="text" name="mar[12]" id="mar12" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'apr', '12','10,000.00' )" type="text" name="apr[12]" id="apr12" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'may', '12','10,000.00' )" type="text" name="may[12]" id="may12" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'jun', '12','10,000.00' )" type="text" name="jun[12]" id="jun12" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'jul', '12','10,000.00' )" type="text" name="jul[12]" id="jul12" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'aug', '12','10,000.00' )" type="text" name="aug[12]" id="aug12" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'sep', '12','10,000.00' )" type="text" name="sep[12]" id="sep12" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'oct', '12','10,000.00' )" type="text" name="oct[12]" id="oct12" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'nov', '12','10,000.00' )" type="text" name="nov[12]" id="nov12" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'dec', '12','10,000.00' )" type="text" name="dec[12]" id="dec12" value="10,000.00"/></td>
+                                                <td><input type="text" name="annual[12]" id="annual12" value="120,000.00" disabled="disabled"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="_id40"  name="_id[40]"  value="40"/></td>
+                                                <!--...--><td><a href="https://salesperformanceindicator.com/goalSettings/edit/39">Nancy Philips</a></td>
+                                                <td><input onblur="cleanup( 'jan', '40','10,000.00' )" type="text" name="jan[40]" id="jan40" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'feb', '40','10,000.00' )" type="text" name="feb[40]" id="feb40" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'mar', '40','10,000.00' )" type="text" name="mar[40]" id="mar40" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'apr', '40','10,000.00' )" type="text" name="apr[40]" id="apr40" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'may', '40','10,000.00' )" type="text" name="may[40]" id="may40" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'jun', '40','10,000.00' )" type="text" name="jun[40]" id="jun40" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'jul', '40','10,000.00' )" type="text" name="jul[40]" id="jul40" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'aug', '40','10,000.00' )" type="text" name="aug[40]" id="aug40" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'sep', '40','10,000.00' )" type="text" name="sep[40]" id="sep40" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'oct', '40','10,000.00' )" type="text" name="oct[40]" id="oct40" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'nov', '40','10,000.00' )" type="text" name="nov[40]" id="nov40" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'dec', '40','10,000.00' )" type="text" name="dec[40]" id="dec40" value="10,000.00"/></td>
+                                                <td><input type="text" name="annual[40]" id="annual40" value="120,000.00" disabled="disabled"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" id="_id35"  name="_id[35]"  value="35"/></td>
+                                                <!--...--><td><a href="https://salesperformanceindicator.com/goalSettings/edit/35">Steve Torrefranca</a></td>
+                                                <td><input onblur="cleanup( 'jan', '35','10,000.00' )" type="text" name="jan[35]" id="jan35" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'feb', '35','10,000.00' )" type="text" name="feb[35]" id="feb35" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'mar', '35','10,000.00' )" type="text" name="mar[35]" id="mar35" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'apr', '35','10,000.00' )" type="text" name="apr[35]" id="apr35" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'may', '35','10,000.00' )" type="text" name="may[35]" id="may35" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'jun', '35','10,000.00' )" type="text" name="jun[35]" id="jun35" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'jul', '35','10,000.00' )" type="text" name="jul[35]" id="jul35" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'aug', '35','10,000.00' )" type="text" name="aug[35]" id="aug35" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'sep', '35','10,000.00' )" type="text" name="sep[35]" id="sep35" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'oct', '35','10,000.00' )" type="text" name="oct[35]" id="oct35" value="10,000.00"/>
+                                                </td>
+                                                <td><input onblur="cleanup( 'nov', '35','10,000.00' )" type="text" name="nov[35]" id="nov35" value="10,000.00"/>
+                                                    <input onblur="cleanup( 'dec', '35','10,000.00' )" type="text" name="dec[35]" id="dec35" value="10,000.00"/></td>
+                                                <td><input type="text" name="annual[35]" id="annual35" value="120,000.00" disabled="disabled"/></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="form-group">
+                                        <div class="col-md-12 text-right">
+                                            <button type="submit" class="btn btn-primary">Update Checked</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                            <div class="col-md-2 col-md-offset-5"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <footer>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center back-to-top">
+                        <a class="btn btn-default" href="#top">Back to top</a>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <ul class="list-unstyled">
+                            <li>
+                                <div class="footer-copyright">
+                                    <div class="container text-center">
+                                        Sales Performance Indicator | &copy; 2014-2015 Good as Gold Training, All rights reserved.<br />
+                                        <a class="grey-text text-lighten-4 right" href="mailto:support@staffingandrecruiting.com">support@staffingandrecruiting.com | 219 663 9609</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

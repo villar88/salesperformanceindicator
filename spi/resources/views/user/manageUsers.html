@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Metrics Solution</title>
+		<!-- Fonts -->
+		<!-- <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'> -->
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		
+		<link rel="stylesheet" href="fixes.css">
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$('#godown').height($("#ss_fixed_nav").height());
+				window.onresize = function() {
+					$('#godown').height($("#ss_fixed_nav").height());
+				}
+			});
+		</script>
+    </head>
+    <body>
+        <div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<nav class="navbar-default navbar-fixed-top" id="ss_fixed_nav">
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+									<span class="sr-only">Toggle Navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+								<a class="navbar-brand" href="#">
+                                    <img class="hidden-xs hidden-sm img-responsive" src="images/modLogo.png" alt="logo description" />
+                                    <img class="hidden-xs visible-sm img-responsive" src="images/modLogo-half.png" alt="logo description" />
+                                    <img class="visible-xs img-responsive" src="images/modLogo-small.png" alt="logo description" />
+                                </a>
+							</div>
+
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<ul class="nav navbar-nav">
+                                    <li class="active"><a href="http://salesperformanceindicator.com">Manage Users</a></li>
+									<li class=""><a href="http://salesperformanceindicator.com/companies">Manage Companies</a></li>
+									<li class=""><a href="http://salesperformanceindicator.com/reports">Reports</a></li>
+								</ul>
+								<ul class="nav navbar-nav navbar-right">
+                                    <li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in as System <span class="caret"></span></a>
+										<ul class="dropdown-menu" role="menu">
+											<li><a href="http://salesperformanceindicator.com/myprofile">MyProfile</a></li>
+											<li><a href="http://salesperformanceindicator.com/auth/logout">Logout</a></li>
+										</ul>
+									</li>
+                                </ul>
+                            </div>
+						</div>
+					</nav>
+					<div id="godown"></div>
+				</div>
+			</div>
+		</div>
+
+        <div class="container-fluid" id="main-content">
+			<div class="page-header" id="banner">
+				<div class="row">
+					<div class="col-lg-8 col-md-7 col-sm-6">
+						<h2>Manage Users</h2>
+					</div>
+				</div>
+			</div>
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading"><h3>Search</h3></div>
+                        <div class="panel-body">
+                            <div class="col-md-10 col-md-offset-1">
+                                <form class="form-horizontal" role="form" method="POST" action="http://salesperformanceindicator.com/users/search">
+                                    <input type="hidden" name="_token" value="dTTAB0BL2ZjGdpKPwbBOR57qPvewEoi2iFakL7xB" />
+                                    <input type="hidden" id="request" name="request" value="" />
+                                    <fieldset>
+
+                                        <div class="input-group">
+                                            <input name="keyword" type="text" class="form-control" value=""/>
+                                            <span class="input-group-btn">
+                                                <button type="submit" class="btn btn-primary" value="Search" onclick="setRequest('search')">Search</button>
+                                                <button type="submit" class="btn btn-default" value="Show_All"  onclick="setRequest('showAll')">Show All</button>
+                                            </span>
+                                        </div>
+                                        <span>Please enter Email, First or Last Name of the User.</span>
+
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">
+                            <h3>Users</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a href="http://salesperformanceindicator.com/users/create" class="btn btn-primary pull-right">Create User</a>
+                                </div>
+                            </div>
+                            
+
+                            <!-- Table -->
+                            <form name="prueba" id="prueba" class="form-horizontal" role="form" method="POST" action="http://salesperformanceindicator.com/users/searchById">
+                                <input type="hidden" name="_token" value="dTTAB0BL2ZjGdpKPwbBOR57qPvewEoi2iFakL7xB" />
+                                <input type="hidden" id="request" name="request" value="" />
+                                <table class="table table-small hidden-sm hidden-md hidden-lg">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <table class="table-small-bordered">
+                                                    <tr>
+                                                        <td class="col-xs-5">First Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/1">System</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Last Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/1">Admin</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Email</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">system@system.com</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Phone Number</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">User Group</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">SuperAdmin</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Company Name
+                                                            <select class="form-control select-small" onchange="setAction(&quot;1&quot;);" name="companies">
+                                                                <option value="default" selected="selected">All Companies</option>
+                                                                <option value="5">Apple</option><option value="16">CDIL</option>
+                                                                <option value="18">CDIL DEMO</option>
+                                                                <option value="2">Company Another</option>
+                                                                <option value="1">Good as Gold Training</option>
+                                                                <option value="6">HR Search Inc</option>
+                                                                <option value="3">Microsoft</option>
+                                                                <option value="4">Oracle</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Status 
+                                                            <select class="form-control select-small" onchange="setAction(&quot;2&quot;);this.form.submit();" name="status">
+                                                                <option value="ALL">ALL</option>
+                                                                <option value="ACTIVE">ACTIVE</option>
+                                                                <option value="INACTIVE">INACTIVE</option>
+                                                                <option value="RESET">RESET</option>
+                                                                <option value="NEW">NEW</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Created</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Updated</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-08-21</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="icons col-xs-5">Actions</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">
+                                                            <a href="http://salesperformanceindicator.com/users/destroy/1" onclick="return  confirm('Are you sure you want to disable Admin, System?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/1" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/support/1" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr><td class="td-separator">&nbsp;</td></tr>
+                                        <tr>
+                                            <td>
+                                                <table class="table-small-bordered">
+                                                    <tr>
+                                                        <td class="col-xs-5">First Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/2">Company</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Last Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/2">Owner</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Email</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">adm@adm.com</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Phone Number</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">User Group</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Owner</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Company Name
+                                                            <select class="form-control select-small" onchange="setAction(&quot;1&quot;);" name="companies">
+                                                                <option value="default" selected="selected">All Companies</option>
+                                                                <option value="5">Apple</option><option value="16">CDIL</option>
+                                                                <option value="18">CDIL DEMO</option>
+                                                                <option value="2">Company Another</option>
+                                                                <option value="1">Good as Gold Training</option>
+                                                                <option value="6">HR Search Inc</option>
+                                                                <option value="3">Microsoft</option>
+                                                                <option value="4">Oracle</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Status 
+                                                            <select class="form-control select-small" onchange="setAction(&quot;2&quot;);this.form.submit();" name="status">
+                                                                <option value="ALL">ALL</option>
+                                                                <option value="ACTIVE">ACTIVE</option>
+                                                                <option value="INACTIVE">INACTIVE</option>
+                                                                <option value="RESET">RESET</option>
+                                                                <option value="NEW">NEW</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Created</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Updated</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-08-21</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="icons col-xs-5">Actions</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">
+                                                            <a href="http://salesperformanceindicator.com/users/destroy/2" onclick="return  confirm('Are you sure you want to disable Owner, Company?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/2" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/support/2" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr><td class="td-separator">&nbsp;</td></tr>
+                                        <tr>
+                                            <td>
+                                                <table class="table-small-bordered">
+                                                    <tr>
+                                                        <td class="col-xs-5">First Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/3">Office</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Last Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/3">Manager</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Email</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">manager@manager.com</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Phone Number</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">User Group</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Manager</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Company Name
+                                                            <select class="form-control select-small" onchange="setAction(&quot;1&quot;);" name="companies">
+                                                                <option value="default" selected="selected">All Companies</option>
+                                                                <option value="5">Apple</option><option value="16">CDIL</option>
+                                                                <option value="18">CDIL DEMO</option>
+                                                                <option value="2">Company Another</option>
+                                                                <option value="1">Good as Gold Training</option>
+                                                                <option value="6">HR Search Inc</option>
+                                                                <option value="3">Microsoft</option>
+                                                                <option value="4">Oracle</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Status 
+                                                            <select class="form-control select-small" onchange="setAction(&quot;2&quot;);this.form.submit();" name="status">
+                                                                <option value="ALL">ALL</option>
+                                                                <option value="ACTIVE">ACTIVE</option>
+                                                                <option value="INACTIVE">INACTIVE</option>
+                                                                <option value="RESET">RESET</option>
+                                                                <option value="NEW">NEW</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Created</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Updated</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-08-21</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="icons col-xs-5">Actions</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">
+                                                            <a href="http://salesperformanceindicator.com/users/destroy/3" onclick="return  confirm('Are you sure you want to disable Manager, Office?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/3" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/support/3" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr><td class="td-separator">&nbsp;</td></tr>
+                                        <tr>
+                                            <td>
+                                                <table class="table-small-bordered">
+                                                    <tr>
+                                                        <td class="col-xs-5">First Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/4">Member</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Last Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/4">Test</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Email</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">rec2@rec2.com</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Phone Number</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">User Group</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Company Name
+                                                            <select class="form-control select-small" onchange="setAction(&quot;1&quot;);" name="companies">
+                                                                <option value="default" selected="selected">All Companies</option>
+                                                                <option value="5">Apple</option><option value="16">CDIL</option>
+                                                                <option value="18">CDIL DEMO</option>
+                                                                <option value="2">Company Another</option>
+                                                                <option value="1">Good as Gold Training</option>
+                                                                <option value="6">HR Search Inc</option>
+                                                                <option value="3">Microsoft</option>
+                                                                <option value="4">Oracle</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Status 
+                                                            <select class="form-control select-small" onchange="setAction(&quot;2&quot;);this.form.submit();" name="status">
+                                                                <option value="ALL">ALL</option>
+                                                                <option value="ACTIVE">ACTIVE</option>
+                                                                <option value="INACTIVE">INACTIVE</option>
+                                                                <option value="RESET">RESET</option>
+                                                                <option value="NEW">NEW</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">RESET</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Created</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Updated</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="icons col-xs-5">Actions</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">
+                                                            <a href="http://salesperformanceindicator.com/users/destroy/4" onclick="return  confirm('Are you sure you want to disable Test, Member?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/4" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/support/4" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr><td class="td-separator">&nbsp;</td></tr>
+                                        <tr>
+                                            <td>
+                                                <table class="table-small-bordered">
+                                                    <tr>
+                                                        <td class="col-xs-5">First Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/5">Member1</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Last Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/5">Test</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Email</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">rec2@rec3.com</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Phone Number</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">User Group</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Company Name
+                                                            <select class="form-control select-small" onchange="setAction(&quot;1&quot;);" name="companies">
+                                                                <option value="default" selected="selected">All Companies</option>
+                                                                <option value="5">Apple</option><option value="16">CDIL</option>
+                                                                <option value="18">CDIL DEMO</option>
+                                                                <option value="2">Company Another</option>
+                                                                <option value="1">Good as Gold Training</option>
+                                                                <option value="6">HR Search Inc</option>
+                                                                <option value="3">Microsoft</option>
+                                                                <option value="4">Oracle</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">HR Search Inc</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Status 
+                                                            <select class="form-control select-small" onchange="setAction(&quot;2&quot;);this.form.submit();" name="status">
+                                                                <option value="ALL">ALL</option>
+                                                                <option value="ACTIVE">ACTIVE</option>
+                                                                <option value="INACTIVE">INACTIVE</option>
+                                                                <option value="RESET">RESET</option>
+                                                                <option value="NEW">NEW</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Created</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Updated</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-07-08</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="icons col-xs-5">Actions</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">
+                                                            <a href="http://salesperformanceindicator.com/users/destroy/5" onclick="return  confirm('Are you sure you want to disable Test, Member1?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/5" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/support/5" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr><td class="td-separator">&nbsp;</td></tr>
+                                        <tr>
+                                            <td>
+                                                <table class="table-small-bordered">
+                                                    <tr>
+                                                        <td class="col-xs-5">First Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/6">Member2</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Last Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/6">Testx</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Email</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">superadmin@ahorasi.com</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Phone Number</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">User Group</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Company Name
+                                                            <select class="form-control select-small" onchange="setAction(&quot;1&quot;);" name="companies">
+                                                                <option value="default" selected="selected">All Companies</option>
+                                                                <option value="5">Apple</option><option value="16">CDIL</option>
+                                                                <option value="18">CDIL DEMO</option>
+                                                                <option value="2">Company Another</option>
+                                                                <option value="1">Good as Gold Training</option>
+                                                                <option value="6">HR Search Inc</option>
+                                                                <option value="3">Microsoft</option>
+                                                                <option value="4">Oracle</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Status 
+                                                            <select class="form-control select-small" onchange="setAction(&quot;2&quot;);this.form.submit();" name="status">
+                                                                <option value="ALL">ALL</option>
+                                                                <option value="ACTIVE">ACTIVE</option>
+                                                                <option value="INACTIVE">INACTIVE</option>
+                                                                <option value="RESET">RESET</option>
+                                                                <option value="NEW">NEW</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Created</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Updated</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-08-11</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="icons col-xs-5">Actions</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">
+                                                            <a href="http://salesperformanceindicator.com/users/destroy/6" onclick="return  confirm('Are you sure you want to disable Testx, Member2?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/6" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/support/6" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr><td class="td-separator">&nbsp;</td></tr>
+                                        <tr>
+                                            <td>
+                                                <table class="table-small-bordered">
+                                                    <tr>
+                                                        <td class="col-xs-5">First Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/7">Member3</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Last Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/7">Test</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Email</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">rec2@rec5.com</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Phone Number</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">User Group</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Company Name
+                                                            <select class="form-control select-small" onchange="setAction(&quot;1&quot;);" name="companies">
+                                                                <option value="default" selected="selected">All Companies</option>
+                                                                <option value="5">Apple</option><option value="16">CDIL</option>
+                                                                <option value="18">CDIL DEMO</option>
+                                                                <option value="2">Company Another</option>
+                                                                <option value="1">Good as Gold Training</option>
+                                                                <option value="6">HR Search Inc</option>
+                                                                <option value="3">Microsoft</option>
+                                                                <option value="4">Oracle</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Status 
+                                                            <select class="form-control select-small" onchange="setAction(&quot;2&quot;);this.form.submit();" name="status">
+                                                                <option value="ALL">ALL</option>
+                                                                <option value="ACTIVE">ACTIVE</option>
+                                                                <option value="INACTIVE">INACTIVE</option>
+                                                                <option value="RESET">RESET</option>
+                                                                <option value="NEW">NEW</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Created</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Updated</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="icons col-xs-5">Actions</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">
+                                                            <a href="http://salesperformanceindicator.com/users/destroy/7" onclick="return  confirm('Are you sure you want to disable Test, Member3?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/7" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/support/7" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr><td class="td-separator">&nbsp;</td></tr>
+                                        <tr>
+                                            <td>
+                                                <table class="table-small-bordered">
+                                                    <tr>
+                                                        <td class="col-xs-5">First Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/8">Member4</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Last Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/8">Test</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Email</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">rec2@rec6.com</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Phone Number</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">User Group</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Company Name
+                                                            <select class="form-control select-small" onchange="setAction(&quot;1&quot;);" name="companies">
+                                                                <option value="default" selected="selected">All Companies</option>
+                                                                <option value="5">Apple</option><option value="16">CDIL</option>
+                                                                <option value="18">CDIL DEMO</option>
+                                                                <option value="2">Company Another</option>
+                                                                <option value="1">Good as Gold Training</option>
+                                                                <option value="6">HR Search Inc</option>
+                                                                <option value="3">Microsoft</option>
+                                                                <option value="4">Oracle</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Status 
+                                                            <select class="form-control select-small" onchange="setAction(&quot;2&quot;);this.form.submit();" name="status">
+                                                                <option value="ALL">ALL</option>
+                                                                <option value="ACTIVE">ACTIVE</option>
+                                                                <option value="INACTIVE">INACTIVE</option>
+                                                                <option value="RESET">RESET</option>
+                                                                <option value="NEW">NEW</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Created</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Updated</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-07-27</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="icons col-xs-5">Actions</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">
+                                                            <a href="http://salesperformanceindicator.com/users/destroy/8" onclick="return  confirm('Are you sure you want to disable Test, Member4?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/8" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/support/8" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr><td class="td-separator">&nbsp;</td></tr>
+                                        <tr>
+                                            <td>
+                                                <table class="table-small-bordered">
+                                                    <tr>
+                                                        <td class="col-xs-5">First Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/9">Member5</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Last Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/9">Testa</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Email</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">rec2@rec7.com</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Phone Number</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">User Group</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Company Name
+                                                            <select class="form-control select-small" onchange="setAction(&quot;1&quot;);" name="companies">
+                                                                <option value="default" selected="selected">All Companies</option>
+                                                                <option value="5">Apple</option><option value="16">CDIL</option>
+                                                                <option value="18">CDIL DEMO</option>
+                                                                <option value="2">Company Another</option>
+                                                                <option value="1">Good as Gold Training</option>
+                                                                <option value="6">HR Search Inc</option>
+                                                                <option value="3">Microsoft</option>
+                                                                <option value="4">Oracle</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Status 
+                                                            <select class="form-control select-small" onchange="setAction(&quot;2&quot;);this.form.submit();" name="status">
+                                                                <option value="ALL">ALL</option>
+                                                                <option value="ACTIVE">ACTIVE</option>
+                                                                <option value="INACTIVE">INACTIVE</option>
+                                                                <option value="RESET">RESET</option>
+                                                                <option value="NEW">NEW</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Created</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Updated</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-07-12</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="icons col-xs-5">Actions</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">
+                                                            <a href="http://salesperformanceindicator.com/users/destroy/9" onclick="return  confirm('Are you sure you want to disable Testa, Member5?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/9" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/support/9" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr><td class="td-separator">&nbsp;</td></tr>
+                                        <tr>
+                                            <td>
+                                                <table class="table-small-bordered">
+                                                    <tr>
+                                                        <td class="col-xs-5">First Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/10">Member6</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Last Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/10">Test otra pag</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Email</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">rec2@rec8.com</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Phone Number</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">User Group</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Company Name
+                                                            <select class="form-control select-small" onchange="setAction(&quot;1&quot;);" name="companies">
+                                                                <option value="default" selected="selected">All Companies</option>
+                                                                <option value="5">Apple</option><option value="16">CDIL</option>
+                                                                <option value="18">CDIL DEMO</option>
+                                                                <option value="2">Company Another</option>
+                                                                <option value="1">Good as Gold Training</option>
+                                                                <option value="6">HR Search Inc</option>
+                                                                <option value="3">Microsoft</option>
+                                                                <option value="4">Oracle</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Status 
+                                                            <select class="form-control select-small" onchange="setAction(&quot;2&quot;);this.form.submit();" name="status">
+                                                                <option value="ALL">ALL</option>
+                                                                <option value="ACTIVE">ACTIVE</option>
+                                                                <option value="INACTIVE">INACTIVE</option>
+                                                                <option value="RESET">RESET</option>
+                                                                <option value="NEW">NEW</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Created</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Updated</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-07-19</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="icons col-xs-5">Actions</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">
+                                                            <a href="http://salesperformanceindicator.com/users/destroy/10" onclick="return  confirm('Are you sure you want to disable Test otra pag, Member6?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/10" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/support/10" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr><td class="td-separator">&nbsp;</td></tr>
+                                        <tr>
+                                            <td>
+                                                <table class="table-small-bordered">
+                                                    <tr>
+                                                        <td class="col-xs-5">First Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/11">Member7</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Last Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/11">Test</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Email</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">rec2@rec9.com</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Phone Number</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">User Group</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Company Name
+                                                            <select class="form-control select-small" onchange="setAction(&quot;1&quot;);" name="companies">
+                                                                <option value="default" selected="selected">All Companies</option>
+                                                                <option value="5">Apple</option><option value="16">CDIL</option>
+                                                                <option value="18">CDIL DEMO</option>
+                                                                <option value="2">Company Another</option>
+                                                                <option value="1">Good as Gold Training</option>
+                                                                <option value="6">HR Search Inc</option>
+                                                                <option value="3">Microsoft</option>
+                                                                <option value="4">Oracle</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Status 
+                                                            <select class="form-control select-small" onchange="setAction(&quot;2&quot;);this.form.submit();" name="status">
+                                                                <option value="ALL">ALL</option>
+                                                                <option value="ACTIVE">ACTIVE</option>
+                                                                <option value="INACTIVE">INACTIVE</option>
+                                                                <option value="RESET">RESET</option>
+                                                                <option value="NEW">NEW</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Created</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Updated</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-07-12</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="icons col-xs-5">Actions</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">
+                                                            <a href="http://salesperformanceindicator.com/users/destroy/11" onclick="return  confirm('Are you sure you want to disable Test, Member7?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/11" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/support/11" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr><td class="td-separator">&nbsp;</td></tr>
+                                        <tr>
+                                            <td>
+                                                <table class="table-small-bordered">
+                                                    <tr>
+                                                        <td class="col-xs-5">First Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/12">Member8</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Last Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/12">Test</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Email</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">rec2@rec10.com</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Phone Number</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">User Group</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Company Name
+                                                            <select class="form-control select-small" onchange="setAction(&quot;1&quot;);" name="companies">
+                                                                <option value="default" selected="selected">All Companies</option>
+                                                                <option value="5">Apple</option><option value="16">CDIL</option>
+                                                                <option value="18">CDIL DEMO</option>
+                                                                <option value="2">Company Another</option>
+                                                                <option value="1">Good as Gold Training</option>
+                                                                <option value="6">HR Search Inc</option>
+                                                                <option value="3">Microsoft</option>
+                                                                <option value="4">Oracle</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Good as Gold Training</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Status 
+                                                            <select class="form-control select-small" onchange="setAction(&quot;2&quot;);this.form.submit();" name="status">
+                                                                <option value="ALL">ALL</option>
+                                                                <option value="ACTIVE">ACTIVE</option>
+                                                                <option value="INACTIVE">INACTIVE</option>
+                                                                <option value="RESET">RESET</option>
+                                                                <option value="NEW">NEW</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Created</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Updated</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="icons col-xs-5">Actions</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">
+                                                            <a href="http://salesperformanceindicator.com/users/destroy/12" onclick="return  confirm('Are you sure you want to disable Test, Member8?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/12" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/support/12" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr><td class="td-separator">&nbsp;</td></tr>
+                                        <tr>
+                                            <td>
+                                                <table class="table-small-bordered">
+                                                    <tr>
+                                                        <td class="col-xs-5">First Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/13">Member9</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Last Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/13">Test</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Email</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">rec2@rec11.com</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Phone Number</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">User Group</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Company Name
+                                                            <select class="form-control select-small" onchange="setAction(&quot;1&quot;);" name="companies">
+                                                                <option value="default" selected="selected">All Companies</option>
+                                                                <option value="5">Apple</option><option value="16">CDIL</option>
+                                                                <option value="18">CDIL DEMO</option>
+                                                                <option value="2">Company Another</option>
+                                                                <option value="1">Good as Gold Training</option>
+                                                                <option value="6">HR Search Inc</option>
+                                                                <option value="3">Microsoft</option>
+                                                                <option value="4">Oracle</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Company Another</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Status 
+                                                            <select class="form-control select-small" onchange="setAction(&quot;2&quot;);this.form.submit();" name="status">
+                                                                <option value="ALL">ALL</option>
+                                                                <option value="ACTIVE">ACTIVE</option>
+                                                                <option value="INACTIVE">INACTIVE</option>
+                                                                <option value="RESET">RESET</option>
+                                                                <option value="NEW">NEW</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Created</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Updated</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-08-11</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="icons col-xs-5">Actions</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">
+                                                            <a href="http://salesperformanceindicator.com/users/destroy/13" onclick="return  confirm('Are you sure you want to disable Test, Member9?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/13" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/support/13" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr><td class="td-separator">&nbsp;</td></tr>
+                                        <tr>
+                                            <td>
+                                                <table class="table-small-bordered">
+                                                    <tr>
+                                                        <td class="col-xs-5">First Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/14">Member10</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Last Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/14">Test</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Email</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">rec2@rec12.com</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Phone Number</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">User Group</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">SuperAdmin</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Company Name
+                                                            <select class="form-control select-small" onchange="setAction(&quot;1&quot;);" name="companies">
+                                                                <option value="default" selected="selected">All Companies</option>
+                                                                <option value="5">Apple</option><option value="16">CDIL</option>
+                                                                <option value="18">CDIL DEMO</option>
+                                                                <option value="2">Company Another</option>
+                                                                <option value="1">Good as Gold Training</option>
+                                                                <option value="6">HR Search Inc</option>
+                                                                <option value="3">Microsoft</option>
+                                                                <option value="4">Oracle</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Company Another</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Status 
+                                                            <select class="form-control select-small" onchange="setAction(&quot;2&quot;);this.form.submit();" name="status">
+                                                                <option value="ALL">ALL</option>
+                                                                <option value="ACTIVE">ACTIVE</option>
+                                                                <option value="INACTIVE">INACTIVE</option>
+                                                                <option value="RESET">RESET</option>
+                                                                <option value="NEW">NEW</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Created</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Updated</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="icons col-xs-5">Actions</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">
+                                                            <a href="http://salesperformanceindicator.com/users/destroy/14" onclick="return  confirm('Are you sure you want to disable Test, Member10?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/14" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/support/14" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr><td class="td-separator">&nbsp;</td></tr>
+                                        <tr>
+                                            <td>
+                                                <table class="table-small-bordered">
+                                                    <tr>
+                                                        <td class="col-xs-5">First Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/15">Member11</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Last Name</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"><a href="http://salesperformanceindicator.com/users/15">Test</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Email</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">rec2@rec13.com</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Phone Number</td>
+                                                        <td class="col-xs-7 text-right td-vcenter"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">User Group</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Member</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Company Name
+                                                            <select class="form-control select-small" onchange="setAction(&quot;1&quot;);" name="companies">
+                                                                <option value="default" selected="selected">All Companies</option>
+                                                                <option value="5">Apple</option><option value="16">CDIL</option>
+                                                                <option value="18">CDIL DEMO</option>
+                                                                <option value="2">Company Another</option>
+                                                                <option value="1">Good as Gold Training</option>
+                                                                <option value="6">HR Search Inc</option>
+                                                                <option value="3">Microsoft</option>
+                                                                <option value="4">Oracle</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">Company Another</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Status 
+                                                            <select class="form-control select-small" onchange="setAction(&quot;2&quot;);this.form.submit();" name="status">
+                                                                <option value="ALL">ALL</option>
+                                                                <option value="ACTIVE">ACTIVE</option>
+                                                                <option value="INACTIVE">INACTIVE</option>
+                                                                <option value="RESET">RESET</option>
+                                                                <option value="NEW">NEW</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-xs-7 text-right td-vcenter">ACTIVE</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Created</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-05-04</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-5">Date Updated</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">2015-07-06</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="icons col-xs-5">Actions</td>
+                                                        <td class="col-xs-7 text-right td-vcenter">
+                                                            <a href="http://salesperformanceindicator.com/users/destroy/15" onclick="return  confirm('Are you sure you want to disable Test, Member11?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/15" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                            <a href="http://salesperformanceindicator.com/users/support/15" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <table class="table hidden-xs">
+                                    <thead>
+                                        <tr>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                            <th>Phone Number</th>
+                                            <th>User Group</th>
+                                            <th>Company Name
+                                                <select class="form-control" onchange="setAction(&quot;1&quot;);" name="companies">
+                                                    <option value="default" selected="selected">All Companies</option>
+                                                    <option value="5">Apple</option><option value="16">CDIL</option>
+                                                    <option value="18">CDIL DEMO</option>
+                                                    <option value="2">Company Another</option>
+                                                    <option value="1">Good as Gold Training</option>
+                                                    <option value="6">HR Search Inc</option>
+                                                    <option value="3">Microsoft</option>
+                                                    <option value="4">Oracle</option>
+                                                </select>
+                                            </th>
+                                            <th>Status 
+                                                <select class="form-control" onchange="setAction(&quot;2&quot;);this.form.submit();" name="status">
+                                                    <option value="ALL">ALL</option>
+                                                    <option value="ACTIVE">ACTIVE</option>
+                                                    <option value="INACTIVE">INACTIVE</option>
+                                                    <option value="RESET">RESET</option>
+                                                    <option value="NEW">NEW</option>
+                                                </select>
+                                            </th>
+                                            <th>Date Created</th>
+                                            <th>Date Updated</th>
+                                            <th class="icons">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="http://salesperformanceindicator.com/users/1">System</a></td>
+                                            <td><a href="http://salesperformanceindicator.com/users/1">Admin</a></td>
+                                            <td>system@system.com</td>
+                                            <td></td>
+                                            <td>SuperAdmin</td>
+                                            <td>Good as Gold Training</td>
+                                            <td>ACTIVE</td>
+                                            <td>2015-05-04</td>
+                                            <td>2015-08-21</td>
+                                            <td>
+                                                <a href="http://salesperformanceindicator.com/users/destroy/1" onclick="return  confirm('Are you sure you want to disable Admin, System?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/1" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/support/1" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="http://salesperformanceindicator.com/users/2">Company</a></td>
+                                            <td><a href="http://salesperformanceindicator.com/users/2">Owner</a></td>
+                                            <td>adm@adm.com</td>
+                                            <td></td>
+                                            <td>Owner</td>
+                                            <td>Good as Gold Training</td>
+                                            <td>ACTIVE</td>
+                                            <td>2015-05-04</td>
+                                            <td>2015-08-21</td>
+                                            <td>
+                                                <a href="http://salesperformanceindicator.com/users/destroy/2" onclick="return  confirm('Are you sure you want to disable Owner, Company?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/2" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/support/2" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="http://salesperformanceindicator.com/users/3">Office</a></td>
+                                            <td><a href="http://salesperformanceindicator.com/users/3">Manager</a></td>
+                                            <td>manager@manager.com</td>
+                                            <td></td>
+                                            <td>Manager</td>
+                                            <td>Good as Gold Training</td>
+                                            <td>ACTIVE</td>
+                                            <td>2015-05-04</td>
+                                            <td>2015-08-21</td>
+                                            <td>
+                                                <a href="http://salesperformanceindicator.com/users/destroy/3" onclick="return  confirm('Are you sure you want to disable Manager, Office?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/3" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/support/3" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="http://salesperformanceindicator.com/users/4">Member</a></td>
+                                            <td><a href="http://salesperformanceindicator.com/users/4">Test</a></td>
+                                            <td>rec2@rec2.com</td>
+                                            <td></td>
+                                            <td>Member</td>
+                                            <td>Good as Gold Training</td>
+                                            <td>RESET</td>
+                                            <td>2015-05-04</td>
+                                            <td>2015-07-06</td>
+                                            <td>
+                                                <a href="http://salesperformanceindicator.com/users/destroy/4" onclick="return  confirm('Are you sure you want to disable Test, Member?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/4" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/support/4" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="http://salesperformanceindicator.com/users/5">Member1</a></td>
+                                            <td><a href="http://salesperformanceindicator.com/users/5">Test</a></td>
+                                            <td>rec2@rec3.com</td>
+                                            <td></td>
+                                            <td>Member</td>
+                                            <td>HR Search Inc</td>
+                                            <td>ACTIVE</td>
+                                            <td>2015-05-04</td>
+                                            <td>2015-07-08</td>
+                                            <td>
+                                                <a href="http://salesperformanceindicator.com/users/destroy/5" onclick="return  confirm('Are you sure you want to disable Test, Member1?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/5" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/support/5" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="http://salesperformanceindicator.com/users/6">Member2</a></td>
+                                            <td><a href="http://salesperformanceindicator.com/users/6">Testx</a></td>
+                                            <td>superadmin@ahorasi.com</td>
+                                            <td></td>
+                                            <td>Member</td>
+                                            <td>Good as Gold Training</td>
+                                            <td>ACTIVE</td>
+                                            <td>2015-05-04</td>
+                                            <td>2015-08-11</td>
+                                            <td>
+                                                <a href="http://salesperformanceindicator.com/users/destroy/6" onclick="return  confirm('Are you sure you want to disable Testx, Member2?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/6" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/support/6" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="http://salesperformanceindicator.com/users/7">Member3</a></td>
+                                            <td><a href="http://salesperformanceindicator.com/users/7">Test</a></td>
+                                            <td>rec2@rec5.com</td>
+                                            <td></td>
+                                            <td>Member</td>
+                                            <td>Good as Gold Training</td>
+                                            <td>ACTIVE</td>
+                                            <td>2015-05-04</td>
+                                            <td>2015-07-06</td>
+                                            <td>
+                                                <a href="http://salesperformanceindicator.com/users/destroy/7" onclick="return  confirm('Are you sure you want to disable Test, Member3?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/7" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/support/7" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="http://salesperformanceindicator.com/users/8">Member4</a></td>
+                                            <td><a href="http://salesperformanceindicator.com/users/8">Test</a></td>
+                                            <td>rec2@rec6.com</td>
+                                            <td></td>
+                                            <td>Member</td>
+                                            <td>Good as Gold Training</td>
+                                            <td>ACTIVE</td>
+                                            <td>2015-05-04</td>
+                                            <td>2015-07-27</td>
+                                            <td>
+                                                <a href="http://salesperformanceindicator.com/users/destroy/8" onclick="return  confirm('Are you sure you want to disable Test, Member4?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/8" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/support/8" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="http://salesperformanceindicator.com/users/9">Member5</a></td>
+                                            <td><a href="http://salesperformanceindicator.com/users/9">Testa</a></td>
+                                            <td>rec2@rec7.com</td>
+                                            <td></td>
+                                            <td>Member</td>
+                                            <td>Good as Gold Training</td>
+                                            <td>ACTIVE</td>
+                                            <td>2015-05-04</td>
+                                            <td>2015-07-12</td>
+                                            <td>
+                                                <a href="http://salesperformanceindicator.com/users/destroy/9" onclick="return  confirm('Are you sure you want to disable Testa, Member5?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/9" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/support/9" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="http://salesperformanceindicator.com/users/10">Member6</a></td>
+                                            <td><a href="http://salesperformanceindicator.com/users/10">Test otra pag</a></td>
+                                            <td>rec2@rec8.com</td>
+                                            <td></td>
+                                            <td>Member</td>
+                                            <td>Good as Gold Training</td>
+                                            <td>ACTIVE</td>
+                                            <td>2015-05-04</td>
+                                            <td>2015-07-19</td>
+                                            <td>
+                                                <a href="http://salesperformanceindicator.com/users/destroy/10" onclick="return  confirm('Are you sure you want to disable Test otra pag, Member6?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/10" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/support/10" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="http://salesperformanceindicator.com/users/11">Member7</a></td>
+                                            <td><a href="http://salesperformanceindicator.com/users/11">Test</a></td>
+                                            <td>rec2@rec9.com</td>
+                                            <td></td>
+                                            <td>Member</td>
+                                            <td>Good as Gold Training</td>
+                                            <td>ACTIVE</td>
+                                            <td>2015-05-04</td>
+                                            <td>2015-07-12</td>
+                                            <td>
+                                                <a href="http://salesperformanceindicator.com/users/destroy/11" onclick="return  confirm('Are you sure you want to disable Test, Member7?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/11" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/support/11" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="http://salesperformanceindicator.com/users/12">Member8</a></td>
+                                            <td><a href="http://salesperformanceindicator.com/users/12">Test</a></td>
+                                            <td>rec2@rec10.com</td>
+                                            <td></td>
+                                            <td>Member</td>
+                                            <td>Good as Gold Training</td>
+                                            <td>ACTIVE</td>
+                                            <td>2015-05-04</td>
+                                            <td>2015-07-06</td>
+                                            <td>
+                                                <a href="http://salesperformanceindicator.com/users/destroy/12" onclick="return  confirm('Are you sure you want to disable Test, Member8?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/12" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/support/12" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="http://salesperformanceindicator.com/users/13">Member9</a></td>
+                                            <td><a href="http://salesperformanceindicator.com/users/13">Test</a></td>
+                                            <td>rec2@rec11.com</td>
+                                            <td></td>
+                                            <td>Member</td>
+                                            <td>Company Another</td>
+                                            <td>ACTIVE</td>
+                                            <td>2015-05-04</td>
+                                            <td>2015-08-11</td>
+                                            <td>
+                                                <a href="http://salesperformanceindicator.com/users/destroy/13" onclick="return  confirm('Are you sure you want to disable Test, Member9?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/13" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/support/13" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="http://salesperformanceindicator.com/users/14">Member10</a></td>
+                                            <td><a href="http://salesperformanceindicator.com/users/14">Test</a></td>
+                                            <td>rec2@rec12.com</td>
+                                            <td></td>
+                                            <td>SuperAdmin</td>
+                                            <td>Company Another</td>
+                                            <td>ACTIVE</td>
+                                            <td>2015-05-04</td>
+                                            <td>2015-07-06</td>
+                                            <td>
+                                                <a href="http://salesperformanceindicator.com/users/destroy/14" onclick="return  confirm('Are you sure you want to disable Test, Member10?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/14" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/support/14" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="http://salesperformanceindicator.com/users/15">Member11</a></td>
+                                            <td><a href="http://salesperformanceindicator.com/users/15">Test</a></td>
+                                            <td>rec2@rec13.com</td>
+                                            <td></td>
+                                            <td>Member</td>
+                                            <td>Company Another</td>
+                                            <td>ACTIVE</td>
+                                            <td>2015-05-04</td>
+                                            <td>2015-07-06</td>
+                                            <td>
+                                                <a href="http://salesperformanceindicator.com/users/destroy/15" onclick="return  confirm('Are you sure you want to disable Test, Member11?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/15" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                                <a href="http://salesperformanceindicator.com/users/support/15" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8 text-center">
+                                    <ul class="pagination">
+                                        <li class="disabled"><span>&laquo;</span></li>
+                                        <li class="active"><span>1</span></li>
+                                        <li><a href="http://salesperformanceindicator.com/users/?page=2">2</a></li>
+                                        <li><a href="http://salesperformanceindicator.com/users/?page=3">3</a></li>
+                                        <li><a href="http://salesperformanceindicator.com/users/?page=4">4</a></li>
+                                        <li><a href="http://salesperformanceindicator.com/users/?page=5">5</a></li>
+                                        <li><a href="http://salesperformanceindicator.com/users/?page=2" rel="next">&raquo;</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div class="col-md-11 "><a href="http://salesperformanceindicator.com/users/create" class="btn btn-primary">Create User</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center back-to-top">
+                        <a class="btn btn-default" href="#top">Back to top</a>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <ul class="list-unstyled">
+                            <li>
+                                <div class="footer-copyright">
+                                    <div class="container text-center">
+                                        Sales Performance Indicator | &copy; 2014-2015 Good as Gold Training, All rights reserved.<br />
+                                        <a class="grey-text text-lighten-4 right" href="mailto:support@staffingandrecruiting.com">support@staffingandrecruiting.com | 219 663 9609</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

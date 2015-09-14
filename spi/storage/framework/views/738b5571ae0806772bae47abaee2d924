@@ -1,0 +1,235 @@
+<?php $__env->startSection('content'); ?>
+
+<div class="page-header" id="banner">
+    <div class="row">
+        <div class="col-lg-8 col-md-7 col-sm-6">
+            <h2>Reports</h2>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function setRequest(arg)
+    {
+        $("#request").val(arg);
+    }
+
+
+</script>
+<div class="row">
+
+    <div class="col-md-10 col-md-offset-1">
+
+        <?php if( !empty($message) ): ?>
+        <div class="alert alert-dismissible <?php echo e($isErr ? 'alert-danger' : 'alert-success'); ?>">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <?php echo $message; ?>
+
+        </div>
+        <?php endif; ?>
+
+        <ul class="nav nav-tabs">
+            <li class="<?php echo e(( $activeTab == 'sales' ) ? 'active' : ''); ?>">
+                <a href="#users" data-toggle="tab">User Reports</a>
+            </li>
+            <li class="<?php echo e(( $activeTab == 'other' ) ? 'active' : ''); ?>">
+                <a href="#other" data-toggle="tab">Other Reports</a>
+            </li>
+        </ul>
+        <br/>
+        <div id="myTabContent" class="tab-content">
+
+
+
+            <div class="tab-pane fade <?php echo e(( $activeTab == 'users' ) ? 'active in' : ''); ?>" id="users">
+                <div class="bs-component">
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading"><h3>Filters</h3></div>
+                        <div class="panel-body">
+                            <div class="col-md-10 col-md-offset-1">
+                                <form id="form_search" class="form-horizontal" role="form" method="POST" action="<?php echo e(url('/reports/search')); ?>">
+                                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" />
+                                    <input type="hidden" id="request" name="request" value="" />
+                                    <fieldset>
+
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <div class="panel-body">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <h5>Users per organization</h5>
+                                                                    <?php echo Form::radio('user_filter','1',true,['class' => 'radio']); ?>
+
+                                                                    <?php echo Form::select('companies',array('default' => 'All Companies') + \App\Company::lists('name', 'id') , $companies, ['class' => 'form-control','style'=>'width: 300px'] ); ?>
+
+                                                                    <hr>
+                                                                    <?php echo Form::select('status', array('ALL' => 'ALL','ACTIVE' =>'ACTIVE','INACTIVE' =>'INACTIVE'),'ALL',['class' => 'form-control','style'=>'width: 300px']);; ?>
+
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <h5>Users by Activation/Cancellation Date</h5>
+                                                                    <?php echo Form::radio('user_filter','2',false,['class' => 'radio']); ?>
+
+                                                                    <?php echo Form::select('status_date', array('ALL' => 'ALL','ACTIVATION' =>'ACTIVATION','CANCELLATION' =>'CANCELLATION'),$status,['class' => 'form-control','style'=>'width: 300px']); ?>
+
+                                                                    <hr>
+                                                                    <div class='input-group date' id='datetimepicker1' style="width: 280px;">
+                                                                        <input type='text' class="form-control" style="width: 260px;" name="from_date" id="from_date" placeholder="FROM DATE"  />
+                                                                        <span class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-calendar" ></span>
+                                                                        </span>
+                                                                    </div>
+
+                                                                    <div class='input-group date' id='datetimepicker2' style="width: 280px;">
+                                                                        <input type='text' class="form-control" style="width: 260px;" name="to_date" id="to_date" placeholder="TO DATE" />
+                                                                        <span class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-calendar" ></span>
+                                                                        </span>
+                                                                    </div>
+
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <script>
+                                                        document.addEventListener("DOMContentLoaded", function(event) { 
+                                                            $('#datetimepicker1').datetimepicker({
+                                                                format: 'YYYY-MM-DD'
+                                                            });
+                                                                                                        
+                                                            $('#datetimepicker2').datetimepicker({
+                                                                format: 'YYYY-MM-DD'
+                                                            });
+                                                            $('#from_date').keypress(function(event) {event.preventDefault();});
+                                                            $('#to_date').keypress(function(event) {event.preventDefault();});
+                                                            function validateDates()
+                                                            {
+                                                                var from_date = $.trim($('#from_date').val());
+                                                                var to_date = $.trim($('#to_date').val());
+                                                                if (from_date  === '') {
+                                                                    alert('FROM DATE is empty.');
+                                                                    return false;
+                                                                }
+
+                                                                if (to_date  === '') {
+                                                                    alert('TO DATE is empty.');
+                                                                    return false;
+                                                                }
+                                                                return true;
+                                                            }
+                                                            $('#form_search').submit(function () {
+                                                                if($('input:radio[name=user_filter]:checked').val()==2){
+                                                                    if($('select[name=status_date]').val()=="ACTIVATION"){
+                                                                        return validateDates();                                        
+                                                                    }
+                                                                    if($('select[name=status_date]').val()=="CANCELLATION"){
+                                                                        return validateDates();                                        
+                                                                    }   
+                                                                    if($('select[name=status_date]').val()=="ALL"){
+                                                                        return true;                                        
+                                                                    } 
+                                                                }
+                                                                                                            
+                                                            });
+                                                        });
+                                                    </script>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary" value="Search" onclick="setRequest('search')">Search</button>
+                                                <button type="submit" class="btn btn-default" value="Show_All"  onclick="setRequest('showAll')">Show All</button>
+                                            </span>
+                                        </div>
+
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">
+                            <h3>Users</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <!-- Table -->
+                            <form name="prueba" id="prueba" class="form-horizontal" role="form" method="POST" action="<?php echo e(url('/reports/search')); ?>">
+                                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" />
+                                <input type="hidden" id="request" name="request" value="" />
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                            <th>User Group</th>
+                                            <th>Company Name</th>
+                                            <th>Status</th>
+                                            <th>Date Created</th>
+                                            <th>Date Updated</th>
+                                            <th>Date Actived</th>
+                                            <th>Date Cancelled</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($users as $user): ?>
+                                        <tr>
+                                            <td><?php echo e($user->first_name); ?></td>
+                                            <td><?php echo e($user->last_name); ?></td>
+                                            <td><?php echo e($user->getEmailDisp()); ?></td>
+                                            <td><?php echo e($user->role->name); ?></td>
+                                            <td><?php echo e($user->company->name); ?></td>
+                                            <td><?php echo e($user->status); ?></td>
+                                            <td><?php echo e($user->created_at->format('Y-m-d')); ?></td>
+                                            <td><?php echo e($user->updated_at->format('Y-m-d')); ?></td>
+                                            <td><?php echo e(date('Y-m-d',strtotime($user->active_date))); ?></td>
+                                            <td><?php echo e(date('Y-m-d',strtotime($user->inactive_date))); ?></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+
+                                    </tbody>
+
+                                </table>
+                            </form>
+                            <div class="col-md-2 col-md-offset-5"><?php echo $users->render(); ?></div>
+                            <div class="col-md-11 "><button type="submit" class="btn btn-primary" value="Search">Exportar</button></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade <?php echo e(( $activeTab == 'other' ) ? 'active in' : ''); ?>" id="other">
+                <div class="row ">
+                    <?php foreach( $saleTypes as $saleType ): ?>
+                    <div class="col-lg-4">
+                        <div class="bs-component">
+                            <div class="panel panel-default">
+                                <div class="panel-body"  style="height: 800px;">
+                                    <div class="col-lg-3">
+                                        <h1>Another Thing</h1>
+                                        <a href="<?php echo e(url('/reports/findByStatus')); ?>" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

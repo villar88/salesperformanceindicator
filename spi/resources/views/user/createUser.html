@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Metrics Solution</title>
+		<!-- Fonts -->
+		<!-- <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'> -->
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		
+		<link rel="stylesheet" href="fixes.css">
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$('#godown').height($("#ss_fixed_nav").height());
+				window.onresize = function() {
+					$('#godown').height($("#ss_fixed_nav").height());
+				}
+			});
+		</script>
+    </head>
+    <body>
+        <div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<nav class="navbar-default navbar-fixed-top" id="ss_fixed_nav">
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+									<span class="sr-only">Toggle Navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+								<a class="navbar-brand" href="#">
+                                    <img class="hidden-xs hidden-sm img-responsive" src="images/modLogo.png" alt="logo description" />
+                                    <img class="hidden-xs visible-sm img-responsive" src="images/modLogo-half.png" alt="logo description" />
+                                    <img class="visible-xs img-responsive" src="images/modLogo-small.png" alt="logo description" />
+                                </a>
+							</div>
+
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<ul class="nav navbar-nav">
+                                    <li class="active"><a href="http://salesperformanceindicator.com">Manage Users</a></li>
+									<li class=""><a href="http://salesperformanceindicator.com/companies">Manage Companies</a></li>
+									<li class=""><a href="http://salesperformanceindicator.com/reports">Reports</a></li>
+								</ul>
+								<ul class="nav navbar-nav navbar-right">
+                                    <li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logged in as System <span class="caret"></span></a>
+										<ul class="dropdown-menu" role="menu">
+											<li><a href="http://salesperformanceindicator.com/myprofile">MyProfile</a></li>
+											<li><a href="http://salesperformanceindicator.com/auth/logout">Logout</a></li>
+										</ul>
+									</li>
+                                </ul>
+                            </div>
+						</div>
+					</nav>
+					<div id="godown"></div>
+				</div>
+			</div>
+		</div>
+
+        <div class="container-fluid">
+            <div class="page-header" id="banner">
+                <div class="row">
+					<div class="col-md-12">
+						<h2>Create New User</h2>
+					</div>
+				</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-body">
+                            <div class="col-lg-10 col-lg-offset-1">
+                                <form method="POST" action="http://salesperformanceindicator.com/users" accept-charset="UTF-8" class="form-horizontal">
+                                    <input name="_token" type="hidden" value="SJUaCUT2wxZik7bJjqHEvvo9dbUpGjQT8dvKSyNO">
+                                    <fieldset>
+                                        <div class="form-group ">
+                                            <label for="email" class="col-lg-3 control-label">Email*</label>
+                                            <div class="col-lg-9"><input class="form-control" name="email" type="text" id="email"></div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="password" class="col-lg-3 control-label">Password*</label>
+                                            <div class="col-lg-9"><input class="form-control" name="password" type="password" value="" id="password"></div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="confirm_password" class="col-lg-3 control-label">Confirm Password</label>
+                                            <div class="col-lg-9"><input class="form-control" name="confirm_password" type="password" value="" id="confirm_password"></div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="first_name" class="col-lg-3 control-label">First Name*</label>
+                                            <div class="col-lg-9"><input class="form-control" name="first_name" type="text" id="first_name"></div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="last_name" class="col-lg-3 control-label">Last Name*</label>
+                                            <div class="col-lg-9"><input class="form-control" name="last_name" type="text" id="last_name"></div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="role_id" class="col-lg-3 control-label">Role</label>
+                                            <div class="col-lg-9">
+                                                <select class="form-control" onchange="setAction(&quot;2&quot;);" id="role_id" name="role_id">
+                                                    <option value="3">Manager</option>
+                                                    <option value="2">Member</option>
+                                                    <option value="4">Owner</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="company_id" class="col-lg-3 control-label">Company</label>
+                                            <div class="col-lg-9">
+                                                <select class="form-control" id="company_id" name="company_id">
+                                                    <option value="default">------</option>
+                                                    <option value="5">Apple</option>
+                                                    <option value="16">CDIL</option>
+                                                    <option value="18">CDIL DEMO</option>
+                                                    <option value="2">Company Another</option>
+                                                    <option value="1">Good as Gold Training</option>
+                                                    <option value="6">HR Search Inc</option>
+                                                    <option value="3">Microsoft</option>
+                                                    <option value="4">Oracle</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="manager_id" class="col-lg-3 control-label">Manager</label>
+                                            <div class="col-lg-9">
+                                                <select class="form-control" disabled="disabled" id="manager_id" name="manager_id">
+                                                    <option value="default" selected="selected">Select a Company</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="contact_number" class="col-lg-3 control-label">Contact Number</label>
+                                            <div class="col-lg-9"><input class="form-control" name="contact_number" type="text" id="contact_number"></div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="address1" class="col-lg-3 control-label">Address 1</label>
+                                            <div class="col-lg-9"><input class="form-control" name="address1" type="text" id="address1"></div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="address2" class="col-lg-3 control-label">Address 2</label>
+                                            <div class="col-lg-9"><input class="form-control" name="address2" type="text" id="address2"></div>
+                                        </div>
+                                        <input name="updated_by" type="hidden" value="1">
+                                        <input name="created_by" type="hidden" value="1">
+                                        <input name="status" type="hidden" value="ACTIVE">
+                                        <div class="form-group">
+                                            <div class="col-lg-9 col-lg-offset-3">
+                                                <a href="http://salesperformanceindicator.com" class="btn btn-default pull-right">Cancel</a>
+                                                <input class="btn btn-primary" type="submit" value="Submit">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12 text-center back-to-top">
+						<a class="btn btn-default" href="#top">Back to top</a>
+					</div>
+					<div class="col-lg-12">
+                        <ul class="list-unstyled">
+                            <li>
+                                <div class="footer-copyright">
+                                    <div class="container text-center">
+                                        Sales Performance Indicator | &copy; 2014-2015 Good as Gold Training, All rights reserved.<br />
+                                        <a class="grey-text text-lighten-4 right" href="mailto:support@staffingandrecruiting.com">support@staffingandrecruiting.com | 219 663 9609</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

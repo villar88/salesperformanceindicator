@@ -1,0 +1,225 @@
+<?php $__env->startSection('content'); ?>
+
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-8 col-md-7 col-sm-6">
+                <h2>Production | Sales Revenue <?php echo empty( $user->first_name ) ? '' : ' - <span style="color:blue;">' . $user->first_name . ' ' . $user -> last_name .'</span>'; ?>  </h2>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h3>DIRECT HIRE PRODUCTION | SALES Monthly</h3>
+                        <div id="directHire" style="text-align: center; margin: 10px;" ></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h3>DIRECT HIRE PRODUCTION | SALES Annually</h3>
+                        <div id="directHireAnnual" style="text-align: center; margin: 10px;" ></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h3>TEMP or CONTRACT GROSS MARGIN OF PROFIT (GMP) Monthly</h3>
+                        <div id="tempGMP" style="text-align: center; margin: 10px;" ></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h3>TEMP or CONTRACT GROSS MARGIN OF PROFIT (GMP) Annual</h3>
+                        <div id="gmpAnnual" style="text-align: center; margin: 10px;" ></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('footer'); ?>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1.1", {packages:["bar"]});
+        google.setOnLoadCallback(directHireChart);
+        google.setOnLoadCallback(directHireAnnualChart);
+        google.setOnLoadCallback(tempGMPChart);
+        google.setOnLoadCallback(gmpAnnualChart);
+
+        function directHireChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Month', 'GOAL', 'ACTUAL PERFORMANCE'],
+                ['Jan',  <?php echo e($directHireTarget->jan); ?>, <?php echo e(empty( $directHire['jan'] ) ? 0 : $directHire['jan']); ?> ],
+                ['Feb',  <?php echo e($directHireTarget->feb); ?>, <?php echo e(empty( $directHire['feb'] ) ? 0 : $directHire['feb']); ?> ],
+                ['Mar',  <?php echo e($directHireTarget->mar); ?>, <?php echo e(empty( $directHire['mar'] ) ? 0 : $directHire['mar']); ?> ],
+                ['Apr', <?php echo e($directHireTarget->apr); ?>, <?php echo e(empty( $directHire['apr'] ) ? 0 : $directHire['apr']); ?> ],
+                ['May', <?php echo e($directHireTarget->may); ?>, <?php echo e(empty( $directHire['may'] ) ? 0 : $directHire['may']); ?> ],
+                ['Jun', <?php echo e($directHireTarget->jun); ?>, <?php echo e(empty( $directHire['jun'] ) ? 0 : $directHire['jun']); ?> ],
+                ['Jul', <?php echo e($directHireTarget->jul); ?>, <?php echo e(empty( $directHire['jul'] ) ? 0 : $directHire['jul']); ?> ],
+                ['Aug', <?php echo e($directHireTarget->aug); ?>, <?php echo e(empty( $directHire['aug'] ) ? 0 : $directHire['aug']); ?> ],
+                ['Sep', <?php echo e($directHireTarget->sep); ?>, <?php echo e(empty( $directHire['sep'] ) ? 0 : $directHire['sep']); ?> ],
+                ['Oct', <?php echo e($directHireTarget->oct); ?>, <?php echo e(empty( $directHire['oct'] ) ? 0 : $directHire['oct']); ?> ],
+                ['Nov', <?php echo e($directHireTarget->nov); ?>, <?php echo e(empty( $directHire['nov'] ) ? 0 : $directHire['nov']); ?> ],
+                ['Dec', <?php echo e($directHireTarget->dec); ?>, <?php echo e(empty( $directHire['dec'] ) ? 0 : $directHire['dec']); ?> ],
+                ['Annual', <?php echo e($directHireTarget->annual); ?>, <?php echo e(empty( $directHire['annual'] ) ? 0 : $directHire['annual']); ?> ]
+            ]);
+
+            var options = {
+                width: 1200,
+                height: 563,
+                hAxis: {
+                    title: 'Annual',
+                    textStyle:{color: 'black', fontSize: '10'}
+                },
+                vAxis: {
+                    title: 'Sales'
+                },
+                colors: ['#3232ff', '#9999ff'],
+                bar: {groupWidth: "90%"},
+                legend: {position: 'top'},
+                displayAnnotations: true,
+                displayExactValues: true
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('directHire'));
+
+            chart.draw(data, options);
+        }
+
+
+        function tempGMPChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Month', 'GOAL', 'ACTUAL PERFORMANCE'],
+                ['Jan',  <?php echo e($directHireTarget->jan); ?>, <?php echo e(empty( $gmp['jan'] ) ? 0 : $gmp['jan']); ?> ],
+                ['Feb',  <?php echo e($directHireTarget->feb); ?>, <?php echo e(empty( $gmp['feb'] ) ? 0 : $gmp['feb']); ?> ],
+                ['Mar',  <?php echo e($directHireTarget->mar); ?>, <?php echo e(empty( $gmp['mar'] ) ? 0 : $gmp['mar']); ?> ],
+                ['Apr', <?php echo e($directHireTarget->apr); ?>, <?php echo e(empty( $gmp['apr'] ) ? 0 : $gmp['apr']); ?> ],
+                ['May', <?php echo e($directHireTarget->may); ?>, <?php echo e(empty( $gmp['may'] ) ? 0 : $gmp['may']); ?> ],
+                ['Jun', <?php echo e($directHireTarget->jun); ?>, <?php echo e(empty( $gmp['jun'] ) ? 0 : $gmp['jun']); ?> ],
+                ['Jul', <?php echo e($directHireTarget->jul); ?>, <?php echo e(empty( $gmp['jul'] ) ? 0 : $gmp['jul']); ?> ],
+                ['Aug', <?php echo e($directHireTarget->aug); ?>, <?php echo e(empty( $gmp['aug'] ) ? 0 : $gmp['aug']); ?> ],
+                ['Sep', <?php echo e($directHireTarget->sep); ?>, <?php echo e(empty( $gmp['sep'] ) ? 0 : $gmp['sep']); ?> ],
+                ['Oct', <?php echo e($directHireTarget->oct); ?>, <?php echo e(empty( $gmp['oct'] ) ? 0 : $gmp['oct']); ?> ],
+                ['Nov', <?php echo e($directHireTarget->nov); ?>, <?php echo e(empty( $gmp['nov'] ) ? 0 : $gmp['nov']); ?> ],
+                ['Dec', <?php echo e($directHireTarget->dec); ?>, <?php echo e(empty( $gmp['dec'] ) ? 0 : $gmp['dec']); ?> ],
+                ['Annual', <?php echo e($directHireTarget->annual); ?>, <?php echo e(empty( $gmp['annual'] ) ? 0 : $gmp['annual']); ?> ]
+            ]);
+
+            var options = {
+                width: 1200,
+                height: 563,
+                hAxis: {
+                    title: 'Annual',
+                    textStyle:{color: 'black', fontSize: '10'}
+                },
+                vAxis: {
+                    title: 'Sales'
+                },
+                colors: ['#3232ff', '#9999ff'],
+                bar: {groupWidth: "90%"},
+                legend: {position: 'top'},
+                displayAnnotations: true,
+                displayExactValues: true
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('tempGMP'));
+
+            chart.draw(data, options);
+        }
+
+        function directHireAnnualChart(){
+
+
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'GOAL', 'ACTUAL PERFORMANCE']
+            <?php
+                $thisYear = date( 'Y' );
+
+                for( $i = $thisYear-10; $i < $thisYear+1; $i++ )
+                {
+                    echo ',[ \''. $i .'\', ' . ( empty($directHireAnnual[$i]) ? (  $thisYear == $i ? $directHireTarget->annual : 0  ) : $directHireTarget->annual ) . ', '. ( empty($directHireAnnual[$i]) ? 0.0 : $directHireAnnual[$i] ) .' ] ';
+
+                }
+             ?>
+            ]);
+
+            var options = {
+                width: 1200,
+                height: 563,
+                hAxis: {
+                    title: 'Annual',
+                    textStyle:{color: 'black', fontSize: '10'}
+                },
+                vAxis: {
+                    title: 'Sales'
+                },
+                colors: ['#3232ff', '#9999ff'],
+                bar: {groupWidth: "90%"},
+                legend: {position: 'top'},
+                displayAnnotations: true,
+                displayExactValues: true
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('directHireAnnual'));
+
+            chart.draw(data, options);
+        }
+
+
+        function gmpAnnualChart(){
+
+
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'GOAL', 'ACTUAL PERFORMANCE']
+                <?php
+                    $thisYear = date( 'Y' );
+
+                    for( $i = $thisYear-10; $i < $thisYear+1; $i++ )
+                    {
+                        echo ',[ \''. $i .'\', ' . ( empty($gmpAnnual[$i]) ? (  $thisYear == $i ? $directHireTarget->annual : 0  ) : $directHireTarget->annual ) . ', '. ( empty($gmpAnnual[$i]) ? 0.0 : $gmpAnnual[$i] ) .' ] ';
+
+                    }
+                 ?>
+            ]);
+
+            var options = {
+                width: 1200,
+                height: 563,
+                hAxis: {
+                    title: 'Annual',
+                    textStyle:{color: 'black', fontSize: '10'}
+                },
+                vAxis: {
+                    title: 'Sales'
+                },
+                colors: ['#3232ff', '#9999ff'],
+                bar: {groupWidth: "90%"},
+                legend: {position: 'top'},
+                displayAnnotations: true,
+                displayExactValues: true
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('gmpAnnual'));
+
+            chart.draw(data, options);
+        }
+    </script>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

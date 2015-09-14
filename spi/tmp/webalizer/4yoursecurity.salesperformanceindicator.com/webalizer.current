@@ -1,0 +1,177 @@
+# Webalizer V2.23-05 Incremental Data - 09/15/2014 06:06:43
+2014 9 15 6 6 43
+42 36 10 4 5 6 409358 7 7 0
+1 1 14 1 15
+15 14 291233 3 1 1
+0 0 0 0 0 0
+1 1 508 1 1 1
+0 0 0 0 0 0
+1 1 508 1 1 1
+0 0 0 0 0 0
+0 0 0 0 0 0
+22 17 115535 8 1 1
+0 0 0 0 0 0
+1 1 556 1 1 1
+0 0 0 0 0 0
+1 1 556 1 1 1
+0 0 0 0 0 0
+0 0 0 0 0 0
+1 1 462 1 1 1
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+1 1 462 1
+1 1 508 1
+0 0 0 0
+1 1 462 1
+0 0 0 0
+14 10 81850 0
+6 5 27711 0
+0 0 0 0
+2 2 5974 1
+0 0 0 0
+1 1 556 1
+0 0 0 0
+2 1 15490 0
+10 10 244301 0
+2 2 30980 0
+1 1 508 1
+0 0 0 0
+0 0 0 0
+1 1 556 1
+0 0 0 0
+0 0 0 0
+0
+0
+0
+36
+0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+0
+0
+0
+0
+0
+0
+0
+5
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+# -urls- 
+/mailer2.php
+0 8 117064800 70488 0 0
+/mailer.php
+0 13 0 290771 0 0
+/
+0 7 0 3560 7 6
+/mailer3.php
+0 8 0 44109 0 0
+# End Of Table - urls
+# -sites- (monthly)
+31.13.97.119
+0 1 1 5466 0 0
+-
+206.190.136.245.static.midphase.com
+0 2 2 27354 0 0
+-
+197.1.97.170
+0 12 9 54744 0 0
+-
+31.13.97.113
+0 1 1 7189 0 0
+-
+197.1.75.234
+0 12 11 259791 0 0
+-
+31.220.1.112
+0 2 2 30980 0 0
+-
+31.13.97.116
+0 2 1 5466 0 0
+-
+67-23-249-181.static.dimenoc.com
+0 7 7 3560 7 1410761203
+/
+197.8.225.216
+0 1 1 7189 0 0
+-
+31.13.97.112
+0 2 1 7619 0 0
+-
+# End Of Table - sites (monthly)
+# -sites- (daily)
+67-23-249-181.static.dimenoc.com
+0 1 1 462 1 1410761203
+/
+# End Of Table - sites (daily)
+# -referrers- 
+http://www.4yoursecurity.salesperformanceindicator.com/mailer.php
+0 8
+http://l.facebook.com/lsr.php
+0 1
+http://www.4yoursecurity.salesperformanceindicator.com/mailer2.php
+0 2
+- (Direct Request)
+0 27
+http://www.4yoursecurity.salesperformanceindicator.com/mailer3.php
+0 4
+# End Of Table - referrers
+# -agents- 
+Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36
+0 12
+facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)
+0 6
+Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.103 Safari/537.36
+0 1
+Mozilla/5.0 (Windows NT 6.1; WOW64; rv:31.0) Gecko/20100101 Firefox/31.0
+0 9
+DimeNOC MWCrawler/2.1 (Like MSIE/9.0)
+0 7
+Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.103 Safari/537.36
+0 6
+# End Of Table - agents
+# -search strings- 
+# End Of Table - search strings
+# -usernames- 
+# End Of Table - usernames
