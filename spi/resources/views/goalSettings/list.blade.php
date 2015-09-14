@@ -116,40 +116,40 @@
                                                     <tr class="gs-new-table-row-moving">
                                                         <td class="fixed-td-small">
                                                             <!--<input type="text" value="888888888" class="gs-new-input">-->
-                                                            <input onblur="cleanup('jan', '{{$user->id}}','{{number_format($user->goalManagement->jan, 2, '.', ',')}}' )" type="text" name="jan[{{$user->id}}]" id="jan{{$user->id}}" value="{{number_format($user->goalManagement->jan, 2, '.', ',')}}" class="gs-new-input"/>
+                                                            <input onblur="cleanup('jan', '{{$user->id}}','{{number_format($user->goalManagement->jan, 2, '.', ',')}}','{{$user->goalManagement->id}}' )" type="text" name="jan[{{$user->id}}]" id="jan{{$user->id}}" value="{{number_format($user->goalManagement->jan, 2, '.', ',')}}" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('feb', '{{$user->id}}','{{number_format($user->goalManagement->feb, 2, '.', ',')}}' )" type="text" name="feb[{{$user->id}}]" id="feb{{$user->id}}" value="{{number_format($user->goalManagement->feb, 2, '.', ',')}}" class="gs-new-input"/>
+                                                            <input onblur="cleanup('feb', '{{$user->id}}','{{number_format($user->goalManagement->feb, 2, '.', ',')}}','{{$user->goalManagement->id}}' )" type="text" name="feb[{{$user->id}}]" id="feb{{$user->id}}" value="{{number_format($user->goalManagement->feb, 2, '.', ',')}}" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('mar', '{{$user->id}}','{{number_format($user->goalManagement->mar, 2, '.', ',')}}' )" type="text" name="mar[{{$user->id}}]" id="mar{{$user->id}}" value="{{number_format($user->goalManagement->mar, 2, '.', ',')}}" class="gs-new-input"/>
+                                                            <input onblur="cleanup('mar', '{{$user->id}}','{{number_format($user->goalManagement->mar, 2, '.', ',')}}','{{$user->goalManagement->id}}' )" type="text" name="mar[{{$user->id}}]" id="mar{{$user->id}}" value="{{number_format($user->goalManagement->mar, 2, '.', ',')}}" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('apr', '{{$user->id}}','{{number_format($user->goalManagement->apr, 2, '.', ',')}}' )" type="text" name="apr[{{$user->id}}]" id="apr{{$user->id}}" value="{{number_format($user->goalManagement->apr, 2, '.', ',')}}" class="gs-new-input"/>
+                                                            <input onblur="cleanup('apr', '{{$user->id}}','{{number_format($user->goalManagement->apr, 2, '.', ',')}}' ,'{{$user->goalManagement->id}}')" type="text" name="apr[{{$user->id}}]" id="apr{{$user->id}}" value="{{number_format($user->goalManagement->apr, 2, '.', ',')}}" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('may', '{{$user->id}}','{{number_format($user->goalManagement->may, 2, '.', ',')}}' )" type="text" name="may[{{$user->id}}]" id="may{{$user->id}}" value="{{number_format($user->goalManagement->may, 2, '.', ',')}}" class="gs-new-input"/>
+                                                            <input onblur="cleanup('may', '{{$user->id}}','{{number_format($user->goalManagement->may, 2, '.', ',')}}','{{$user->goalManagement->id}}' )" type="text" name="may[{{$user->id}}]" id="may{{$user->id}}" value="{{number_format($user->goalManagement->may, 2, '.', ',')}}" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('jun', '{{$user->id}}','{{number_format($user->goalManagement->jun, 2, '.', ',')}}' )" type="text" name="jun[{{$user->id}}]" id="jun{{$user->id}}" value="{{number_format($user->goalManagement->jun, 2, '.', ',')}}" class="gs-new-input"/>
+                                                            <input onblur="cleanup('jun', '{{$user->id}}','{{number_format($user->goalManagement->jun, 2, '.', ',')}}','{{$user->goalManagement->id}}' )" type="text" name="jun[{{$user->id}}]" id="jun{{$user->id}}" value="{{number_format($user->goalManagement->jun, 2, '.', ',')}}" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('jul', '{{$user->id}}','{{number_format($user->goalManagement->jul, 2, '.', ',')}}' )" type="text" name="jul[{{$user->id}}]" id="jul{{$user->id}}" value="{{number_format($user->goalManagement->jul, 2, '.', ',')}}" class="gs-new-input"/>
+                                                            <input onblur="cleanup('jul', '{{$user->id}}','{{number_format($user->goalManagement->jul, 2, '.', ',')}}','{{$user->goalManagement->id}}' )" type="text" name="jul[{{$user->id}}]" id="jul{{$user->id}}" value="{{number_format($user->goalManagement->jul, 2, '.', ',')}}" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('aug', '{{$user->id}}','{{number_format($user->goalManagement->aug, 2, '.', ',')}}' )" type="text" name="aug[{{$user->id}}]" id="aug{{$user->id}}" value="{{number_format($user->goalManagement->aug, 2, '.', ',')}}" class="gs-new-input"/>
+                                                            <input onblur="cleanup('aug', '{{$user->id}}','{{number_format($user->goalManagement->aug, 2, '.', ',')}}','{{$user->goalManagement->id}}' )" type="text" name="aug[{{$user->id}}]" id="aug{{$user->id}}" value="{{number_format($user->goalManagement->aug, 2, '.', ',')}}" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('sep', '{{$user->id}}','{{number_format($user->goalManagement->sep, 2, '.', ',')}}' )" type="text" name="sep[{{$user->id}}]" id="sep{{$user->id}}" value="{{number_format($user->goalManagement->sep, 2, '.', ',')}}" class="gs-new-input"/>
+                                                            <input onblur="cleanup('sep', '{{$user->id}}','{{number_format($user->goalManagement->sep, 2, '.', ',')}}','{{$user->goalManagement->id}}' )" type="text" name="sep[{{$user->id}}]" id="sep{{$user->id}}" value="{{number_format($user->goalManagement->sep, 2, '.', ',')}}" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('oct', '{{$user->id}}','{{number_format($user->goalManagement->oct, 2, '.', ',')}}' )" type="text" name="oct[{{$user->id}}]" id="oct{{$user->id}}" value="{{number_format($user->goalManagement->oct, 2, '.', ',')}}" class="gs-new-input"/>
+                                                            <input onblur="cleanup('oct', '{{$user->id}}','{{number_format($user->goalManagement->oct, 2, '.', ',')}}','{{$user->goalManagement->id}}' )" type="text" name="oct[{{$user->id}}]" id="oct{{$user->id}}" value="{{number_format($user->goalManagement->oct, 2, '.', ',')}}" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('nov', '{{$user->id}}','{{number_format($user->goalManagement->nov, 2, '.', ',')}}' )" type="text" name="nov[{{$user->id}}]" id="nov{{$user->id}}" value="{{number_format($user->goalManagement->nov, 2, '.', ',')}}" class="gs-new-input"/>
+                                                            <input onblur="cleanup('nov', '{{$user->id}}','{{number_format($user->goalManagement->nov, 2, '.', ',')}}' ,'{{$user->goalManagement->id}}')" type="text" name="nov[{{$user->id}}]" id="nov{{$user->id}}" value="{{number_format($user->goalManagement->nov, 2, '.', ',')}}" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('dec', '{{$user->id}}','{{number_format($user->goalManagement->dec, 2, '.', ',')}}' )" type="text" name="dec[{{$user->id}}]" id="dec{{$user->id}}" value="{{number_format($user->goalManagement->dec, 2, '.', ',')}}" class="gs-new-input"/>
+                                                            <input onblur="cleanup('dec', '{{$user->id}}','{{number_format($user->goalManagement->dec, 2, '.', ',')}}','{{$user->goalManagement->id}}' )" type="text" name="dec[{{$user->id}}]" id="dec{{$user->id}}" value="{{number_format($user->goalManagement->dec, 2, '.', ',')}}" class="gs-new-input"/>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -202,28 +202,43 @@
             $("#request").val(arg);
             }
 
-    function cleanup( nkey, nid, oldVal )
+    function cleanup( nkey, nid, oldVal ,id_goals)
     {
-        //console.log( nkey+' '+nid+' '+oldVal );
+        //console.log( nkey+' '+nid+' '+oldVal ); 
         //console.log( document.getElementById(nkey+nid).value  );
-        try {
-    
-            if(document.getElementById(nkey+nid).value == ''){
-                document.getElementById(nkey+nid).value = 0;
+        
+        if(document.getElementById(nkey + nid).value != ''){
+            try {
+
+                if(document.getElementById(nkey+nid).value == ''){
+                    document.getElementById(nkey+nid).value = 0;
+                }
+
+                document.getElementById('annual'+nid).value = parseFloat(computeAnnual( nid ).replace(/,/g, ""))
+                    .toFixed(2)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")  ;
+
+                document.getElementById(nkey+nid).value = parseFloat(numberWithCommas( cleanMoney(document.getElementById(nkey+nid).value) ).replace(/,/g, ""))
+                    .toFixed(2)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")  ;
+
+
+                var amountRequest = parseFloat( cleanMoney( document.getElementById(nkey + nid).value) );
+
+                $.ajax({
+                  url: '{{ url('updateGoals')}}',
+                  type: "get",
+                  data: {'id_goals_managers':id_goals, '_token': $('input[name=_token]').val(),month: nkey,amount: amountRequest},
+                  success: function(data){
+                    //alert(data); TODO: gestionar monto total
+                  }
+                }); 
+
+            }catch (err){
+                //alert( err )
             }
-
-            document.getElementById('annual'+nid).value = parseFloat(computeAnnual( nid ).replace(/,/g, ""))
-                .toFixed(2)
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")  ;
-
-            document.getElementById(nkey+nid).value = parseFloat(numberWithCommas( cleanMoney(document.getElementById(nkey+nid).value) ).replace(/,/g, ""))
-                .toFixed(2)
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")  ;
-                
-        }catch (err){
-            //alert( err )
         }
     }
 

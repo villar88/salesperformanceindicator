@@ -122,6 +122,66 @@ Route::get('dropdown', function(){
 	return $managers;
 });
 
+Route::get('updateGoals', function(){
+    
+        try{
+            $id_goals_managers = Input::get('id_goals_managers');//id for goals_managers
+            $month = Input::get('month');
+            $amount = Input::get('amount');
+
+            $goalManagements = \App\GoalManagement::findOrFail($id_goals_managers);
+
+            if($goalManagements){
+
+                switch ($month) {
+                    case "jan":
+                        $goalManagements->jan = $amount;
+                        break;
+                    case "feb":
+                        $goalManagements->feb = $amount;
+                        break;
+                    case "mar":
+                        $goalManagements->mar = $amount;
+                        break;
+                    case "apr":
+                        $goalManagements->apr = $amount;
+                        break;
+                    case "may":
+                        $goalManagements->may = $amount;
+                        break;
+                    case "jun":
+                        $goalManagements->jun = $amount;
+                        break;
+                    case "jul":
+                        $goalManagements->jul = $amount;
+                        break;
+                    case "aug":
+                        $goalManagements->aug = $amount;
+                        break;
+                    case "sep":
+                        $goalManagements->sep = $amount;
+                        break;
+                    case "oct":
+                        $goalManagements->oct = $amount;
+                        break;
+                    case "nov":
+                        $goalManagements->nov = $amount;
+                        break;
+                    case "dic":
+                        $goalManagements->dic = $amount;
+                        break;
+                }
+
+                $goalManagements->save();
+                echo "true";
+            }else{
+                echo "false";
+            }
+        }catch(Exception $e){
+            echo "false";
+        }
+});
+
 Route::get('prueba', function(){
 	$id = Input::get('user_id');
 	$data = DB::table('sales')
