@@ -172,6 +172,21 @@ Route::get('updateGoals', function(){
                         break;
                 }
 
+                $total = $goalManagements->jan +
+                $goalManagements->feb +
+                $goalManagements->mar +
+                $goalManagements->apr +
+                $goalManagements->may +
+                $goalManagements->jun +
+                $goalManagements->jul +
+                $goalManagements->aug +
+                $goalManagements->sep +
+                $goalManagements->oct +
+                $goalManagements->nov +
+                $goalManagements->dec ;
+                  
+                $goalManagements->annual = $total;
+                
                 $goalManagements->save();
                 echo "true";
             }else{

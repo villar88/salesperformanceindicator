@@ -226,13 +226,13 @@
 
 
                 var amountRequest = parseFloat( cleanMoney( document.getElementById(nkey + nid).value) );
-
+ 
                 $.ajax({
                   url: '{{ url('updateGoals')}}',
                   type: "get",
                   data: {'id_goals_managers':id_goals, '_token': $('input[name=_token]').val(),month: nkey,amount: amountRequest},
                   success: function(data){
-                    //alert(data); TODO: gestionar monto total
+                    
                   }
                 }); 
 
