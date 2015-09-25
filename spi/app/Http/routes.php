@@ -87,6 +87,7 @@ Route::any('/licenses/destroy/{id}','LicenseController@destroy');
 Route::any('/licenses/activate/{id}','LicenseController@activate');
 Route::any('/licenses/create/{id}', 'LicenseController@create');
 Route::any('/licenses/remove/{id}', 'LicenseController@remove');
+Route::any('/licenses/cancelsubscription/{id}', 'LicenseController@cancelsubscription');
 Route::any('/licenses/shoppingcart', 'LicenseController@shoppingcart');
 Route::resource('licenses','LicenseController');
 
