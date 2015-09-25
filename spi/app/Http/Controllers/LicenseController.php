@@ -259,14 +259,13 @@ class LicenseController extends SecureController {
     
     public function remove($id) {
         $license = License::findOrFail($id);
+        $user_id = $license->user_id;
         $date = new \DateTime(); //this returns the current date time
         $license->user_id=0;
         $license->save();
-        if ($license->user_id != 0) {
-            DB::table('users')
-                    ->where('id', $license->user_id)
+        DB::table('users')
+                    ->where('id', $user_id)
                     ->update(array('status' => 'INACTIVE', 'inactive_date' => $date));
-        }
         \Session::flash('message', 'You have successfully remove user for this License');
         $company = Company::findOrFail($license->company_id);
         $licenses = License::whereRaw('company_id like ? order by id', array($license->company_id))->paginate(15)->appends(Input::except('page'));

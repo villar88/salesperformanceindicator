@@ -1,8 +1,9 @@
 <fieldset>
 
     
-    <div class="form-group {{ $errors->has('quantity') ? 'has-error' : '' }}">
-        {!! Form::label('quantity', 'Number of License*', ['class' => 'col-lg-2 control-label']) !!}
+    <div class="form-group <?php echo e($errors->has('quantity') ? 'has-error' : ''); ?>">
+        <?php echo Form::label('quantity', 'Number of License*', ['class' => 'col-lg-2 control-label']); ?>
+
         <div class="col-lg-10">
             <select class="form-control"  id="quantity" name="quantity" size="1" data-on="Component.Select">
 		<option value="1">1</option>
@@ -37,18 +38,21 @@
 		</select>
         </div>
         </div>
-    <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
-        {!! Form::label('type', 'Type of License*', ['class' => 'col-lg-2 control-label']) !!}
+    <div class="form-group <?php echo e($errors->has('type') ? 'has-error' : ''); ?>">
+        <?php echo Form::label('type', 'Type of License*', ['class' => 'col-lg-2 control-label']); ?>
+
         <div class="col-lg-10">
-            {!! Form::label('current_type', 'Lifetime', ['class' => 'col-lg-2 control-label']) !!}
+            <?php echo Form::label('current_type', 'Lifetime', ['class' => 'col-lg-2 control-label']); ?>
+
         </div>
     </div>
-    <input type="hidden" id="company_id" name="company_id" value="{{$company->id}}" />
+    <input type="hidden" id="company_id" name="company_id" value="<?php echo e($company->id); ?>" />
 
     <div class="form-group">
         <div class="col-lg-10 col-lg-offset-2">
-            <a href="{{ url('/licenses/list/'.$company->id) }}" class="btn btn-default pull-right">Cancel</a>
-            {!! Form::submit('Create', ['class' => 'btn btn-primary']) !!}
+            <a href="<?php echo e(url('/licenses/list/'.$company->id)); ?>" class="btn btn-default pull-right">Cancel</a>
+            <?php echo Form::submit('Create', ['class' => 'btn btn-primary']); ?>
+
         </div>
     </div>
 

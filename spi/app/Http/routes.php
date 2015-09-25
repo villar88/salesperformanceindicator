@@ -62,6 +62,7 @@ Route::any('companyUsers/test', 'CompanyUserController@test');
 Route::any('companies/search', 'CompanyController@index');
 Route::any('companies/destroy/{id}', 'CompanyController@destroy');
 Route::any('companies/activate/{id}', 'CompanyController@activate');
+Route::any('companies/delete/{id}', 'CompanyController@delete');
 Route::any('goalSettings/search', 'GoalSettingController@index');
 Route::any('goalSettings/edit/{id}', 'GoalSettingController@edit');
 Route::post('goalSettings/updateAll', 'GoalSettingController@updateAll');
@@ -128,54 +129,87 @@ Route::get('updateGoals', function(){
             $id_goals_managers = Input::get('id_goals_managers');//id for goals_managers
             $month = Input::get('month');
             $amount = Input::get('amount');
+            
+            if($month != 'annual'){
 
-            $goalManagements = \App\GoalManagement::findOrFail($id_goals_managers);
+                $goalManagements = \App\GoalManagement::findOrFail($id_goals_managers);
 
-            if($goalManagements){
+                if($goalManagements){
 
-                switch ($month) {
-                    case "jan":
-                        $goalManagements->jan = $amount;
-                        break;
-                    case "feb":
-                        $goalManagements->feb = $amount;
-                        break;
-                    case "mar":
-                        $goalManagements->mar = $amount;
-                        break;
-                    case "apr":
-                        $goalManagements->apr = $amount;
-                        break;
-                    case "may":
-                        $goalManagements->may = $amount;
-                        break;
-                    case "jun":
-                        $goalManagements->jun = $amount;
-                        break;
-                    case "jul":
-                        $goalManagements->jul = $amount;
-                        break;
-                    case "aug":
-                        $goalManagements->aug = $amount;
-                        break;
-                    case "sep":
-                        $goalManagements->sep = $amount;
-                        break;
-                    case "oct":
-                        $goalManagements->oct = $amount;
-                        break;
-                    case "nov":
-                        $goalManagements->nov = $amount;
-                        break;
-                    case "dic":
-                        $goalManagements->dic = $amount;
-                        break;
+                    switch ($month) {
+                        case "jan":
+                            $goalManagements->jan = $amount;
+                            break;
+                        case "feb":
+                            $goalManagements->feb = $amount;
+                            break;
+                        case "mar":
+                            $goalManagements->mar = $amount;
+                            break;
+                        case "apr":
+                            $goalManagements->apr = $amount;
+                            break;
+                        case "may":
+                            $goalManagements->may = $amount;
+                            break;
+                        case "jun":
+                            $goalManagements->jun = $amount;
+                            break;
+                        case "jul":
+                            $goalManagements->jul = $amount;
+                            break;
+                        case "aug":
+                            $goalManagements->aug = $amount;
+                            break;
+                        case "sep":
+                            $goalManagements->sep = $amount;
+                            break;
+                        case "oct":
+                            $goalManagements->oct = $amount;
+                            break;
+                        case "nov":
+                            $goalManagements->nov = $amount;
+                            break;
+                        case "dic":
+                            $goalManagements->dic = $amount;
+                            break;
+                    }
+
+                    $goalManagements->annual = $goalManagements->jan + $goalManagements->feb +
+                            $goalManagements->mar+$goalManagements->apr+$goalManagements->may+
+                            $goalManagements->jun+$goalManagements->jul+
+                            $goalManagements->aug+$goalManagements->sep + $goalManagements->oct+
+                            $goalManagements->nov + $goalManagements->dec;
+
+                    $goalManagements->save();
+                    echo "true";
+                }else{
+                    echo "false";
                 }
-
-                $goalManagements->save();
-                echo "true";
+            
             }else{
-                echo "false";
+                $goalManagements = \App\GoalManagement::findOrFail($id_goals_managers);
+
+                if($goalManagements){
+                    $goalManagements->annual = $amount;
+                    $goalManagements->jan = $amount/12;
+                    $goalManagements->feb = $amount/12;
+                    $goalManagements->mar = $amount/12;
+                    $goalManagements->apr = $amount/12;
+                    $goalManagements->may = $amount/12;
+                    $goalManagements->jun = $amount/12;
+                    $goalManagements->jul = $amount/12;
+                    $goalManagements->aug = $amount/12;
+                    $goalManagements->sep = $amount/12;
+                    $goalManagements->oct = $amount/12;
+                    $goalManagements->nov = $amount/12;
+                    $goalManagements->dec = $amount/12;
+                    
+                    $goalManagements->save();
+                    echo "true";
+                }else{
+                    echo "false";
+                }
             }
         }catch(Exception $e){
             echo "false";

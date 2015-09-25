@@ -2,18 +2,150 @@
 #    Output easy-to-read numbers
 #    by james at bandit.co.nz
 
-function bd_nice_number($n) {
+function find_max($n){
     // is this a number?
-    if (!is_numeric($n))
-        return false;
-
-    // now filter it;
-    if ($n > 1000000)
-        return round(($n / 1000000), 1) . 'M';
-    else if ($n > 1000)
-        return round(($n / 1000), 1) . 'K';
-
-    return number_format($n);
+    if ($n<=700){
+        return 700;
+    }
+    else{
+        if ($n<=1000){
+            return 1000;
+        }else{
+            if ($n<=1200){
+                return 1200;
+            }else{
+                if ($n<=1200){
+                    return 1200;
+                }else{
+                    if ($n<=1500){
+                        return 1500;
+                    }else{
+                        if ($n<=2000){
+                            return 2000;
+                        }else{
+                            if ($n<=2500){
+                                return 2500;
+                            }else{
+                                if ($n<=3000){
+                                    return 3000;
+                                }else{
+                                    if ($n<=4000){
+                                        return 4000;
+                                    }else{
+                                        if ($n<=5000){
+                                            return 5000;
+                                        }else{
+                                            if ($n<=7000){
+                                                return 7000;
+                                            }else{
+                                                if ($n<=10000){
+                                                    return 10000;
+                                                }else{
+                                                    if ($n<=15000){
+                                                        return 15000;
+                                                    }else{
+                                                        if ($n<=20000){
+                                                            return 20000;
+                                                        }else{
+                                                            if ($n<=30000){
+                                                                return 30000;
+                                                            }else{
+                                                                if ($n<=50000){
+                                                                    return 50000;
+                                                                }else{
+                                                                    if ($n<=100000){
+                                                                        return 100000;
+                                                                    }else{
+                                                                        if ($n<=200000){
+                                                                            return 200000;
+                                                                        }else{
+                                                                            if ($n<=300000){
+                                                                                return 300000;
+                                                                            }else{
+                                                                                if ($n<=400000){
+                                                                                    return 400000;
+                                                                                }else{
+                                                                                    if ($n<=500000){
+                                                                                        return 500000;
+                                                                                    }else{
+                                                                                        if ($n<=1000000){
+                                                                                            return 1000000;
+                                                                                        }else{
+                                                                                            if ($n<=1500000){
+                                                                                                return 1500000;
+                                                                                            }else{
+                                                                                                if ($n<=2000000){
+                                                                                                    return 2000000;
+                                                                                                }else{
+                                                                                                    if ($n<=2500000){
+                                                                                                        return 2500000;
+                                                                                                    }else{
+                                                                                                        if ($n<=3000000){
+                                                                                                            return 3000000;
+                                                                                                        }else{
+                                                                                                            if ($n<=4000000){
+                                                                                                                return 4000000;
+                                                                                                            }else{
+                                                                                                                if ($n<=5000000){
+                                                                                                                    return 5000000;
+                                                                                                                }else{
+                                                                                                                    if ($n<=7000000){
+                                                                                                                        return 7000000;
+                                                                                                                    }else{
+                                                                                                                        if ($n<=10000000){
+                                                                                                                            return 10000000;
+                                                                                                                        }else{
+                                                                                                                            if ($n<=15000000){
+                                                                                                                                return 15000000;
+                                                                                                                            }else{
+                                                                                                                                if ($n<=20000000){
+                                                                                                                                    return 20000000;
+                                                                                                                                }else{
+                                                                                                                                    if ($n<=30000000){
+                                                                                                                                        return 30000000;
+                                                                                                                                    }else{
+                                                                                                                                        if ($n<=50000000){
+                                                                                                                                            return 50000000;
+                                                                                                                                        }else{
+                                                                                                                                            if ($n<=100000000){
+                                                                                                                                                return 100000000;
+                                                                                                                                            }else{
+                                                                                                                                                return 500000000;
+                                                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 ?>
 <div class="row">
@@ -104,7 +236,7 @@ function bd_nice_number($n) {
                                         @endif
                                         <a href="{{ url('/companyUsers/'.$user->id) }}" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
                                         <a href="{{ url('/companyUsers/reset/'.$user->id) }}" onclick="return  confirm('Are you sure want to clean all data for the user {{$user->last_name}}, {{$user->first_name}}?');" title="Reset" ><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span></a> |
-                                        <a href="{{ url('/companyUsers/sendEmail/'.$user->id) }}" title="Send Username and Password" ><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                                        <a href="{{ url('/companyUsers/sendEmail/'.$user->id) }}" onclick="return  confirm(' Do you want to send the username and password to {{$user->last_name}}, {{$user->first_name}} ?');" title="Send Username and Password" ><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -184,7 +316,7 @@ function bd_nice_number($n) {
                                                 <th style="text-align: right;">
                                                 <div class="row">
                                                     <div class="col-lg-8 col-md-7 col-sm-6">
-                                                        <h4 style="text-align: left;margin-bottom: 40px"></h4>
+                                                        <h4 style="text-align: left;margin-bottom: 40px;"></h4>
                                                     </div>
                                                 </div>
                                                 <div class="panel panel-default">
@@ -1302,7 +1434,14 @@ function bd_nice_number($n) {
 <script type="text/javascript">
             function tal(event){
             //DIRECT HIRE PRODUCTION | SALES Monthly
-<?php foreach ($users as $user) { ?>
+<?php foreach ($users as $user) { 
+    $maxpointDaily= find_max(max($pointDaily[$user->cont]));
+    $maxpointMonthly= find_max(max($pointMonthly[$user->cont]));
+    $maxdirectHire= find_max(max($directHire[$user->cont]));
+    $maxdirectHireAnnual= find_max(max($directHireAnnual[$user->cont]));
+    $maxtempGMP= find_max(max($gmp[$user->cont]));
+    $maxgmpAnnual= find_max(max($gmpAnnual[$user->cont]));
+    ?>
                 var pointDaily = '#pointDaily' +<?php echo $user->id; ?>;
                         var pointMonthly = '#pointMonthly' +<?php echo $user->id; ?>;
                         var directHire = '#directHire' +<?php echo $user->id; ?>;
@@ -1310,6 +1449,14 @@ function bd_nice_number($n) {
                         var tempGMP = '#tempGMP' +<?php echo $user->id; ?>;
                         var gmpAnnual = '#gmpAnnual' +<?php echo $user->id; ?>;
                         //Points Daily
+                        
+                        //variables maximas
+                        var pointDailyRate =(0+<?php echo $maxpointDaily; ?>)/5;
+                        var pointMonthlyRate =(0+<?php echo $maxpointMonthly; ?>)/10;
+                        var directHireRate =(0+<?php echo $maxdirectHire; ?>)/10;
+                        var directHireAnnualRate =(0+<?php echo $maxdirectHireAnnual; ?>)/15;
+                        var tempGMPRate =(0+<?php echo $maxtempGMP; ?>)/10;
+                        var gmpAnnualRate =(0+<?php echo $maxgmpAnnual; ?>)/15;
                         $(pointDaily).highcharts({
                 data: {
                 table: 'pointDailydatatable' +<?php echo $user->id; ?>
@@ -1321,7 +1468,7 @@ function bd_nice_number($n) {
                         text: ''
                         },
                         yAxis: {
-                        tickPositions: [0, 50, 100, 150, 200, 250, 300],
+                        tickPositions: [0, 50, pointDailyRate, pointDailyRate*2, pointDailyRate*3, pointDailyRate*4, pointDailyRate*5],
                                 allowDecimals: false,
                                 title: {
                                 text: ''
@@ -1350,7 +1497,7 @@ function bd_nice_number($n) {
                         text: ''
                         },
                         yAxis: {
-                        tickPositions: [0, 500, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000],
+                        tickPositions: [0, 500, pointMonthlyRate, pointMonthlyRate*2, pointMonthlyRate*3, pointMonthlyRate*4, pointMonthlyRate*5, pointMonthlyRate*6, pointMonthlyRate*7, pointMonthlyRate*8, pointMonthlyRate*9, pointMonthlyRate*10],
                                 allowDecimals: false,
                                 title: {
                                 text: ''
@@ -1386,7 +1533,7 @@ function bd_nice_number($n) {
                         text: ''
                         },
                         yAxis: {
-                        tickPositions: [0, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000],
+                        tickPositions: [0, 5000, directHireRate, directHireRate*2, directHireRate*3, directHireRate*4, directHireRate*5, directHireRate*6, directHireRate*7, directHireRate*8, directHireRate*9, directHireRate*10],
                                 allowDecimals: false,
                                 title: {
                                 text: ''
@@ -1425,7 +1572,7 @@ function bd_nice_number($n) {
                         text: ''
                         },
                         yAxis: {
-                            tickPositions: [0, 100000, 150000, 200000, 250000, 300000, 350000, 400000, 450000, 500000, 600000, 700000, 800000, 900000, 1000000],
+                            tickPositions: [0, directHireAnnualRate, directHireAnnualRate*2, directHireAnnualRate*3, directHireAnnualRate*4, directHireAnnualRate*5, directHireAnnualRate*6, directHireAnnualRate*7, directHireAnnualRate*8, directHireAnnualRate*9, directHireAnnualRate*10, directHireAnnualRate*11, directHireAnnualRate*12, directHireAnnualRate*13, directHireAnnualRate*14,directHireAnnualRate*15],
                             allowDecimals: false,
                             title: {
                                 text: ''
@@ -1478,7 +1625,7 @@ function bd_nice_number($n) {
                         text: ''
                         },
                         yAxis: {
-                        tickPositions: [0, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000],
+                        tickPositions: [0, 5000, tempGMPRate, tempGMPRate*2, tempGMPRate*3, tempGMPRate*4, tempGMPRate*5, tempGMPRate*6, tempGMPRate*7, tempGMPRate*8, tempGMPRate*9, tempGMPRate*10],
                                 allowDecimals: false,
                                 title: {
                                 text: ''
@@ -1517,7 +1664,7 @@ function bd_nice_number($n) {
                         text: ''
                         },
                         yAxis: {
-                            tickPositions: [0, 100000, 150000, 200000, 250000, 300000, 350000, 400000, 450000, 500000, 600000, 700000, 800000, 900000, 1000000],
+                            tickPositions: [0, gmpAnnualRate, gmpAnnualRate*2, gmpAnnualRate*3, gmpAnnualRate*4, gmpAnnualRate*5, gmpAnnualRate*6, gmpAnnualRate*7, gmpAnnualRate*8, gmpAnnualRate*9, gmpAnnualRate*10, gmpAnnualRate*11, gmpAnnualRate*12, gmpAnnualRate*13, gmpAnnualRate*14,gmpAnnualRate*15],
                             allowDecimals: false,
                             title: {
                                 text: ''

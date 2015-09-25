@@ -34,17 +34,8 @@
                     <td>{{$user->getEmailDisp()}}</td>
                     <td>{{$user->status}}</td>
                     <td>
-                        @if( \Illuminate\Support\Facades\Auth::user()->role_id == 4)
-                            @if( $user->status == 'INACTIVE' )
-                                <a href="{{ url('/companyUsers/activate/'.$user->id) }}" title="Active"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a> |
-                            @else
-                                <a href="{{ url('/companyUsers/destroy/'.$user->id) }}" onclick="return  confirm('Are you sure you want to disable {{$user->last_name}}, {{$user->first_name}}?');" title="Inactive"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a> |
-                            @endif
-                        @endif
-                        <a href="{{ url('/companyUsers/'.$user->id) }}" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
-                        <a href="{{ url('/companyUsers/statistics/'.$user->id) }}" title="Statistics"><span class="glyphicon glyphicon-stats"  aria-hidden="true"></span></a>|
-                        <a href="{{ url('/users/reset/'.$user->id) }}" title="Reset" ><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span></a>
                         <a href="{{ url('/companyUsers/sendEmail/'.$user->id) }}" title="Send Username and Password" ><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                        <a href="{{ url('/users/support/'.$user->id) }}" title="Support Standpoint" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
                     </td>
                 </tr>
             @endforeach

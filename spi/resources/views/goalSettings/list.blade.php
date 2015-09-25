@@ -84,7 +84,7 @@
                                             @foreach ($users as $user)
                                             <tr>
                                                 <td class="fixed-main-th-big"><a href="{{ url('/goalSettings/edit/'.$user->goalManagement->id) }}" class="gs-new-user-link"> {{ (strlen($user->first_name.' '.$user->last_name)>10)?substr(($user->first_name.' '.$user->last_name), 0 , 18) : $user->first_name.' '.$user->last_name }}</a></td>
-                                                <td class="fixed-main-th-small"><input onblur="calcAnnual( '{{$user->id}}' )" value="{{number_format($user->goalManagement->annual, 2, '.', ',')}}" id="annual{{$user->id}}" type="text" class="gs-new-input" style="width: 85px;"/> </td>
+                                                <td class="fixed-main-th-small"><input onblur="calcAnnual( 'annual' , '{{$user->id}}' ,'{{$user->goalManagement->id}}' )" value="{{number_format($user->goalManagement->annual, 2, '.', ',')}}" id="annual{{$user->id}}" type="text" class="gs-new-input" style="width: 85px;"/> </td>
                                                 <td class="vertical-table-separator"></td>
                                             </tr>
                                             <tr>
@@ -169,9 +169,11 @@
             
 <script type="application/javascript">
     
-    function calcAnnual( nid ){
+    function calcAnnual( nkey, nid , id_goals ){
         
         var pro = parseFloat( cleanMoney( document.getElementById('annual'+nid).value )) / 12;
+         
+        var amountRequest = parseFloat( cleanMoney( document.getElementById('annual'+nid).value ));
          
         pro = parseFloat( (pro+'').replace(/,/g, ""))
                 .toFixed(2)
@@ -195,6 +197,15 @@
                 .toFixed(2)
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")  ; 
+                
+        $.ajax({
+            url: '{{ url('updateGoals')}}',
+            type: "get",
+            data: {'id_goals_managers':id_goals, '_token': $('input[name=_token]').val(),month: nkey,amount: amountRequest},
+            success: function(data){
+              //alert(data); TODO: gestionar monto total
+            }
+          }); 
     }
     
     function setRequest(arg)

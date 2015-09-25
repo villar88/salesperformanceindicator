@@ -82,7 +82,7 @@
                                             <?php foreach($users as $user): ?>
                                             <tr>
                                                 <td class="fixed-main-th-big"><a href="<?php echo e(url('/goalSettings/edit/'.$user->goalManagement->id)); ?>" class="gs-new-user-link"> <?php echo e((strlen($user->first_name.' '.$user->last_name)>10)?substr(($user->first_name.' '.$user->last_name), 0 , 18) : $user->first_name.' '.$user->last_name); ?></a></td>
-                                                <td class="fixed-main-th-small"><input onblur="calcAnnual( '<?php echo e($user->id); ?>' )" value="<?php echo e(number_format($user->goalManagement->annual, 2, '.', ',')); ?>" id="annual<?php echo e($user->id); ?>" type="text" class="gs-new-input" style="width: 85px;"/> </td>
+                                                <td class="fixed-main-th-small"><input onblur="calcAnnual( 'annual' , '<?php echo e($user->id); ?>' ,'<?php echo e($user->goalManagement->id); ?>' )" value="<?php echo e(number_format($user->goalManagement->annual, 2, '.', ',')); ?>" id="annual<?php echo e($user->id); ?>" type="text" class="gs-new-input" style="width: 85px;"/> </td>
                                                 <td class="vertical-table-separator"></td>
                                             </tr>
                                             <tr>
@@ -114,40 +114,40 @@
                                                     <tr class="gs-new-table-row-moving">
                                                         <td class="fixed-td-small">
                                                             <!--<input type="text" value="888888888" class="gs-new-input">-->
-                                                            <input onblur="cleanup('jan', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->jan, 2, '.', ',')); ?>' )" type="text" name="jan[<?php echo e($user->id); ?>]" id="jan<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->jan, 2, '.', ',')); ?>" class="gs-new-input"/>
+                                                            <input onblur="cleanup('jan', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->jan, 2, '.', ',')); ?>','<?php echo e($user->goalManagement->id); ?>' )" type="text" name="jan[<?php echo e($user->id); ?>]" id="jan<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->jan, 2, '.', ',')); ?>" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('feb', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->feb, 2, '.', ',')); ?>' )" type="text" name="feb[<?php echo e($user->id); ?>]" id="feb<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->feb, 2, '.', ',')); ?>" class="gs-new-input"/>
+                                                            <input onblur="cleanup('feb', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->feb, 2, '.', ',')); ?>','<?php echo e($user->goalManagement->id); ?>' )" type="text" name="feb[<?php echo e($user->id); ?>]" id="feb<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->feb, 2, '.', ',')); ?>" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('mar', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->mar, 2, '.', ',')); ?>' )" type="text" name="mar[<?php echo e($user->id); ?>]" id="mar<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->mar, 2, '.', ',')); ?>" class="gs-new-input"/>
+                                                            <input onblur="cleanup('mar', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->mar, 2, '.', ',')); ?>','<?php echo e($user->goalManagement->id); ?>' )" type="text" name="mar[<?php echo e($user->id); ?>]" id="mar<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->mar, 2, '.', ',')); ?>" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('apr', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->apr, 2, '.', ',')); ?>' )" type="text" name="apr[<?php echo e($user->id); ?>]" id="apr<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->apr, 2, '.', ',')); ?>" class="gs-new-input"/>
+                                                            <input onblur="cleanup('apr', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->apr, 2, '.', ',')); ?>' ,'<?php echo e($user->goalManagement->id); ?>')" type="text" name="apr[<?php echo e($user->id); ?>]" id="apr<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->apr, 2, '.', ',')); ?>" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('may', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->may, 2, '.', ',')); ?>' )" type="text" name="may[<?php echo e($user->id); ?>]" id="may<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->may, 2, '.', ',')); ?>" class="gs-new-input"/>
+                                                            <input onblur="cleanup('may', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->may, 2, '.', ',')); ?>','<?php echo e($user->goalManagement->id); ?>' )" type="text" name="may[<?php echo e($user->id); ?>]" id="may<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->may, 2, '.', ',')); ?>" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('jun', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->jun, 2, '.', ',')); ?>' )" type="text" name="jun[<?php echo e($user->id); ?>]" id="jun<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->jun, 2, '.', ',')); ?>" class="gs-new-input"/>
+                                                            <input onblur="cleanup('jun', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->jun, 2, '.', ',')); ?>','<?php echo e($user->goalManagement->id); ?>' )" type="text" name="jun[<?php echo e($user->id); ?>]" id="jun<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->jun, 2, '.', ',')); ?>" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('jul', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->jul, 2, '.', ',')); ?>' )" type="text" name="jul[<?php echo e($user->id); ?>]" id="jul<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->jul, 2, '.', ',')); ?>" class="gs-new-input"/>
+                                                            <input onblur="cleanup('jul', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->jul, 2, '.', ',')); ?>','<?php echo e($user->goalManagement->id); ?>' )" type="text" name="jul[<?php echo e($user->id); ?>]" id="jul<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->jul, 2, '.', ',')); ?>" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('aug', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->aug, 2, '.', ',')); ?>' )" type="text" name="aug[<?php echo e($user->id); ?>]" id="aug<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->aug, 2, '.', ',')); ?>" class="gs-new-input"/>
+                                                            <input onblur="cleanup('aug', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->aug, 2, '.', ',')); ?>','<?php echo e($user->goalManagement->id); ?>' )" type="text" name="aug[<?php echo e($user->id); ?>]" id="aug<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->aug, 2, '.', ',')); ?>" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('sep', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->sep, 2, '.', ',')); ?>' )" type="text" name="sep[<?php echo e($user->id); ?>]" id="sep<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->sep, 2, '.', ',')); ?>" class="gs-new-input"/>
+                                                            <input onblur="cleanup('sep', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->sep, 2, '.', ',')); ?>','<?php echo e($user->goalManagement->id); ?>' )" type="text" name="sep[<?php echo e($user->id); ?>]" id="sep<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->sep, 2, '.', ',')); ?>" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('oct', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->oct, 2, '.', ',')); ?>' )" type="text" name="oct[<?php echo e($user->id); ?>]" id="oct<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->oct, 2, '.', ',')); ?>" class="gs-new-input"/>
+                                                            <input onblur="cleanup('oct', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->oct, 2, '.', ',')); ?>','<?php echo e($user->goalManagement->id); ?>' )" type="text" name="oct[<?php echo e($user->id); ?>]" id="oct<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->oct, 2, '.', ',')); ?>" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('nov', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->nov, 2, '.', ',')); ?>' )" type="text" name="nov[<?php echo e($user->id); ?>]" id="nov<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->nov, 2, '.', ',')); ?>" class="gs-new-input"/>
+                                                            <input onblur="cleanup('nov', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->nov, 2, '.', ',')); ?>' ,'<?php echo e($user->goalManagement->id); ?>')" type="text" name="nov[<?php echo e($user->id); ?>]" id="nov<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->nov, 2, '.', ',')); ?>" class="gs-new-input"/>
                                                         </td>
                                                         <td>
-                                                            <input onblur="cleanup('dec', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->dec, 2, '.', ',')); ?>' )" type="text" name="dec[<?php echo e($user->id); ?>]" id="dec<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->dec, 2, '.', ',')); ?>" class="gs-new-input"/>
+                                                            <input onblur="cleanup('dec', '<?php echo e($user->id); ?>','<?php echo e(number_format($user->goalManagement->dec, 2, '.', ',')); ?>','<?php echo e($user->goalManagement->id); ?>' )" type="text" name="dec[<?php echo e($user->id); ?>]" id="dec<?php echo e($user->id); ?>" value="<?php echo e(number_format($user->goalManagement->dec, 2, '.', ',')); ?>" class="gs-new-input"/>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -167,9 +167,11 @@
             
 <script type="application/javascript">
     
-    function calcAnnual( nid ){
+    function calcAnnual( nkey, nid , id_goals ){
         
         var pro = parseFloat( cleanMoney( document.getElementById('annual'+nid).value )) / 12;
+         
+        var amountRequest = parseFloat( cleanMoney( document.getElementById('annual'+nid).value ));
          
         pro = parseFloat( (pro+'').replace(/,/g, ""))
                 .toFixed(2)
@@ -193,6 +195,15 @@
                 .toFixed(2)
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")  ; 
+                
+        $.ajax({
+            url: '<?php echo e(url('updateGoals')); ?>',
+            type: "get",
+            data: {'id_goals_managers':id_goals, '_token': $('input[name=_token]').val(),month: nkey,amount: amountRequest},
+            success: function(data){
+              //alert(data); TODO: gestionar monto total
+            }
+          }); 
     }
     
     function setRequest(arg)
@@ -200,28 +211,43 @@
             $("#request").val(arg);
             }
 
-    function cleanup( nkey, nid, oldVal )
+    function cleanup( nkey, nid, oldVal ,id_goals)
     {
-        //console.log( nkey+' '+nid+' '+oldVal );
+        //console.log( nkey+' '+nid+' '+oldVal ); 
         //console.log( document.getElementById(nkey+nid).value  );
-        try {
-    
-            if(document.getElementById(nkey+nid).value == ''){
-                document.getElementById(nkey+nid).value = 0;
+        
+        if(document.getElementById(nkey + nid).value != ''){
+            try {
+
+                if(document.getElementById(nkey+nid).value == ''){
+                    document.getElementById(nkey+nid).value = 0;
+                }
+
+                document.getElementById('annual'+nid).value = parseFloat(computeAnnual( nid ).replace(/,/g, ""))
+                    .toFixed(2)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")  ;
+
+                document.getElementById(nkey+nid).value = parseFloat(numberWithCommas( cleanMoney(document.getElementById(nkey+nid).value) ).replace(/,/g, ""))
+                    .toFixed(2)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")  ;
+
+
+                var amountRequest = parseFloat( cleanMoney( document.getElementById(nkey + nid).value) );
+
+                $.ajax({
+                  url: '<?php echo e(url('updateGoals')); ?>',
+                  type: "get",
+                  data: {'id_goals_managers':id_goals, '_token': $('input[name=_token]').val(),month: nkey,amount: amountRequest},
+                  success: function(data){
+                    //alert(data); TODO: gestionar monto total
+                  }
+                }); 
+
+            }catch (err){
+                //alert( err )
             }
-
-            document.getElementById('annual'+nid).value = parseFloat(computeAnnual( nid ).replace(/,/g, ""))
-                .toFixed(2)
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")  ;
-
-            document.getElementById(nkey+nid).value = parseFloat(numberWithCommas( cleanMoney(document.getElementById(nkey+nid).value) ).replace(/,/g, ""))
-                .toFixed(2)
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")  ;
-                
-        }catch (err){
-            //alert( err )
         }
     }
 

@@ -113,6 +113,7 @@ class SecureController extends Controller {
                 ->select(DB::raw('sum(points.points) as monthlyTotal, points.month'))
                 ->where('points.user_id', '=', $user_id)
                 ->where('points.year', '=', date("Y"))
+                ->where('points.reset_enabled', '=', 0)
                 ->groupBy('points.month')
                 ->orderBy('points.month')
                 ->get();
@@ -123,6 +124,7 @@ class SecureController extends Controller {
                 ->select(DB::raw('sum(points.points) as monthlyTotal, points.month'))
                 ->where('points.year', '=', date("Y"))
                 ->where('users.manager_id', '=',Auth::user()->id )
+                ->where('points.reset_enabled', '=', 0)
                 ->groupBy('points.month')
                 ->orderBy('points.month')
                 ->get();
@@ -132,6 +134,7 @@ class SecureController extends Controller {
                 ->select(DB::raw('sum(points.points) as monthlyTotal, points.month'))
                 ->where('points.year', '=', date("Y"))
                 ->where('users.company_id', '=',Auth::user()->company_id )
+                ->where('points.reset_enabled', '=', 0)
                 ->groupBy('points.month')
                 ->orderBy('points.month')
                 ->get();
@@ -160,6 +163,7 @@ class SecureController extends Controller {
                 ->where(DB::raw( 'Date_format(date,"%W")' ), '!=', 'Saturday')
                 ->where(DB::raw( 'Date_format(date,"%W")' ), '!=', 'Sunday')
                 ->where('point_audits.user_id', '=', $user_id)
+                ->where('point_audits.reset_enabled', '=', 0)
                 ->orderBy('point_audits.date')
                 ->get();
         }else{
@@ -172,6 +176,7 @@ class SecureController extends Controller {
                 ->where(DB::raw( 'Date_format(date,"%W")' ), '!=', 'Saturday')
                 ->where(DB::raw( 'Date_format(date,"%W")' ), '!=', 'Sunday')
                 ->where('users.manager_id', '=',Auth::user()->id )
+                ->where('point_audits.reset_enabled', '=', 0)
                 ->orderBy('point_audits.date')
                 ->get();
             }else{
@@ -183,6 +188,7 @@ class SecureController extends Controller {
                 ->where(DB::raw( 'Date_format(date,"%W")' ), '!=', 'Saturday')
                 ->where(DB::raw( 'Date_format(date,"%W")' ), '!=', 'Sunday')
                 ->where('users.company_id', '=',Auth::user()->company_id )
+                ->where('point_audits.reset_enabled', '=', 0)
                 ->orderBy('point_audits.date')
                 ->get();
             }
@@ -222,6 +228,7 @@ class SecureController extends Controller {
                 ->where('sales.user_id', '=', $user_id)
                 ->where('sales.saleType_id', '=', 1)
                 ->where('sales.year', '=', date("Y"))
+                ->where('sales.reset_enabled', '=', 0)
                 ->groupBy('sales.month')
                 ->get();
         }else{
@@ -232,6 +239,7 @@ class SecureController extends Controller {
                 ->where('sales.saleType_id', '=', 1)
                 ->where('sales.year', '=', date("Y"))
                 ->where('users.manager_id', '=',Auth::user()->id )
+                ->where('sales.reset_enabled', '=', 0)
                 ->groupBy('sales.month')
                 ->get();
             }else{
@@ -241,6 +249,7 @@ class SecureController extends Controller {
                 ->where('sales.saleType_id', '=', 1)
                 ->where('sales.year', '=', date("Y"))
                 ->where('users.company_id', '=',Auth::user()->company_id )
+                ->where('sales.reset_enabled', '=', 0)
                 ->groupBy('sales.month')
                 ->get();
             }
@@ -265,6 +274,7 @@ class SecureController extends Controller {
                 ->select(DB::raw('sum(sales.sale) as yearlyTotal, sales.year'))
                 ->where('sales.user_id', '=', $user_id)
                 ->where('sales.saleType_id', '=', 1)
+                ->where('sales.reset_enabled', '=', 0)
                 ->groupBy('sales.year')
                 ->get();
         
@@ -275,6 +285,7 @@ class SecureController extends Controller {
                 ->select(DB::raw('sum(sales.sale) as yearlyTotal, sales.year'))
                 ->where('sales.saleType_id', '=', 1)
                 ->where('users.manager_id', '=',Auth::user()->id )
+                ->where('sales.reset_enabled', '=', 0)
                 ->groupBy('sales.year')
                 ->get();
             }else{
@@ -283,6 +294,7 @@ class SecureController extends Controller {
                 ->select(DB::raw('sum(sales.sale) as yearlyTotal, sales.year'))
                 ->where('sales.saleType_id', '=', 1)
                 ->where('users.company_id', '=',Auth::user()->company_id )
+                ->where('sales.reset_enabled', '=', 0)
                 ->groupBy('sales.year')
                 ->get();
             }
@@ -305,6 +317,7 @@ class SecureController extends Controller {
                 ->where('sales.user_id', '=', $user_id)
                 ->where('sales.saleType_id', '=', 2)
                 ->where('sales.year', '=', date("Y"))
+                ->where('sales.reset_enabled', '=', 0)
                 ->groupBy('sales.month')
                 ->get();
         }else{
@@ -315,6 +328,7 @@ class SecureController extends Controller {
                 ->where('sales.saleType_id', '=', 2)
                 ->where('sales.year', '=', date("Y"))
                 ->where('users.manager_id', '=',Auth::user()->id )
+                ->where('sales.reset_enabled', '=', 0)
                 ->groupBy('sales.month')
                 ->get();
             }else{
@@ -324,6 +338,7 @@ class SecureController extends Controller {
                 ->where('sales.saleType_id', '=', 2)
                 ->where('sales.year', '=', date("Y"))
                 ->where('users.company_id', '=',Auth::user()->company_id )
+                ->where('sales.reset_enabled', '=', 0)
                 ->groupBy('sales.month')
                 ->get();
             }
@@ -348,6 +363,7 @@ class SecureController extends Controller {
                 ->select(DB::raw('sum(sales.sale) as yearlyTotal, sales.year'))
                 ->where('sales.user_id', '=', $user_id)
                 ->where('sales.saleType_id', '=', 2)
+                ->where('sales.reset_enabled', '=', 0)
                 ->groupBy('sales.year')
                 ->get();
         }else{
@@ -357,6 +373,7 @@ class SecureController extends Controller {
                 ->select(DB::raw('sum(sales.sale) as yearlyTotal, sales.year'))
                 ->where('sales.saleType_id', '=', 2)
                 ->where('users.manager_id', '=',Auth::user()->id )
+                ->where('sales.reset_enabled', '=', 0)
                 ->groupBy('sales.year')
                 ->get();
             }else{
@@ -365,6 +382,7 @@ class SecureController extends Controller {
                 ->select(DB::raw('sum(sales.sale) as yearlyTotal, sales.year'))
                 ->where('sales.saleType_id', '=', 2)
                 ->where('users.company_id', '=',Auth::user()->company_id )
+                ->where('sales.reset_enabled', '=', 0)
                 ->groupBy('sales.year')
                 ->get();
             }
@@ -388,6 +406,7 @@ class SecureController extends Controller {
                 //->join('goal_managements', 'my_stats.user_id', '=', 'goal_managements.user_id')
                 ->where(DB::raw('concat(DATE_FORMAT(my_stats.date, \'%m\'), DATE_FORMAT(date, \'%Y\'))'), '=', DB::raw('concat(DATE_FORMAT(curdate(), \'%m\'), DATE_FORMAT(curdate(), \'%Y\'))'))
                 ->where('my_stats.user_id', '=', $user_id)
+                ->where('my_stats.reset_enabled', '=', 0)
                 ->groupBy('my_stats.date')
                 ->orderBy('day')
                 ->get();
@@ -444,24 +463,25 @@ class SecureController extends Controller {
             $recruiting = DB::table('point_audits')
                 ->select(DB::raw(
                                 ' IfNULL(sum(point), 0 ) as recruitingPresentationToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where task_id = 1 and user_id = ' . $id . ' ) as recruitingPresentationOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 2 and user_id = ' . $id . ' ) as recruitingHitToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 2 and user_id = ' . $id . ' ) as recruitingHitOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 4 and user_id = ' . $id . ' ) as candidateInterviewToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 4 and user_id = ' . $id . ' ) as candidateInterviewOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where date = current_date() and task_id = 5 and user_id = ' . $id . ' ) as interviewReactivatedCandidateToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where task_id = 5 and user_id = ' . $id . ' ) as interviewReactivatedCandidateOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 5 and user_id = ' . $id . ' ) as interviewReactivatedCandidateToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 5 and user_id = ' . $id . ' ) as interviewReactivatedCandidateOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 9 and user_id = ' . $id . ' ) as fillOrPlacementToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 9 and user_id = ' . $id . ' ) as fillOrPlacementOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 7 and user_id = ' . $id . ' ) as sendOutRToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 7 and user_id = ' . $id . ' ) as sendOutROngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 6 and user_id = ' . $id . ' ) as sendOutInterviewToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 6 and user_id = ' . $id . ' ) as sendOutInterviewOngoing '
+                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where task_id = 1 and reset_enabled = 0 and user_id = ' . $id . ' ) as recruitingPresentationOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 2 and reset_enabled = 0 and user_id = ' . $id . ' ) as recruitingHitToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 2 and reset_enabled = 0 and user_id = ' . $id . ' ) as recruitingHitOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 4 and reset_enabled = 0 and user_id = ' . $id . ' ) as candidateInterviewToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 4 and reset_enabled = 0 and user_id = ' . $id . ' ) as candidateInterviewOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where date = current_date() and task_id = 5 and reset_enabled = 0 and user_id = ' . $id . ' ) as interviewReactivatedCandidateToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where task_id = 5 and reset_enabled = 0 and user_id = ' . $id . ' ) as interviewReactivatedCandidateOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 5 and reset_enabled = 0 and user_id = ' . $id . ' ) as interviewReactivatedCandidateToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 5 and reset_enabled = 0 and user_id = ' . $id . ' ) as interviewReactivatedCandidateOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 9 and reset_enabled = 0 and user_id = ' . $id . ' ) as fillOrPlacementToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 9 and reset_enabled = 0 and user_id = ' . $id . ' ) as fillOrPlacementOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 7 and reset_enabled = 0 and user_id = ' . $id . ' ) as sendOutRToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 7 and reset_enabled = 0 and user_id = ' . $id . ' ) as sendOutROngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 6 and reset_enabled = 0 and user_id = ' . $id . ' ) as sendOutInterviewToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 6 and reset_enabled = 0 and user_id = ' . $id . ' ) as sendOutInterviewOngoing '
                         ))
                 ->where('date', '=', DB::raw('current_date()'))
                 ->where('task_id', '=', 1)
+                ->where('reset_enabled', '=', 0)
                 ->where('user_id', '=', $id)
                 ->first();
         }else{
@@ -471,24 +491,25 @@ class SecureController extends Controller {
                 ->join('users', 'point_audits.user_id', '=', 'users.id')
                 ->select(DB::raw(
                                 ' IfNULL(sum(point), 0 ) as recruitingPresentationToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where task_id = 1 ) as recruitingPresentationOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 2 ) as recruitingHitToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 2 ) as recruitingHitOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 4 ) as candidateInterviewToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 4 ) as candidateInterviewOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where date = current_date() and task_id = 5 ) as interviewReactivatedCandidateToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where task_id = 5 ) as interviewReactivatedCandidateOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 5 ) as interviewReactivatedCandidateToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 5 ) as interviewReactivatedCandidateOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 9 ) as fillOrPlacementToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 9 ) as fillOrPlacementOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 7 ) as sendOutRToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 7 ) as sendOutROngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 6 ) as sendOutInterviewToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 6 ) as sendOutInterviewOngoing '
+                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 1  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as recruitingPresentationOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 2  and reset_enabled = 0 and manager_id= '.Auth::user()->id.' ) as recruitingHitToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 2  and reset_enabled = 0 and manager_id= '.Auth::user()->id.' ) as recruitingHitOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 4  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as candidateInterviewToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 4  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as candidateInterviewOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 5  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as interviewReactivatedCandidateToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 5  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as interviewReactivatedCandidateOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 5  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as interviewReactivatedCandidateToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 5  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as interviewReactivatedCandidateOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 9  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as fillOrPlacementToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 9  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as fillOrPlacementOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 7  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as sendOutRToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 7  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as sendOutROngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 6  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as sendOutInterviewToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 6  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as sendOutInterviewOngoing '
                         ))
                 ->where('date', '=', DB::raw('current_date()'))
                 ->where('task_id', '=', 1)
+                ->where('reset_enabled', '=', 0)
                 ->where('users.manager_id', '=',Auth::user()->id )
                 ->first();
             }else{
@@ -496,24 +517,25 @@ class SecureController extends Controller {
                 ->join('users', 'point_audits.user_id', '=', 'users.id')
                 ->select(DB::raw(
                                 ' IfNULL(sum(point), 0 ) as recruitingPresentationToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where task_id = 1 ) as recruitingPresentationOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 2 ) as recruitingHitToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 2 ) as recruitingHitOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 4 ) as candidateInterviewToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 4 ) as candidateInterviewOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where date = current_date() and task_id = 5 ) as interviewReactivatedCandidateToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where task_id = 5 ) as interviewReactivatedCandidateOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 5 ) as interviewReactivatedCandidateToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 5 ) as interviewReactivatedCandidateOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 9 ) as fillOrPlacementToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 9 ) as fillOrPlacementOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 7 ) as sendOutRToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 7 ) as sendOutROngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 6 ) as sendOutInterviewToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 6 ) as sendOutInterviewOngoing '
+                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 1  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as recruitingPresentationOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 2  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as recruitingHitToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 2  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as recruitingHitOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 4  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as candidateInterviewToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 4  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as candidateInterviewOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 5  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as interviewReactivatedCandidateToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 5  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as interviewReactivatedCandidateOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 5  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as interviewReactivatedCandidateToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 5  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as interviewReactivatedCandidateOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 9  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as fillOrPlacementToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 9  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as fillOrPlacementOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 7  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as sendOutRToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 7  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as sendOutROngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 6  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as sendOutInterviewToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 6  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as sendOutInterviewOngoing '
                         ))
                 ->where('date', '=', DB::raw('current_date()'))
                 ->where('task_id', '=', 1)
+                ->where('reset_enabled', '=', 0)
                 ->where('users.company_id', '=',Auth::user()->company_id )
                 ->first();
             }
@@ -704,24 +726,25 @@ class SecureController extends Controller {
             $clientDev = DB::table('point_audits')
                 ->select(DB::raw(
                                 ' IfNULL( sum(point), 0) as marketingCallToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where task_id = 10 and user_id = ' . $id . ' ) as marketingCallOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 11 and user_id = ' . $id . ' ) as mPCPresentationToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 11 and user_id = ' . $id . ' ) as mPCPresentationOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 12 and user_id = ' . $id . ' ) as jobOrderContractTempAssignmentMpcToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 12 and user_id = ' . $id . ' ) as jobOrderContractTempAssignmentMpcOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 16 and user_id = ' . $id . ' ) as fillBySelfToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 16 and user_id = ' . $id . ' ) as fillBySelfOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 17 and user_id = ' . $id . ' ) as fillByOtherToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 17 and user_id = ' . $id . ' ) as fillByOtherOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 14 and user_id = ' . $id . ' ) as submittalToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 14 and user_id = ' . $id . ' ) as submittalOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 15 and user_id = ' . $id . ' ) as sendOutToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 15 and user_id = ' . $id . ' ) as sendOutOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 13 and user_id = ' . $id . ' ) as jobOrderContractTempAssignmentMarketingToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 13 and user_id = ' . $id . ' ) as jobOrderContractTempAssignmentMarketingOngoing '
+                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where task_id = 10 and reset_enabled = 0 and user_id = ' . $id . ' ) as marketingCallOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 11 and reset_enabled = 0 and user_id = ' . $id . ' ) as mPCPresentationToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 11 and reset_enabled = 0 and user_id = ' . $id . ' ) as mPCPresentationOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 12 and reset_enabled = 0 and user_id = ' . $id . ' ) as jobOrderContractTempAssignmentMpcToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 12 and reset_enabled = 0 and user_id = ' . $id . ' ) as jobOrderContractTempAssignmentMpcOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 16 and reset_enabled = 0 and user_id = ' . $id . ' ) as fillBySelfToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 16 and reset_enabled = 0 and user_id = ' . $id . ' ) as fillBySelfOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 17 and reset_enabled = 0 and user_id = ' . $id . ' ) as fillByOtherToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 17 and reset_enabled = 0 and user_id = ' . $id . ' ) as fillByOtherOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 14 and reset_enabled = 0 and user_id = ' . $id . ' ) as submittalToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 14 and reset_enabled = 0 and user_id = ' . $id . ' ) as submittalOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 15 and reset_enabled = 0 and user_id = ' . $id . ' ) as sendOutToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 15 and reset_enabled = 0 and user_id = ' . $id . ' ) as sendOutOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 13 and reset_enabled = 0 and user_id = ' . $id . ' ) as jobOrderContractTempAssignmentMarketingToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 13 and reset_enabled = 0 and user_id = ' . $id . ' ) as jobOrderContractTempAssignmentMarketingOngoing '
                         ))
                 ->where('date', '=', DB::raw('current_date()'))
                 ->where('task_id', '=', 10)
+                ->where('reset_enabled', '=', 0)
                 ->where('user_id', '=', $id)
                 ->first();
         }else{
@@ -730,24 +753,25 @@ class SecureController extends Controller {
                 ->join('users', 'point_audits.user_id', '=', 'users.id')
                 ->select(DB::raw(
                                 ' IfNULL( sum(point), 0) as marketingCallToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where task_id = 10 ) as marketingCallOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 11 ) as mPCPresentationToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 11 ) as mPCPresentationOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 12 ) as jobOrderContractTempAssignmentMpcToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 12 ) as jobOrderContractTempAssignmentMpcOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 16 ) as fillBySelfToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 16 ) as fillBySelfOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 17 ) as fillByOtherToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 17 ) as fillByOtherOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 14 ) as submittalToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 14 ) as submittalOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 15 ) as sendOutToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 15 ) as sendOutOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 13 ) as jobOrderContractTempAssignmentMarketingToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 13 ) as jobOrderContractTempAssignmentMarketingOngoing '
+                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 10  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as marketingCallOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 11  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as mPCPresentationToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 11  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as mPCPresentationOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 12  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as jobOrderContractTempAssignmentMpcToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 12  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as jobOrderContractTempAssignmentMpcOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 16  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as fillBySelfToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 16  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as fillBySelfOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 17  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as fillByOtherToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 17  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as fillByOtherOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 14  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as submittalToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 14  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as submittalOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 15  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as sendOutToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 15  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as sendOutOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 13  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as jobOrderContractTempAssignmentMarketingToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 13  and reset_enabled = 0 and manager_id= '.Auth::user()->id.') as jobOrderContractTempAssignmentMarketingOngoing '
                         ))
                 ->where('date', '=', DB::raw('current_date()'))
                 ->where('task_id', '=', 10)
+                ->where('reset_enabled', '=', 0)
                 ->where('users.manager_id', '=',Auth::user()->id )
                 ->first();
             }else{
@@ -755,24 +779,25 @@ class SecureController extends Controller {
                 ->join('users', 'point_audits.user_id', '=', 'users.id')
                 ->select(DB::raw(
                                 ' IfNULL( sum(point), 0) as marketingCallToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where task_id = 10 ) as marketingCallOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 11 ) as mPCPresentationToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 11 ) as mPCPresentationOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 12 ) as jobOrderContractTempAssignmentMpcToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 12 ) as jobOrderContractTempAssignmentMpcOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 16 ) as fillBySelfToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 16 ) as fillBySelfOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 17 ) as fillByOtherToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 17 ) as fillByOtherOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 14 ) as submittalToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 14 ) as submittalOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 15 ) as sendOutToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 15 ) as sendOutOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 13 ) as jobOrderContractTempAssignmentMarketingToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 13 ) as jobOrderContractTempAssignmentMarketingOngoing '
+                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 10  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as marketingCallOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 11  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as mPCPresentationToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 11  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as mPCPresentationOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 12  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as jobOrderContractTempAssignmentMpcToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 12  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as jobOrderContractTempAssignmentMpcOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 16  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as fillBySelfToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 16  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as fillBySelfOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 17  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as fillByOtherToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 17  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as fillByOtherOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 14  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as submittalToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 14  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as submittalOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 15  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as sendOutToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 15  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as sendOutOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 13  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as jobOrderContractTempAssignmentMarketingToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 13  and reset_enabled = 0 and users.company_id= '.Auth::user()->company_id.') as jobOrderContractTempAssignmentMarketingOngoing '
                         ))
                 ->where('date', '=', DB::raw('current_date()'))
                 ->where('task_id', '=', 10)
+                ->where('reset_enabled', '=', 0)
                 ->where('users.company_id', '=',Auth::user()->company_id )
                 ->first();
             }
@@ -990,24 +1015,25 @@ class SecureController extends Controller {
             $clientDevOut = DB::table('point_audits')
                 ->select(DB::raw(
                                 ' IfNULL( sum(point), 0) as completeFaceToFaceAppointmentToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where task_id = 19 and user_id = ' . $id . ' ) as completeFaceToFaceAppointmentOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 22 and user_id = ' . $id . ' ) as jobOrderContractTempAssignmentToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 22 and user_id = ' . $id . ' ) as jobOrderContractTempAssignmentOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 20 and user_id = ' . $id . ' ) as marketingCallToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 20 and user_id = ' . $id . ' ) as marketingCallOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 21 and user_id = ' . $id . ' ) as mPCPresentationToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 21 and user_id = ' . $id . ' ) as mPCPresentationOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 23 and user_id = ' . $id . ' ) as mpcJOToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 23 and user_id = ' . $id . ' ) as mpcJOOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 24 and user_id = ' . $id . ' ) as fillSelfToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 24 and user_id = ' . $id . ' ) as fillSelfOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 25 and user_id = ' . $id . ' ) as fillOtherToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 25 and user_id = ' . $id . ' ) as fillOtherOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 26 and user_id = ' . $id . ' ) as sendOutToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 26 and user_id = ' . $id . ' ) as sendOutOngoing '
+                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where task_id = 19 and reset_enabled = 0 and user_id = ' . $id . ' ) as completeFaceToFaceAppointmentOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 22 and reset_enabled = 0 and user_id = ' . $id . ' ) as jobOrderContractTempAssignmentToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 22 and reset_enabled = 0 and user_id = ' . $id . ' ) as jobOrderContractTempAssignmentOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 20 and reset_enabled = 0 and user_id = ' . $id . ' ) as marketingCallToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 20 and reset_enabled = 0 and user_id = ' . $id . ' ) as marketingCallOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 21 and reset_enabled = 0 and user_id = ' . $id . ' ) as mPCPresentationToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 21 and reset_enabled = 0 and user_id = ' . $id . ' ) as mPCPresentationOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 23 and reset_enabled = 0 and user_id = ' . $id . ' ) as mpcJOToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 23 and reset_enabled = 0 and user_id = ' . $id . ' ) as mpcJOOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 24 and reset_enabled = 0 and user_id = ' . $id . ' ) as fillSelfToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 24 and reset_enabled = 0 and user_id = ' . $id . ' ) as fillSelfOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 25 and reset_enabled = 0 and user_id = ' . $id . ' ) as fillOtherToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 25 and reset_enabled = 0 and user_id = ' . $id . ' ) as fillOtherOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 26 and reset_enabled = 0 and user_id = ' . $id . ' ) as sendOutToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 26 and reset_enabled = 0 and user_id = ' . $id . ' ) as sendOutOngoing '
                         ))
                 ->where('date', '=', DB::raw('current_date()'))
                 ->where('task_id', '=', 19)
+                ->where('reset_enabled', '=', 0)
                 ->where('user_id', '=', $id)
                 ->first();
         }else{
@@ -1016,24 +1042,25 @@ class SecureController extends Controller {
                 ->join('users', 'point_audits.user_id', '=', 'users.id')
                 ->select(DB::raw(
                                 ' IfNULL( sum(point), 0) as completeFaceToFaceAppointmentToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where task_id = 19 ) as completeFaceToFaceAppointmentOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 22 ) as jobOrderContractTempAssignmentToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 22 ) as jobOrderContractTempAssignmentOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 20 ) as marketingCallToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 20 ) as marketingCallOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 21 ) as mPCPresentationToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 21 ) as mPCPresentationOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 23 ) as mpcJOToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 23 ) as mpcJOOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 24 ) as fillSelfToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 24 ) as fillSelfOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 25 ) as fillOtherToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 25 ) as fillOtherOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 26 ) as sendOutToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 26 ) as sendOutOngoing '
+                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 19 and reset_enabled = 0  and manager_id= '.Auth::user()->id.') as completeFaceToFaceAppointmentOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 22 and reset_enabled = 0  and manager_id= '.Auth::user()->id.') as jobOrderContractTempAssignmentToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 22 and reset_enabled = 0  and manager_id= '.Auth::user()->id.') as jobOrderContractTempAssignmentOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 20 and reset_enabled = 0  and manager_id= '.Auth::user()->id.') as marketingCallToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 20 and reset_enabled = 0  and manager_id= '.Auth::user()->id.') as marketingCallOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 21 and reset_enabled = 0  and manager_id= '.Auth::user()->id.') as mPCPresentationToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 21 and reset_enabled = 0  and manager_id= '.Auth::user()->id.') as mPCPresentationOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 23 and reset_enabled = 0  and manager_id= '.Auth::user()->id.') as mpcJOToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 23 and reset_enabled = 0  and manager_id= '.Auth::user()->id.') as mpcJOOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 24 and reset_enabled = 0  and manager_id= '.Auth::user()->id.') as fillSelfToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 24 and reset_enabled = 0  and manager_id= '.Auth::user()->id.') as fillSelfOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 25 and reset_enabled = 0  and manager_id= '.Auth::user()->id.') as fillOtherToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 25 and reset_enabled = 0  and manager_id= '.Auth::user()->id.') as fillOtherOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 26 and reset_enabled = 0  and manager_id= '.Auth::user()->id.') as sendOutToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 26 and reset_enabled = 0  and manager_id= '.Auth::user()->id.') as sendOutOngoing '
                         ))
                 ->where('date', '=', DB::raw('current_date()'))
                 ->where('task_id', '=', 19)
+                ->where('reset_enabled', '=', 0)
                 ->where('users.manager_id', '=',Auth::user()->id )
                 ->first();
             }else{
@@ -1041,24 +1068,25 @@ class SecureController extends Controller {
                 ->join('users', 'point_audits.user_id', '=', 'users.id')
                 ->select(DB::raw(
                                 ' IfNULL( sum(point), 0) as completeFaceToFaceAppointmentToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits where task_id = 19 ) as completeFaceToFaceAppointmentOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 22 ) as jobOrderContractTempAssignmentToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 22 ) as jobOrderContractTempAssignmentOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 20 ) as marketingCallToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 20 ) as marketingCallOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 21 ) as mPCPresentationToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 21 ) as mPCPresentationOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 23 ) as mpcJOToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 23 ) as mpcJOOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 24 ) as fillSelfToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 24 ) as fillSelfOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 25 ) as fillOtherToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 25 ) as fillOtherOngoing, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where date = current_date() and task_id = 26 ) as sendOutToday, ' .
-                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits where task_id = 26 ) as sendOutOngoing '
+                                '( SELECT IfNULL( sum(point), 0 ) FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 19 and reset_enabled = 0  and users.company_id= '.Auth::user()->company_id.') as completeFaceToFaceAppointmentOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 22 and reset_enabled = 0  and users.company_id= '.Auth::user()->company_id.') as jobOrderContractTempAssignmentToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 22 and reset_enabled = 0  and users.company_id= '.Auth::user()->company_id.') as jobOrderContractTempAssignmentOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 20 and reset_enabled = 0  and users.company_id= '.Auth::user()->company_id.') as marketingCallToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 20 and reset_enabled = 0  and users.company_id= '.Auth::user()->company_id.') as marketingCallOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 21 and reset_enabled = 0  and users.company_id= '.Auth::user()->company_id.') as mPCPresentationToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 21 and reset_enabled = 0  and users.company_id= '.Auth::user()->company_id.') as mPCPresentationOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 23 and reset_enabled = 0  and users.company_id= '.Auth::user()->company_id.') as mpcJOToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 23 and reset_enabled = 0  and users.company_id= '.Auth::user()->company_id.') as mpcJOOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 24 and reset_enabled = 0  and users.company_id= '.Auth::user()->company_id.') as fillSelfToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 24 and reset_enabled = 0  and users.company_id= '.Auth::user()->company_id.') as fillSelfOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 25 and reset_enabled = 0  and users.company_id= '.Auth::user()->company_id.') as fillOtherToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 25 and reset_enabled = 0  and users.company_id= '.Auth::user()->company_id.') as fillOtherOngoing, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where date = current_date() and task_id = 26 and reset_enabled = 0  and users.company_id= '.Auth::user()->company_id.') as sendOutToday, ' .
+                                '( SELECT IfNULL( sum(point), 0 )  FROM point_audits INNER JOIN users ON user_id=users.id where task_id = 26 and reset_enabled = 0  and users.company_id= '.Auth::user()->company_id.') as sendOutOngoing '
                         ))
                 ->where('date', '=', DB::raw('current_date()'))
                 ->where('task_id', '=', 19)
+                ->where('reset_enabled', '=', 0)
                 ->where('users.company_id', '=',Auth::user()->company_id )
                 ->first();
             }
@@ -1267,6 +1295,7 @@ class SecureController extends Controller {
             ->select(DB::raw('case when SUM(point*value)<1 then 0 else SUM(point*value) end as total, date'))
             ->where('date', '=', DB::raw( 'current_date()' ))
             ->where('user_id', '=', $user->id)
+            ->where('reset_enabled', '=', 0)
             ->groupBy('user_id')
             ->first();
         }else{
@@ -1277,6 +1306,7 @@ class SecureController extends Controller {
                 ->select(DB::raw('case when SUM(point*value)<1 then 0 else SUM(point*value) end as total, date'))
                 ->where('date', '=', DB::raw( 'current_date()' ))
                 ->where('users.manager_id', '=',Auth::user()->id )
+                ->where('reset_enabled', '=', 0)
                 ->first();
             }else{
                 return DB::table('point_audits')
@@ -1284,6 +1314,7 @@ class SecureController extends Controller {
                 ->join('users', 'point_audits.user_id', '=', 'users.id')
                 ->select(DB::raw('case when SUM(point*value)<1 then 0 else SUM(point*value) end as total, date'))
                 ->where('date', '=', DB::raw( 'current_date()' ))
+                ->where('reset_enabled', '=', 0)
                 ->where('users.company_id', '=',Auth::user()->company_id )
                 ->first();
             }

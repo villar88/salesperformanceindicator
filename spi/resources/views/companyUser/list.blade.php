@@ -14,7 +14,7 @@
             <div class="col-md-10 col-md-offset-1">
 
                 
-                @include('companyUser/_companyuserlist');
+                @include('companyUser/_companyuserlist')
             </div>
         </div>
 

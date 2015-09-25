@@ -6,7 +6,7 @@
 <body>
 <div>
 
-    <p>Dear, {{{ $first_name }}}!</p>
+    <p>Dear, <?php echo e($first_name); ?>!</p>
 
     <p>
         Here is your login information and your password:
@@ -14,8 +14,8 @@
 
     <p>
         URL:  http://salesperformanceindicator.com/app/auth/login <br/>
-        Username: {{{ $user_name }}}    <br/>
-        Password:  {{{ $password }}}   <br/>
+        Username: <?php echo e($user_name); ?>    <br/>
+        Password:  <?php echo e($password); ?>   <br/>
     </p>
 
     <p>

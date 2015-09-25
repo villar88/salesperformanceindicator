@@ -89,6 +89,7 @@ class UserController extends SecureController{
         $userPassword->user_id=$user->id;
         $userPassword->crypt_password=\Crypt::encrypt($password);
         $userPassword->updated_at=new \DateTime();
+        $userPassword->created_at=new \DateTime();
         $userPassword->save();
         
         $contactEmail = $user->email;

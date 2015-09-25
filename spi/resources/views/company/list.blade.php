@@ -107,11 +107,13 @@
                                                     <td class="col-xs-7 text-right td-vcenter">
                                                         <a href="{{ url('/licenses/list/'.$company->id) }}" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> 
                                         <a href="{{ url('/companies/'.$company->id) }}" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                        <a href="{{ url('/licenses/list/'.$company->id) }}" title="Delete" ><span class="glyphicon glyphicon-fire" aria-hidden="true"></span></a> 
                                         @if( $company->status == 'INACTIVE' )
                                             <a href="{{ url('/companies/activate/'.$company->id) }}" title="Activate"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a>
                                         @else
-                                            <a href="{{ url('/companies/destroy/'.$company->id) }}" title="Desactivate" onclick="return  confirm('Are you sure you want to disable {{$company->name}}?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                            <a href="{{ url('/companies/destroy/'.$company->id) }}" title="Inactivate" onclick="return  confirm('Are you sure you want to inactive {{$company->name}}?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
                                         @endif
+                                        
                                                     </td>
                                                 </tr>
                                             </table>
@@ -148,10 +150,11 @@
                                     <td>
                                         <a href="{{ url('/licenses/list/'.$company->id) }}" title="Manage Licenses" ><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> 
                                         <a href="{{ url('/companies/'.$company->id) }}" title="Edit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> |
+                                        <a href="{{ url('/companies/delete/'.$company->id) }}" title="Delete" onclick="if(confirm('Are you sure? This will delete the company {{$company->name}} and all of its users.?')){return confirm('Are you double sure? We just have to check. This cannot be undone.');}"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span></a> 
                                         @if( $company->status == 'INACTIVE' )
                                             <a href="{{ url('/companies/activate/'.$company->id) }}" title="Activate"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a>
                                         @else
-                                            <a href="{{ url('/companies/destroy/'.$company->id) }}" title="Desactivate" onclick="return  confirm('Are you sure you want to disable {{$company->name}}?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
+                                            <a href="{{ url('/companies/destroy/'.$company->id) }}" title="Inactivate" onclick="return  confirm('Are you sure you want to inactive {{$company->name}}?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
                                         @endif
                                     </td>
                                 </tr>
@@ -163,7 +166,7 @@
                         <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-8 text-center">
-                            <?php echo $companies->render(); ?>
+                            {!! str_replace('/?', '?', $companies->render()) !!}
                         </div>
                         <div class="col-md-2"></div>
                     </div>

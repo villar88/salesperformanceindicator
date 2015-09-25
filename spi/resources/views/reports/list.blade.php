@@ -276,20 +276,6 @@
 
             <div class="tab-pane fade {{ ( $activeTab == 'other' ) ? 'active in' : ''  }}" id="other">
                 <div class="row ">
-                    @foreach( $saleTypes as $saleType )
-                    <div class="col-lg-4">
-                        <div class="bs-component">
-                            <div class="panel panel-default">
-                                <div class="panel-body other-panel-style">
-                                    <div class="col-lg-3">
-                                        <h1>Another Thing</h1>
-                                        <a href="{{ url('/reports/findByStatus') }}" title="Edit" ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
                 </div>
             </div>
 

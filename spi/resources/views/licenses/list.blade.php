@@ -67,11 +67,6 @@
                         @endif
                     <td>{{ $license->status }}</td>
                     <td>
-                        @if( $license->status == 'INACTIVE' )
-                        <a href="{{ url('/licenses/activate/'.$license->id) }}" title="Activate"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a>
-                        @else
-                        <a href="{{ url('/licenses/destroy/'.$license->id) }}" title="Inactive" onclick="return  confirm('Owners within the Sales Performance Indicator software have the ability to deactivate a user.  Your cancellation will take effect on your next billing date.  Refunds will not be provided for deactivation during a billing cycle.\n\nAre you sure?');"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>
-                        @endif
                         @if( $license->user_id != 0 )
                         <a href="{{ url('/licenses/remove/'.$license->id) }}" title="Remove User" onclick="return  confirm('Owners within the Sales Performance Indicator software have the ability to remove a user.  Once you remove a user, we cannot retrieve any data.  Your cancellation will take effect on your next billing date.  Refunds will not be provided for the removed user during a billing cycle.\n\nAre you sure?');"><span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                         @endif

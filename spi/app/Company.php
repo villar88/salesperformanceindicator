@@ -16,7 +16,7 @@ class Company extends MetricsModel {
      *
      * @var array
      */
-    protected $fillable = ['name', 'created_by', 'updated_by'];
+    protected $fillable = ['name', 'created_by', 'updated_by','status'];
 
     public $timestamps = true;
 

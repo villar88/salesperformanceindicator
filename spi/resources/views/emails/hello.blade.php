@@ -25,7 +25,7 @@
     </p>
 
     <p>
-        URL:  http://salesperformanceindicator.com/auth/login <br/>
+        URL:  http://salesperformanceindicator.com/app/auth/login <br/>
         Username: {{{ $user_name }}}    <br/>
         Password:  {{{ $password }}}   <br/>
     </p>

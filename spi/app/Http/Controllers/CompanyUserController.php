@@ -142,6 +142,12 @@ class CompanyUserController extends SecureController {
         $user->create($request->all());
 
         $user = DB::table('users')->where('email', $request->email)->first();
+        $userPassword = new UserPassword();
+        $userPassword->user_id=$user->id;
+        $userPassword->crypt_password=\Crypt::encrypt($password);
+        $userPassword->updated_at=new \DateTime();
+        $userPassword->created_at=new \DateTime();
+        $userPassword->save();
         $goal = parent::assembleGoalSetting();
         $goal->user_id = $user->id;
         $goal->created_by = Auth::user()->id;
@@ -283,25 +289,27 @@ class CompanyUserController extends SecureController {
 
     public function reset($id) {
         $user = User::findOrFail($id);
-        $userPassword = UserPassword::whereRaw('user_id = ?', array($id))->first();
-        $date = new \DateTime(); //this returns the current date time
-        $password = parent::randStrGen(8);
+        
+        if(isset($user) and isset($id)){
+            DB::table('sales')
+                ->where('user_id', $id )
+                ->update(['reset_enabled' => 1]);
 
-        $user->password = bcrypt($password);
-        $userPassword->crypt_password = \Crypt::encrypt($password);
-        $user->updated_by = Auth::user()->id;
-        $user->status = 'RESET';
-        $user->save();
-        $userPassword->update();
-        $message = 'You have successfully Reset ' . $user->last_name . ', ' . $user->first_name . '\'s password. ';
-        \Session::flash('message', 'You have successfully Reset ' . $user->last_name . ', ' . $user->first_name . '\'s password. ');
+            DB::table('points')
+                ->where('user_id', $id )
+                ->update(['reset_enabled' => 1]);
 
-        $contactEmail = $user->email;
-        $contactName = $user->first_name . ' ' . $user->last_name;
-        Mail::send('emails.reset', array('first_name' => $user->first_name, 'last_name' => $user->last_name, 'user_name' => $contactEmail, 'password' => $password), function( $message ) use ($contactEmail, $contactName) {
-            $message->from('no-reply@salesperformanceindicator.com', 'Sales Performance Indicator');
-            $message->to($contactEmail, $contactName)->subject('Password Reset');
-        });
+            DB::table('point_audits')
+                ->where('user_id', $id )
+                ->update(['reset_enabled' => 1]);
+            
+            DB::table('my_stats')
+                ->where('user_id', $id )
+                ->update(['reset_enabled' => 1]);
+            
+            \Session::flash('message', 'You have successfully Reset ' . $user->last_name . ', ' . $user->first_name . '\'s password. ');
+
+        }
 
         return Redirect::action('CompanyUserController@index');
     }
@@ -309,14 +317,21 @@ class CompanyUserController extends SecureController {
     public function sendEmail($id) {
         $user = User::findOrFail($id);
         $userPassword = UserPassword::whereRaw('user_id = ?', array($id))->first();
+        
         $decrypted = \Crypt::decrypt($userPassword->crypt_password);
         $contactEmail = $user->email;
+        
         Mail::send('emails.resend', array('first_name' => $user->first_name, 'user_name' => $user->email, 'password' => $decrypted), function( $message ) use ($contactEmail) {
             $message->from('no-reply@salesperformanceindicator.com', 'Sales Performance Indicator');
             $message->to($contactEmail, 'Sales Performance Indicator')->subject('Your Username and Password');
         });
         \Session::flash('message', 'You have successfully send a username and password for  ' . $user->last_name . ', ' . $user->first_name);
-        return Redirect::action('CompanyUserController@index');
+        if(Auth::user()->role_id==1){
+            return Redirect::action('CompanyController@index');
+        }else{
+            return Redirect::action('CompanyUserController@index');
+        }
+        
     }
 
     /**
